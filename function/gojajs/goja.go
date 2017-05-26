@@ -5,12 +5,12 @@ import (
 	"io/ioutil"
 	"time"
 
+	"github.com/aviaryan/abc/function"
+	"github.com/aviaryan/abc/log"
+	"github.com/aviaryan/abc/message"
+	"github.com/aviaryan/abc/message/data"
+	"github.com/aviaryan/abc/message/ops"
 	"github.com/compose/mejson"
-	"github.com/compose/transporter/function"
-	"github.com/compose/transporter/log"
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/data"
-	"github.com/compose/transporter/message/ops"
 	"github.com/dop251/goja"
 )
 

@@ -3,9 +3,9 @@ package pipeline
 import (
 	"time"
 
-	"github.com/compose/transporter/adaptor"
-	"github.com/compose/transporter/events"
-	"github.com/compose/transporter/log"
+	"github.com/aviaryan/abc/adaptor"
+	"github.com/aviaryan/abc/events"
+	"github.com/aviaryan/abc/log"
 )
 
 // A Pipeline is a the end to end description of a transporter data flow.

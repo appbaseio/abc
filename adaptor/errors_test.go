@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/compose/transporter/adaptor"
+	"github.com/aviaryan/abc/adaptor"
 )
 
 var errorLevelTests = []struct {

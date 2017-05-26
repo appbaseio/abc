@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/data"
-	"github.com/compose/transporter/message/ops"
+	"github.com/aviaryan/abc/message"
+	"github.com/aviaryan/abc/message/data"
+	"github.com/aviaryan/abc/message/ops"
 )
 
 var optests = []struct {

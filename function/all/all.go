@@ -1,11 +1,11 @@
 package all
 
 import (
-	_ "github.com/compose/transporter/function/gojajs"
-	_ "github.com/compose/transporter/function/omit"
-	_ "github.com/compose/transporter/function/ottojs"
-	_ "github.com/compose/transporter/function/pick"
-	_ "github.com/compose/transporter/function/pretty"
-	_ "github.com/compose/transporter/function/rename"
-	_ "github.com/compose/transporter/function/skip"
+	_ "github.com/aviaryan/abc/function/gojajs"
+	_ "github.com/aviaryan/abc/function/omit"
+	_ "github.com/aviaryan/abc/function/ottojs"
+	_ "github.com/aviaryan/abc/function/pick"
+	_ "github.com/aviaryan/abc/function/pretty"
+	_ "github.com/aviaryan/abc/function/rename"
+	_ "github.com/aviaryan/abc/function/skip"
 )

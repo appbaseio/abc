@@ -12,14 +12,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/compose/transporter/adaptor"
-	"github.com/compose/transporter/client"
-	"github.com/compose/transporter/commitlog"
-	"github.com/compose/transporter/function"
-	"github.com/compose/transporter/log"
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/ops"
-	"github.com/compose/transporter/offset"
+	"github.com/aviaryan/abc/adaptor"
+	"github.com/aviaryan/abc/client"
+	"github.com/aviaryan/abc/commitlog"
+	"github.com/aviaryan/abc/function"
+	"github.com/aviaryan/abc/log"
+	"github.com/aviaryan/abc/message"
+	"github.com/aviaryan/abc/message/ops"
+	"github.com/aviaryan/abc/offset"
 )
 
 var (

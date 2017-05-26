@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/compose/transporter/client"
-	"github.com/compose/transporter/log"
+	"github.com/aviaryan/abc/client"
+	"github.com/aviaryan/abc/log"
 	version "github.com/hashicorp/go-version"
 
 	r "gopkg.in/gorethink/gorethink.v3"

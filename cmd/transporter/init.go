@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/compose/transporter/adaptor"
+	"github.com/aviaryan/abc/adaptor"
 )
 
 func runInit(args []string) error {

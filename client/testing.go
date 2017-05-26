@@ -4,9 +4,9 @@ import (
 	"errors"
 	"time"
 
-	"github.com/compose/transporter/commitlog"
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/ops"
+	"github.com/aviaryan/abc/commitlog"
+	"github.com/aviaryan/abc/message"
+	"github.com/aviaryan/abc/message/ops"
 )
 
 var (

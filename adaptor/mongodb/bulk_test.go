@@ -10,8 +10,8 @@ import (
 
 	"gopkg.in/mgo.v2/bson"
 
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/ops"
+	"github.com/aviaryan/abc/message"
+	"github.com/aviaryan/abc/message/ops"
 )
 
 var (

@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/aviaryan/abc/client"
+	"github.com/aviaryan/abc/log"
+	"github.com/aviaryan/abc/message"
+	"github.com/aviaryan/abc/message/ops"
 	"github.com/compose/mejson"
-	"github.com/compose/transporter/client"
-	"github.com/compose/transporter/log"
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/ops"
 )
 
 var _ client.Writer = &Writer{}

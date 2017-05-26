@@ -11,10 +11,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/compose/transporter/events"
-	"github.com/compose/transporter/log"
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/offset"
+	"github.com/aviaryan/abc/events"
+	"github.com/aviaryan/abc/log"
+	"github.com/aviaryan/abc/message"
+	"github.com/aviaryan/abc/offset"
 )
 
 var (

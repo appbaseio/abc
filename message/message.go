@@ -12,8 +12,8 @@ import (
 
 	"gopkg.in/mgo.v2/bson"
 
-	"github.com/compose/transporter/message/data"
-	"github.com/compose/transporter/message/ops"
+	"github.com/aviaryan/abc/message/data"
+	"github.com/aviaryan/abc/message/ops"
 )
 
 // A Msg serves to wrap the actual document to

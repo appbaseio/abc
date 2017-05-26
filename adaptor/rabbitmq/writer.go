@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/compose/transporter/client"
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/ops"
+	"github.com/aviaryan/abc/client"
+	"github.com/aviaryan/abc/message"
+	"github.com/aviaryan/abc/message/ops"
 	"github.com/streadway/amqp"
 )
 

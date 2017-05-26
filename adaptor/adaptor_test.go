@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/compose/transporter/adaptor"
-	_ "github.com/compose/transporter/log"
+	"github.com/aviaryan/abc/adaptor"
+	_ "github.com/aviaryan/abc/log"
 )
 
 func init() {

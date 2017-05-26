@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/compose/transporter/log"
+	"github.com/aviaryan/abc/log"
 )
 
 // Emitter types are used by the transporter pipeline to consume events from a pipeline's event channel

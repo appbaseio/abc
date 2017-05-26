@@ -4,9 +4,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/data"
-	"github.com/compose/transporter/message/ops"
+	"github.com/aviaryan/abc/message"
+	"github.com/aviaryan/abc/message/data"
+	"github.com/aviaryan/abc/message/ops"
 	"gopkg.in/mgo.v2/bson"
 )
 

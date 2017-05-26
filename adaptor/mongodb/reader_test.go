@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/compose/transporter/client"
-	"github.com/compose/transporter/log"
+	"github.com/aviaryan/abc/client"
+	"github.com/aviaryan/abc/log"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

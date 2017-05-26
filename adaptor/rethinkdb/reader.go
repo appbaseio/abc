@@ -4,11 +4,11 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/compose/transporter/client"
-	"github.com/compose/transporter/commitlog"
-	"github.com/compose/transporter/log"
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/ops"
+	"github.com/aviaryan/abc/client"
+	"github.com/aviaryan/abc/commitlog"
+	"github.com/aviaryan/abc/log"
+	"github.com/aviaryan/abc/message"
+	"github.com/aviaryan/abc/message/ops"
 
 	re "gopkg.in/gorethink/gorethink.v3"
 )

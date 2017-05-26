@@ -4,7 +4,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/compose/transporter/adaptor"
+	"github.com/aviaryan/abc/adaptor"
 )
 
 func TestDescription(t *testing.T) {

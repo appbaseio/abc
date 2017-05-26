@@ -7,8 +7,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/compose/transporter/commitlog"
-	"github.com/compose/transporter/message/ops"
+	"github.com/aviaryan/abc/commitlog"
+	"github.com/aviaryan/abc/message/ops"
 )
 
 var (

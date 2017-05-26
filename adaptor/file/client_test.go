@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/compose/transporter/log"
+	"github.com/aviaryan/abc/log"
 )
 
 var (
