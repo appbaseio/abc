@@ -2,7 +2,7 @@ package main
 
 func runRun(args []string) error {
 	flagset := baseFlagSet("run")
-	flagset.Usage = usageFor(flagset, "transporter run [flags] <pipeline>")
+	flagset.Usage = usageFor(flagset, "abc run [flags] <pipeline>")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}

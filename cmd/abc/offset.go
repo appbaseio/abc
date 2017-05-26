@@ -23,7 +23,7 @@ const (
 func runOffset(args []string) error {
 	flagset := baseFlagSet("offset")
 	logDir := flagset.String("log_dir", "", "path to commit log directory")
-	flagset.Usage = usageFor(flagset, "transporter offset --log_dir=/path/to/log list|show|mark|delete [SINK] [OFFSET]")
+	flagset.Usage = usageFor(flagset, "abc offset --log_dir=/path/to/log list|show|mark|delete [SINK] [OFFSET]")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
