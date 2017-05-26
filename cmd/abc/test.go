@@ -6,7 +6,7 @@ import (
 
 func runTest(args []string) error {
 	flagset := baseFlagSet("test")
-	flagset.Usage = usageFor(flagset, "transporter test [flags] <pipeline>")
+	flagset.Usage = usageFor(flagset, "abc test [flags] <pipeline>")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}

@@ -10,7 +10,7 @@ import (
 
 func runInit(args []string) error {
 	flagset := baseFlagSet("init")
-	flagset.Usage = usageFor(flagset, "transporter init [source] [sink]")
+	flagset.Usage = usageFor(flagset, "abc init [source] [sink]")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}

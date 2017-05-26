@@ -8,7 +8,7 @@ import (
 
 func runAbout(args []string) error {
 	flagset := baseFlagSet("about")
-	flagset.Usage = usageFor(flagset, "transporter about [adaptor]")
+	flagset.Usage = usageFor(flagset, "abc about [adaptor]")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
