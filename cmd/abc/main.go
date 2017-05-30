@@ -21,6 +21,7 @@ var version = "dev" // set by release script
 func usage() {
 	fmt.Fprintf(os.Stderr, "USAGE\n")
 	fmt.Fprintf(os.Stderr, "  %s <command> [flags]\n", os.Args[0])
+	usageAppbase()
 	fmt.Fprintf(os.Stderr, "\n")
 	fmt.Fprintf(os.Stderr, "COMMANDS\n")
 	fmt.Fprintf(os.Stderr, "  run       run pipeline loaded from a file\n")
@@ -56,8 +57,7 @@ func main() {
 	case "offset":
 		run = runOffset
 	default:
-		usage()
-		os.Exit(1)
+		run = provisionAppbaseCLI(os.Args[1])
 	}
 
 	if err := run(os.Args[2:]); err != nil {
