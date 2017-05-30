@@ -6,12 +6,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/compose/transporter/adaptor"
-	_ "github.com/compose/transporter/adaptor/file"
-	"github.com/compose/transporter/client"
-	"github.com/compose/transporter/commitlog"
-	"github.com/compose/transporter/events"
-	"github.com/compose/transporter/offset"
+	"github.com/appbaseio/abc/adaptor"
+	_ "github.com/appbaseio/abc/adaptor/file"
+	"github.com/appbaseio/abc/client"
+	"github.com/appbaseio/abc/commitlog"
+	"github.com/appbaseio/abc/events"
+	"github.com/appbaseio/abc/offset"
 )
 
 // a noop node adaptor to help test

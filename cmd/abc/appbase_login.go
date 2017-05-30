@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/aviaryan/abc/appbase/login"
-	"github.com/aviaryan/abc/appbase/user"
+	"github.com/appbaseio/abc/appbase/login"
+	"github.com/appbaseio/abc/appbase/user"
 )
 
 // runLogin runs the login command

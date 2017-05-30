@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/compose/transporter/client"
+	"github.com/appbaseio/abc/client"
 )
 
 var (

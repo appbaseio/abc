@@ -3,7 +3,7 @@ package rabbitmq
 import (
 	"testing"
 
-	"github.com/compose/transporter/adaptor"
+	"github.com/appbaseio/abc/adaptor"
 )
 
 func TestDescription(t *testing.T) {

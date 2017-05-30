@@ -3,7 +3,7 @@ package commitlog
 import (
 	"io"
 
-	"github.com/compose/transporter/message/ops"
+	"github.com/appbaseio/abc/message/ops"
 )
 
 const (

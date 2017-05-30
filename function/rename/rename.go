@@ -1,8 +1,8 @@
 package rename
 
 import (
-	"github.com/compose/transporter/function"
-	"github.com/compose/transporter/message"
+	"github.com/appbaseio/abc/function"
+	"github.com/appbaseio/abc/message"
 )
 
 var (

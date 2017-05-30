@@ -5,9 +5,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/compose/transporter/client"
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/ops"
+	"github.com/appbaseio/abc/client"
+	"github.com/appbaseio/abc/message"
+	"github.com/appbaseio/abc/message/ops"
 )
 
 func TestWrite(t *testing.T) {

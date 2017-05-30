@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/compose/transporter/client"
+	"github.com/appbaseio/abc/client"
 	"github.com/streadway/amqp"
 )
 

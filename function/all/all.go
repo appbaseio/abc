@@ -1,11 +1,11 @@
 package all
 
 import (
-	_ "github.com/compose/transporter/function/gojajs"
-	_ "github.com/compose/transporter/function/omit"
-	_ "github.com/compose/transporter/function/ottojs"
-	_ "github.com/compose/transporter/function/pick"
-	_ "github.com/compose/transporter/function/pretty"
-	_ "github.com/compose/transporter/function/rename"
-	_ "github.com/compose/transporter/function/skip"
+	_ "github.com/appbaseio/abc/function/gojajs"
+	_ "github.com/appbaseio/abc/function/omit"
+	_ "github.com/appbaseio/abc/function/ottojs"
+	_ "github.com/appbaseio/abc/function/pick"
+	_ "github.com/appbaseio/abc/function/pretty"
+	_ "github.com/appbaseio/abc/function/rename"
+	_ "github.com/appbaseio/abc/function/skip"
 )

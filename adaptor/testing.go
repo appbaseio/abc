@@ -3,7 +3,7 @@ package adaptor
 import (
 	"sync"
 
-	"github.com/compose/transporter/client"
+	"github.com/appbaseio/abc/client"
 )
 
 var (

@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/compose/transporter/commitlog"
-	"github.com/compose/transporter/log"
+	"github.com/appbaseio/abc/commitlog"
+	"github.com/appbaseio/abc/log"
 )
 
 func runXlog(args []string) error {

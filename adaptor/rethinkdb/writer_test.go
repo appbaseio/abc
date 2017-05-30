@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/compose/transporter/log"
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/data"
-	"github.com/compose/transporter/message/ops"
+	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/message"
+	"github.com/appbaseio/abc/message/data"
+	"github.com/appbaseio/abc/message/ops"
 
 	r "gopkg.in/gorethink/gorethink.v3"
 )

@@ -2,9 +2,9 @@ package login
 
 import (
 	"fmt"
-	"github.com/aviaryan/abc/appbase/common"
-	"github.com/aviaryan/abc/appbase/session"
-	"github.com/aviaryan/abc/appbase/user"
+	"github.com/appbaseio/abc/appbase/common"
+	"github.com/appbaseio/abc/appbase/session"
+	"github.com/appbaseio/abc/appbase/user"
 	"os/exec"
 	"runtime"
 )

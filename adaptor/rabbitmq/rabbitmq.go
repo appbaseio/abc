@@ -3,8 +3,8 @@ package rabbitmq
 import (
 	"sync"
 
-	"github.com/compose/transporter/adaptor"
-	"github.com/compose/transporter/client"
+	"github.com/appbaseio/abc/adaptor"
+	"github.com/appbaseio/abc/client"
 )
 
 const (

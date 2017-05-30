@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/compose/transporter/client"
+	"github.com/appbaseio/abc/client"
 	version "github.com/hashicorp/go-version"
 )
 

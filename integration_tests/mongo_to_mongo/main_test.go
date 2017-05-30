@@ -13,7 +13,7 @@ import (
 
 	mgo "gopkg.in/mgo.v2"
 
-	"github.com/compose/transporter/log"
+	"github.com/appbaseio/abc/log"
 )
 
 var (

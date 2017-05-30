@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/compose/transporter/adaptor"
+	"github.com/appbaseio/abc/adaptor"
 )
 
 var errorLevelTests = []struct {

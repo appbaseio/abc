@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/compose/transporter/client"
+	"github.com/appbaseio/abc/client"
 
 	r "gopkg.in/gorethink/gorethink.v3"
 )

@@ -1,7 +1,7 @@
 package mongodb
 
 import (
-	"github.com/compose/transporter/client"
+	"github.com/appbaseio/abc/client"
 	mgo "gopkg.in/mgo.v2"
 )
 
