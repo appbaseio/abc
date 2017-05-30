@@ -34,10 +34,12 @@ func StartUserLogin(host string) error {
 	if err != nil {
 		return err
 	}
-	// TODO: re-check ?
+	// show email
 	email, err := user.GetUserEmail()
 	if err == nil {
 		fmt.Printf("\nLogged in as %s\n", email)
+	} else {
+		fmt.Println("\nFailed to get user info. Please try again.")
 	}
 	return err
 }
