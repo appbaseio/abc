@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/aviaryan/abc/message"
-	"github.com/aviaryan/abc/message/ops"
+	"github.com/appbaseio/abc/message"
+	"github.com/appbaseio/abc/message/ops"
 )
 
 func TestWrite(t *testing.T) {

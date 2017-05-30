@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/aviaryan/abc/adaptor"
-	_ "github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/adaptor"
+	_ "github.com/appbaseio/abc/log"
 )
 
 func init() {

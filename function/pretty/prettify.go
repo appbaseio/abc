@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/aviaryan/abc/function"
-	"github.com/aviaryan/abc/log"
-	"github.com/aviaryan/abc/message"
+	"github.com/appbaseio/abc/function"
+	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/message"
 	"github.com/compose/mejson"
 )
 

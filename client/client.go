@@ -1,8 +1,8 @@
 package client
 
 import (
-	"github.com/aviaryan/abc/commitlog"
-	"github.com/aviaryan/abc/message"
+	"github.com/appbaseio/abc/commitlog"
+	"github.com/appbaseio/abc/message"
 )
 
 // MessageChanFunc represents the func signature needed to send messages to downstream adaptors.

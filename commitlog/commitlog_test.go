@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aviaryan/abc/commitlog"
+	"github.com/appbaseio/abc/commitlog"
 )
 
 func init() {

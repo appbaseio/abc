@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/log"
 )
 
 // Compactor defines the necessary functions for performing compaction of

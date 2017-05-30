@@ -7,9 +7,9 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/aviaryan/abc/adaptor"
-	"github.com/aviaryan/abc/client"
-	"github.com/aviaryan/abc/message"
+	"github.com/appbaseio/abc/adaptor"
+	"github.com/appbaseio/abc/client"
+	"github.com/appbaseio/abc/message"
 )
 
 var (

@@ -11,10 +11,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aviaryan/abc/events"
-	"github.com/aviaryan/abc/log"
-	"github.com/aviaryan/abc/message"
-	"github.com/aviaryan/abc/offset"
+	"github.com/appbaseio/abc/events"
+	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/message"
+	"github.com/appbaseio/abc/offset"
 )
 
 var (

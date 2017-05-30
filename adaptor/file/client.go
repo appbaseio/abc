@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/aviaryan/abc/client"
+	"github.com/appbaseio/abc/client"
 )
 
 var (

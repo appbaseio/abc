@@ -3,7 +3,7 @@ package commitlog
 import (
 	"io"
 
-	"github.com/aviaryan/abc/message/ops"
+	"github.com/appbaseio/abc/message/ops"
 )
 
 const (

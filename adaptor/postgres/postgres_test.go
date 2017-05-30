@@ -3,7 +3,7 @@ package postgres
 import (
 	"testing"
 
-	"github.com/aviaryan/abc/adaptor"
+	"github.com/appbaseio/abc/adaptor"
 )
 
 func TestDescription(t *testing.T) {

@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aviaryan/abc/offset"
+	"github.com/appbaseio/abc/offset"
 )
 
 func init() {

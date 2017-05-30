@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/log"
 
 	r "gopkg.in/gorethink/gorethink.v3"
 )

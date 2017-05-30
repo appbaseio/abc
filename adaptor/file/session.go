@@ -3,7 +3,7 @@ package file
 import (
 	"os"
 
-	"github.com/aviaryan/abc/client"
+	"github.com/appbaseio/abc/client"
 )
 
 // Session serves as a wrapper for the underlying file

@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aviaryan/abc/adaptor/elasticsearch/clients"
-	"github.com/aviaryan/abc/log"
-	"github.com/aviaryan/abc/message"
-	"github.com/aviaryan/abc/message/ops"
+	"github.com/appbaseio/abc/adaptor/elasticsearch/clients"
+	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/message"
+	"github.com/appbaseio/abc/message/ops"
 )
 
 const (

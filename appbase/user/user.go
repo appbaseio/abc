@@ -2,8 +2,8 @@ package user
 
 import (
 	"encoding/json"
-	"github.com/aviaryan/abc/appbase/common"
-	"github.com/aviaryan/abc/appbase/session"
+	"github.com/appbaseio/abc/appbase/common"
+	"github.com/appbaseio/abc/appbase/session"
 	"net/http"
 )
 

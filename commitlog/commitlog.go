@@ -15,7 +15,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/log"
 )
 
 const (

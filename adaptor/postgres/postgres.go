@@ -3,8 +3,8 @@ package postgres
 import (
 	"sync"
 
-	"github.com/aviaryan/abc/adaptor"
-	"github.com/aviaryan/abc/client"
+	"github.com/appbaseio/abc/adaptor"
+	"github.com/appbaseio/abc/client"
 
 	_ "github.com/lib/pq" // import pq driver
 )

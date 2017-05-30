@@ -6,11 +6,11 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/aviaryan/abc/client"
-	"github.com/aviaryan/abc/log"
-	"github.com/aviaryan/abc/message"
-	"github.com/aviaryan/abc/message/data"
-	"github.com/aviaryan/abc/message/ops"
+	"github.com/appbaseio/abc/client"
+	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/message"
+	"github.com/appbaseio/abc/message/data"
+	"github.com/appbaseio/abc/message/ops"
 )
 
 var (

@@ -4,10 +4,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/aviaryan/abc/function"
-	_ "github.com/aviaryan/abc/log"
-	"github.com/aviaryan/abc/message"
-	"github.com/aviaryan/abc/message/ops"
+	"github.com/appbaseio/abc/function"
+	_ "github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/message"
+	"github.com/appbaseio/abc/message/ops"
 )
 
 var initTests = []struct {

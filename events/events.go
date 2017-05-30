@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/log"
 )
 
 // Event is an interface that describes data which is produced periodically by the running transporter.

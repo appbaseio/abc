@@ -7,7 +7,7 @@ import (
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 
-	"github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/log"
 )
 
 var (

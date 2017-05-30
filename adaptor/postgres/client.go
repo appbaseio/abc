@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"net/url"
 
-	"github.com/aviaryan/abc/client"
+	"github.com/appbaseio/abc/client"
 
 	_ "github.com/lib/pq" // import pq driver
 )

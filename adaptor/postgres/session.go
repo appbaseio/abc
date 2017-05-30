@@ -3,7 +3,7 @@ package postgres
 import (
 	"database/sql"
 
-	"github.com/aviaryan/abc/client"
+	"github.com/appbaseio/abc/client"
 )
 
 var _ client.Session = &Session{}

@@ -12,9 +12,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aviaryan/abc/adaptor"
-	"github.com/aviaryan/abc/commitlog"
-	"github.com/aviaryan/abc/offset"
+	"github.com/appbaseio/abc/adaptor"
+	"github.com/appbaseio/abc/commitlog"
+	"github.com/appbaseio/abc/offset"
 )
 
 var (

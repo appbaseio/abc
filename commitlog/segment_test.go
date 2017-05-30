@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/aviaryan/abc/commitlog"
+	"github.com/appbaseio/abc/commitlog"
 )
 
 var (

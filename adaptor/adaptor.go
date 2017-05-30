@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/aviaryan/abc/client"
+	"github.com/appbaseio/abc/client"
 )
 
 // ErrNamespaceMalformed represents the error to be returned when an invalid namespace is given.

@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	_ "github.com/aviaryan/abc/log"
-	"github.com/aviaryan/abc/message/ops"
+	_ "github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/message/ops"
 
 	"gopkg.in/mgo.v2/bson"
 )

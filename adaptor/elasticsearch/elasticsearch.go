@@ -10,12 +10,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aviaryan/abc/adaptor"
-	"github.com/aviaryan/abc/adaptor/elasticsearch/clients"
+	"github.com/appbaseio/abc/adaptor"
+	"github.com/appbaseio/abc/adaptor/elasticsearch/clients"
 	// used to call init function for each client to register itself
-	_ "github.com/aviaryan/abc/adaptor/elasticsearch/clients/all"
-	"github.com/aviaryan/abc/client"
-	"github.com/aviaryan/abc/log"
+	_ "github.com/appbaseio/abc/adaptor/elasticsearch/clients/all"
+	"github.com/appbaseio/abc/client"
+	"github.com/appbaseio/abc/log"
 	version "github.com/hashicorp/go-version"
 )
 

@@ -9,8 +9,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/aviaryan/abc/client"
-	"github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/client"
+	"github.com/appbaseio/abc/log"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

@@ -6,12 +6,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aviaryan/abc/adaptor"
-	_ "github.com/aviaryan/abc/adaptor/file"
-	"github.com/aviaryan/abc/client"
-	"github.com/aviaryan/abc/commitlog"
-	"github.com/aviaryan/abc/events"
-	"github.com/aviaryan/abc/offset"
+	"github.com/appbaseio/abc/adaptor"
+	_ "github.com/appbaseio/abc/adaptor/file"
+	"github.com/appbaseio/abc/client"
+	"github.com/appbaseio/abc/commitlog"
+	"github.com/appbaseio/abc/events"
+	"github.com/appbaseio/abc/offset"
 )
 
 // a noop node adaptor to help test

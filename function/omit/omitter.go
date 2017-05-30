@@ -1,8 +1,8 @@
 package omit
 
 import (
-	"github.com/aviaryan/abc/function"
-	"github.com/aviaryan/abc/message"
+	"github.com/appbaseio/abc/function"
+	"github.com/appbaseio/abc/message"
 )
 
 func init() {

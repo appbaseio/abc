@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/log"
 	"github.com/streadway/amqp"
 )
 

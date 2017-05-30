@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/aviaryan/abc/client"
-	"github.com/aviaryan/abc/message"
+	"github.com/appbaseio/abc/client"
+	"github.com/appbaseio/abc/message"
 )
 
 var _ client.Writer = &Writer{}

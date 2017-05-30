@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/log"
 )
 
 var (

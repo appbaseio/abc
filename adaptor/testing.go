@@ -3,7 +3,7 @@ package adaptor
 import (
 	"sync"
 
-	"github.com/aviaryan/abc/client"
+	"github.com/appbaseio/abc/client"
 )
 
 var (

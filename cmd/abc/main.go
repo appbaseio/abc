@@ -7,9 +7,9 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	_ "github.com/aviaryan/abc/adaptor/all"
-	_ "github.com/aviaryan/abc/function/all"
-	"github.com/aviaryan/abc/log"
+	_ "github.com/appbaseio/abc/adaptor/all"
+	_ "github.com/appbaseio/abc/function/all"
+	"github.com/appbaseio/abc/log"
 )
 
 const (

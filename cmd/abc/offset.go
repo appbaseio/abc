@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aviaryan/abc/log"
-	"github.com/aviaryan/abc/offset"
+	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/offset"
 	"github.com/olekukonko/tablewriter"
 )
 

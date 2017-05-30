@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aviaryan/abc/adaptor"
-	_ "github.com/aviaryan/abc/adaptor/all"
-	"github.com/aviaryan/abc/commitlog"
-	"github.com/aviaryan/abc/events"
-	"github.com/aviaryan/abc/offset"
+	"github.com/appbaseio/abc/adaptor"
+	_ "github.com/appbaseio/abc/adaptor/all"
+	"github.com/appbaseio/abc/commitlog"
+	"github.com/appbaseio/abc/events"
+	"github.com/appbaseio/abc/offset"
 )
 
 // set up some local files

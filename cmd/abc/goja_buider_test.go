@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aviaryan/abc/offset"
-	"github.com/aviaryan/abc/pipeline"
+	"github.com/appbaseio/abc/offset"
+	"github.com/appbaseio/abc/pipeline"
 )
 
 func TestNewBuilder(t *testing.T) {

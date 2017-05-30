@@ -3,7 +3,7 @@ package client_test
 import (
 	"testing"
 
-	"github.com/aviaryan/abc/client"
+	"github.com/appbaseio/abc/client"
 )
 
 var errorTests = []struct {

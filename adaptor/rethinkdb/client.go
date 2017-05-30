@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aviaryan/abc/client"
-	"github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/client"
+	"github.com/appbaseio/abc/log"
 	version "github.com/hashicorp/go-version"
 
 	r "gopkg.in/gorethink/gorethink.v3"

@@ -10,7 +10,7 @@ import (
 
 	r "gopkg.in/gorethink/gorethink.v3"
 
-	"github.com/aviaryan/abc/log"
+	"github.com/appbaseio/abc/log"
 )
 
 var (

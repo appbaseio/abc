@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aviaryan/abc/client"
+	"github.com/appbaseio/abc/client"
 
 	mgo "gopkg.in/mgo.v2"
 )

@@ -1,8 +1,8 @@
 package function
 
 import (
-	"github.com/aviaryan/abc/log"
-	"github.com/aviaryan/abc/message"
+	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/message"
 )
 
 var (

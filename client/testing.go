@@ -4,9 +4,9 @@ import (
 	"errors"
 	"time"
 
-	"github.com/aviaryan/abc/commitlog"
-	"github.com/aviaryan/abc/message"
-	"github.com/aviaryan/abc/message/ops"
+	"github.com/appbaseio/abc/commitlog"
+	"github.com/appbaseio/abc/message"
+	"github.com/appbaseio/abc/message/ops"
 )
 
 var (

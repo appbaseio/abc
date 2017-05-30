@@ -4,11 +4,11 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/aviaryan/abc/client"
-	"github.com/aviaryan/abc/commitlog"
-	"github.com/aviaryan/abc/log"
-	"github.com/aviaryan/abc/message"
-	"github.com/aviaryan/abc/message/ops"
+	"github.com/appbaseio/abc/client"
+	"github.com/appbaseio/abc/commitlog"
+	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/message"
+	"github.com/appbaseio/abc/message/ops"
 
 	re "gopkg.in/gorethink/gorethink.v3"
 )

@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/aviaryan/abc/client"
+	"github.com/appbaseio/abc/client"
 	"github.com/hashicorp/go-version"
 )
 
