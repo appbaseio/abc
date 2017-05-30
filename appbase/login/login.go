@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/aviaryan/abc/appbase/common"
 	"github.com/aviaryan/abc/appbase/session"
+	"github.com/aviaryan/abc/appbase/user"
 	"os/exec"
 	"runtime"
 )
@@ -34,7 +35,11 @@ func StartUserLogin(host string) error {
 		return err
 	}
 	// TODO: re-check ?
-	return nil
+	email, err := user.GetUserEmail()
+	if err == nil {
+		fmt.Printf("\nLogged in as %s\n", email)
+	}
+	return err
 }
 
 // https://stackoverflow.com/a/39324149/2295672
