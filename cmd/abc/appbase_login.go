@@ -22,7 +22,8 @@ func runLogin(args []string) error {
 			fmt.Println("UnAuthenticated user")
 		}
 	case 1:
-		fmt.Println("Logging in")
+		fmt.Println("Logging in..")
+		return login.StartUserLogin(args[0])
 	default:
 		fmt.Println("Wrong parameters. See help.")
 	}

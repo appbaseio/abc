@@ -24,6 +24,16 @@ func LoadUserSessionAsString() (string, error) {
 	return "", err
 }
 
+// SaveUserSession saves user session information
+func SaveUserSession(data string) error {
+	sessionFile, err := getSessionFilePath()
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile(sessionFile, []byte(data), 0644)
+	return err
+}
+
 func getUserHomeDir() (string, error) {
 	usr, err := user.Current()
 	if err != nil {
