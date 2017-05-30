@@ -18,9 +18,12 @@ func runLogin(args []string) error {
 	switch len(args) {
 	case 0:
 		if login.IsUserAuthenticated() {
-			email, _ := user.GetUserEmail()
-			// FIXME: token can be tampered and so it won't work
-			fmt.Println("Logged in as", email)
+			email, err := user.GetUserEmail()
+			if err == nil {
+				fmt.Println("Logged in as", email)
+			} else {
+				return err
+			}
 		} else {
 			fmt.Println("Not logged in.")
 		}
