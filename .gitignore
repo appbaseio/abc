@@ -3,3 +3,5 @@
 /pipeline.js
 /transformer.js
 .vscode
+# macOS
+.DS_Store
