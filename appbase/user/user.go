@@ -2,6 +2,7 @@ package user
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
 	"net/http"
@@ -9,13 +10,15 @@ import (
 
 // userDetails represents extra details of user
 type userDetails struct {
-	Name string `json:"name"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
 }
 
 // userBody represents Appbase.io user
 type userBody struct {
-	Email   string      `json:"email"`
-	Details userDetails `json:"details"`
+	Email   string            `json:"email"`
+	Details userDetails       `json:"details"`
+	Apps    map[string]string `json:"apps"`
 }
 
 // respBody represents response body
@@ -49,4 +52,21 @@ func GetUserEmail() (string, error) {
 		return "", err
 	}
 	return user.Email, nil
+}
+
+// ShowUserDetails shows user details
+func ShowUserDetails() error {
+	user, err := getCurrentUser()
+	if err != nil {
+		return err
+	}
+	fmt.Printf(`NAME:  %s
+EMAIL: %s
+
+APPS:
+-----
+%s
+`, user.Details.Name, user.Email, user.Apps)
+
+	return nil
 }
