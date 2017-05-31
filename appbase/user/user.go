@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
+	"github.com/olekukonko/tablewriter"
 	"net/http"
+	"os"
 )
 
 // userDetails represents extra details of user
@@ -62,11 +64,15 @@ func ShowUserDetails() error {
 	}
 	fmt.Printf(`NAME:  %s
 EMAIL: %s
-
 APPS:
------
-%s
-`, user.Details.Name, user.Email, user.Apps)
+`, user.Details.Name, user.Email)
+
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader([]string{"Id", "Name"})
+	for name, id := range user.Apps {
+		table.Append([]string{id, name})
+	}
+	table.Render()
 
 	return nil
 }
