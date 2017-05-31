@@ -17,15 +17,13 @@ func runLogin(args []string) error {
 
 	switch len(args) {
 	case 0:
-		if login.IsUserAuthenticated() {
+		if isLoggedIn() {
 			email, err := user.GetUserEmail()
 			if err == nil {
 				fmt.Println("Logged in as", email)
 			} else {
 				return err
 			}
-		} else {
-			fmt.Println("Not logged in.")
 		}
 	case 1:
 		fmt.Println("Logging in..")
@@ -34,4 +32,13 @@ func runLogin(args []string) error {
 		fmt.Println("Wrong number of parameters. See help (--help).")
 	}
 	return nil
+}
+
+// isLoggedIn checks if a user is logged in or not, prints message if not logged in
+func isLoggedIn() bool {
+	if login.IsUserAuthenticated() {
+		return true
+	}
+	fmt.Println("Not logged in.")
+	return false
 }

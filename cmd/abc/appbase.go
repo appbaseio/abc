@@ -11,6 +11,7 @@ func usageAppbase() {
 	fmt.Fprintf(os.Stderr, "\n")
 	fmt.Fprintf(os.Stderr, "APPBASE\n")
 	fmt.Fprintf(os.Stderr, "  login     login into appbase.io\n")
+	fmt.Fprintf(os.Stderr, "  user      get user details\n")
 	fmt.Fprintf(os.Stderr, "  apps      display user apps\n")
 }
 
@@ -21,6 +22,8 @@ func provisionAppbaseCLI(command string) func([]string) error {
 	switch strings.ToLower(command) {
 	case "login":
 		run = runLogin
+	case "user":
+		run = runUser
 	default:
 		usage()
 		os.Exit(1)
