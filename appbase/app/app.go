@@ -5,6 +5,7 @@ import (
 	// "fmt"
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
+	"github.com/appbaseio/abc/appbase/spinner"
 	"github.com/appbaseio/abc/appbase/user"
 	"github.com/olekukonko/tablewriter"
 	"net/http"
@@ -25,11 +26,13 @@ type respBody struct {
 
 // ShowUserApps shows the list of user apps
 func ShowUserApps() error {
+	spinner.StartText("Loading user app list")
 	// get name id mapping
 	apps, err := user.GetUserApps()
 	if err != nil {
 		return err
 	}
+	spinner.StartText("Fetching app data")
 	// get more details
 	req, err := http.NewRequest("GET", common.AccAPIURL+"/user/apps/metrics", nil)
 	if err != nil {
@@ -43,6 +46,7 @@ func ShowUserApps() error {
 	if err != nil {
 		return err
 	}
+	spinner.Stop()
 	// decode response
 	var res respBody
 	dec := json.NewDecoder(resp.Body)

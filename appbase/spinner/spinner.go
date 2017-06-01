@@ -6,6 +6,7 @@ import (
 )
 
 var s *spinner.Spinner
+var active bool
 
 // Start starts the spinner
 func Start() {
@@ -21,10 +22,15 @@ func StartText(text string) {
 // Stop stops the spinner
 func Stop() {
 	s.Stop()
+	active = false
 }
 
 // startSpinner ...
 func startSpinner(sType int) {
+	if active {
+		Stop()
+	}
 	s = spinner.New(spinner.CharSets[sType], 100*time.Millisecond)
 	s.Start()
+	active = true
 }
