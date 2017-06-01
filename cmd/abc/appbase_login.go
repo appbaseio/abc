@@ -18,12 +18,7 @@ func runLogin(args []string) error {
 	switch len(args) {
 	case 0:
 		if isLoggedIn() {
-			email, err := user.GetUserEmail()
-			if err == nil {
-				fmt.Println("Logged in as", email)
-			} else {
-				return err
-			}
+			return user.ShowUserEmail()
 		}
 	case 1:
 		fmt.Println("Logging in..")

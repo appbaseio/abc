@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
+	"github.com/appbaseio/abc/appbase/spinner"
 	"github.com/appbaseio/abc/log"
 	"github.com/olekukonko/tablewriter"
 	"net/http"
@@ -60,7 +61,9 @@ func GetUserEmail() (string, error) {
 
 // ShowUserDetails shows user details
 func ShowUserDetails() error {
+	spinner.Start()
 	user, err := getCurrentUser()
+	spinner.Stop()
 	if err != nil {
 		return err
 	}
@@ -77,4 +80,15 @@ APPS:
 	table.Render()
 
 	return nil
+}
+
+// ShowUserEmail shows user email
+func ShowUserEmail() error {
+	spinner.Start()
+	email, err := GetUserEmail()
+	spinner.Stop()
+	if err == nil {
+		fmt.Println("Logged in as", email)
+	}
+	return err
 }
