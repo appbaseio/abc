@@ -3,6 +3,7 @@ package session
 import (
 	b64 "encoding/base64"
 	"encoding/json"
+	"github.com/appbaseio/abc/log"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -35,6 +36,7 @@ func LoadUserSessionAsCookie() ([3]http.Cookie, error) {
 		return cookies, err
 	}
 	sDec, err := b64.StdEncoding.DecodeString(sessionData)
+	log.Debugf("Decoded Token: %s", string(sDec))
 	if err != nil {
 		return cookies, err
 	}
@@ -68,6 +70,7 @@ func SaveUserSession(data string) error {
 // AttachCookiesToRequest attaches cookies to a request
 func AttachCookiesToRequest(req *http.Request) error {
 	cookies, err := LoadUserSessionAsCookie()
+	log.Debugf("Cookies: %s", cookies)
 	if err != nil {
 		return err
 	}
@@ -90,5 +93,6 @@ func getSessionFilePath() (string, error) {
 	if err != nil {
 		return "", err
 	}
+	log.Debugf("Home Dir: %s", homeDir)
 	return homeDir + "/.abcsession", nil
 }

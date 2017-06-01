@@ -5,6 +5,7 @@ import (
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
 	"github.com/appbaseio/abc/appbase/user"
+	"github.com/appbaseio/abc/log"
 	"os/exec"
 	"runtime"
 )
@@ -29,6 +30,7 @@ func StartUserLogin(host string) error {
 	fmt.Print("> ")
 	var token string
 	fmt.Scanf("%s", &token)
+	log.Debugf("Token: %s", token)
 	// save to file
 	err = session.SaveUserSession(token)
 	if err != nil {
@@ -39,6 +41,7 @@ func StartUserLogin(host string) error {
 	if err == nil {
 		fmt.Printf("\nLogged in as %s\n", email)
 	} else {
+		log.Errorln(err)
 		fmt.Println("\nFailed to get user info. Please try again.")
 	}
 	return err
