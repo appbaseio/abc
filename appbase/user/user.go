@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
+	"github.com/appbaseio/abc/log"
 	"github.com/olekukonko/tablewriter"
 	"net/http"
 	"os"
@@ -42,6 +43,7 @@ func getCurrentUser() (userBody, error) {
 	if err != nil {
 		return user.Body, err
 	}
+	log.Debugf("User Request Response: %s", resp.Body)
 	dec := json.NewDecoder(resp.Body)
 	err = dec.Decode(&user)
 	return user.Body, err
