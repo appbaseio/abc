@@ -24,6 +24,8 @@ func provisionAppbaseCLI(command string) func([]string) error {
 		run = runLogin
 	case "user":
 		run = runUser
+	case "apps":
+		run = runApps
 	default:
 		usage()
 		os.Exit(1)
