@@ -59,6 +59,15 @@ func GetUserEmail() (string, error) {
 	return user.Email, nil
 }
 
+// GetUserApps returns the list of user apps
+func GetUserApps() (map[string]string, error) {
+	user, err := getCurrentUser()
+	if err != nil {
+		return nil, err
+	}
+	return user.Apps, nil
+}
+
 // ShowUserDetails shows user details
 func ShowUserDetails() error {
 	spinner.Start()
