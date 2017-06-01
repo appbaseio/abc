@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
+	"github.com/appbaseio/abc/appbase/spinner"
 	"github.com/appbaseio/abc/appbase/user"
 	"github.com/appbaseio/abc/log"
 	"os/exec"
@@ -37,6 +38,7 @@ func StartUserLogin(host string) error {
 		return err
 	}
 	// show email
+	spinner.StartText("Checking token")
 	email, err := user.GetUserEmail()
 	if err == nil {
 		fmt.Printf("\nLogged in as %s\n", email)
@@ -44,6 +46,7 @@ func StartUserLogin(host string) error {
 		log.Errorln(err)
 		fmt.Println("\nFailed to get user info. Please try again.")
 	}
+	spinner.Stop()
 	return err
 }
 
