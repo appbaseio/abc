@@ -32,11 +32,9 @@ func runApp(args []string) error {
 	}
 	args = flagset.Args()
 
-	switch len(args) {
-	case 1:
-		return app.ShowAppDetails(args[0])
-	default:
-		fmt.Println("No such option. See --help")
+	if len(args) < 3 {
+		return app.ShowAppDetails(args[0], args[1:]...)
 	}
+	fmt.Println("No such option. See --help")
 	return nil
 }

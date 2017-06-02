@@ -74,7 +74,7 @@ func ShowUserApps() error {
 }
 
 // ShowAppDetails shows the app details
-func ShowAppDetails(app string) error {
+func ShowAppDetails(app string, options ...string) error {
 	spinner.StartText("Loading app details")
 	app, err := ensureAppID(app)
 	if err != nil {
@@ -101,6 +101,10 @@ func ShowAppDetails(app string) error {
 	fmt.Printf("ID:         %s\n", app)
 	fmt.Printf("Name:       %s\n", res.Body.AppName)
 	fmt.Printf("ES Version: %s\n", res.Body.ESVersion)
+
+	if common.StringInSlice("-m", options) || common.StringInSlice("--metrics", options) {
+		return ShowAppMetrics(app)
+	}
 	return nil
 }
 
