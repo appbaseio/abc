@@ -2,7 +2,8 @@ package app
 
 import (
 	"encoding/json"
-	// "fmt"
+	"errors"
+	"fmt"
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
 	"github.com/appbaseio/abc/appbase/spinner"
@@ -22,6 +23,15 @@ type appBody struct {
 // respBody represents response body
 type respBody struct {
 	Body map[string]appBody `json:"body"`
+}
+
+type appDetailBody struct {
+	AppName   string `json:"appname"`
+	ESVersion string `json:"es_version"`
+}
+
+type appRespBody struct {
+	Body appDetailBody `json:"body"`
 }
 
 // ShowUserApps shows the list of user apps
@@ -65,4 +75,58 @@ func ShowUserApps() error {
 	}
 	table.Render()
 	return nil
+}
+
+// ShowAppDetails shows the app details
+func ShowAppDetails(app string) error {
+	spinner.StartText("Loading app details")
+	app, err := ensureAppID(app)
+	if err != nil {
+		return err
+	}
+	// get app details
+	req, err := http.NewRequest("GET", common.AccAPIURL+"/app/"+app, nil)
+	if err != nil {
+		return err
+	}
+	err = session.AttachCookiesToRequest(req)
+	if err != nil {
+		return err
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return err
+	}
+	spinner.Stop()
+	// decode response
+	var res appRespBody
+	dec := json.NewDecoder(resp.Body)
+	err = dec.Decode(&res)
+	if err != nil {
+		return err
+	}
+	// output
+	fmt.Printf(`
+	ID: %s
+Name: %s
+ES Version: %s`, app, res.Body.AppName, res.Body.ESVersion)
+	return nil
+}
+
+// ensureAppId make sures `app` is id
+func ensureAppID(app string) (string, error) {
+	// check if num https://stackoverflow.com/questions/22593259/
+	if _, err := strconv.Atoi(app); err == nil {
+		return app, nil // return as is
+	}
+	// convert to appID
+	apps, err := user.GetUserApps()
+	if err != nil {
+		return "", err
+	}
+	appID, ok := apps[app]
+	if ok {
+		return appID, nil
+	}
+	return "", errors.New("App with name " + app + " not found.")
 }
