@@ -48,11 +48,7 @@ func ShowUserApps() error {
 	if err != nil {
 		return err
 	}
-	err = session.AttachCookiesToRequest(req)
-	if err != nil {
-		return err
-	}
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := session.SendRequest(req)
 	if err != nil {
 		return err
 	}
@@ -89,11 +85,7 @@ func ShowAppDetails(app string) error {
 	if err != nil {
 		return err
 	}
-	err = session.AttachCookiesToRequest(req)
-	if err != nil {
-		return err
-	}
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := session.SendRequest(req)
 	if err != nil {
 		return err
 	}
