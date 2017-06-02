@@ -36,11 +36,7 @@ func getCurrentUser() (userBody, error) {
 	if err != nil {
 		return user.Body, err
 	}
-	err = session.AttachCookiesToRequest(req)
-	if err != nil {
-		return user.Body, err
-	}
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := session.SendRequest(req)
 	if err != nil {
 		return user.Body, err
 	}

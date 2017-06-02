@@ -67,8 +67,8 @@ func SaveUserSession(data string) error {
 	return err
 }
 
-// AttachCookiesToRequest attaches cookies to a request
-func AttachCookiesToRequest(req *http.Request) error {
+// attachCookiesToRequest attaches cookies to a request
+func attachCookiesToRequest(req *http.Request) error {
 	cookies, err := LoadUserSessionAsCookie()
 	log.Debugf("Cookies: %s", cookies)
 	if err != nil {
@@ -78,6 +78,20 @@ func AttachCookiesToRequest(req *http.Request) error {
 		req.AddCookie(&cookie)
 	}
 	return nil
+}
+
+// SendRequest sends a request with cookies
+func SendRequest(req *http.Request) (*http.Response, error) {
+	var dumResp *http.Response
+	err := attachCookiesToRequest(req)
+	if err != nil {
+		return dumResp, err
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return dumResp, err
+	}
+	return resp, nil
 }
 
 func getUserHomeDir() (string, error) {
