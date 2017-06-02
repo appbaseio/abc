@@ -13,6 +13,7 @@ func usageAppbase() {
 	fmt.Fprintf(os.Stderr, "  login     login into appbase.io\n")
 	fmt.Fprintf(os.Stderr, "  user      get user details\n")
 	fmt.Fprintf(os.Stderr, "  apps      display user apps\n")
+	fmt.Fprintf(os.Stderr, "  app       display app details\n")
 }
 
 // provisionAppbaseCLI provisions the addon appbase CLI
@@ -26,6 +27,8 @@ func provisionAppbaseCLI(command string) func([]string) error {
 		run = runUser
 	case "apps":
 		run = runApps
+	case "app":
+		run = runApp
 	default:
 		usage()
 		os.Exit(1)

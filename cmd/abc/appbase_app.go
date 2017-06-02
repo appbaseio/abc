@@ -22,3 +22,21 @@ func runApps(args []string) error {
 	}
 	return nil
 }
+
+// runApp runs `app` command
+func runApp(args []string) error {
+	flagset := baseFlagSet("app")
+	flagset.Usage = usageFor(flagset, "abc app ID|Appname")
+	if err := flagset.Parse(args); err != nil {
+		return err
+	}
+	args = flagset.Args()
+
+	switch len(args) {
+	case 1:
+		return app.ShowAppDetails(args[0])
+	default:
+		fmt.Println("No such option. See --help")
+	}
+	return nil
+}
