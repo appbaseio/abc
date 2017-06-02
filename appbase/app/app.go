@@ -98,10 +98,9 @@ func ShowAppDetails(app string) error {
 		return err
 	}
 	// output
-	fmt.Printf(`
-	ID: %s
-Name: %s
-ES Version: %s`, app, res.Body.AppName, res.Body.ESVersion)
+	fmt.Printf("ID:         %s\n", app)
+	fmt.Printf("Name:       %s\n", res.Body.AppName)
+	fmt.Printf("ES Version: %s\n", res.Body.ESVersion)
 	return nil
 }
 
