@@ -1,5 +1,5 @@
 #
-# ABC Dockerfile
+# abc Dockerfile
 # docker build -t abc .
 # docker volume create --name abc
 # docker run -i --rm -v abc:/root --name abc abc login google
@@ -13,10 +13,10 @@ MAINTAINER Avi Aryan <avi.aryan123@gmail.com>
 # Set GOPATH
 ENV GOPATH /go
 
-# Make directories for api_frontend
+# Make directories for the code
 RUN mkdir -p /go/src/github.com/appbaseio/abc
 
-# Add api_frontend files
+# Add abc files
 ADD . /go/src/github.com/appbaseio/abc
 
 # Define working directory
