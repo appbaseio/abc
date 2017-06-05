@@ -32,7 +32,7 @@ func runApp(args []string) error {
 	}
 	args = flagset.Args()
 
-	if len(args) < 3 {
+	if len(args) < 4 {
 		return app.ShowAppDetails(args[0], args[1:]...)
 	}
 	fmt.Println("No such option. See --help")

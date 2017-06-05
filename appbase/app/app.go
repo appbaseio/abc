@@ -102,10 +102,13 @@ func ShowAppDetails(app string, options ...string) error {
 	fmt.Printf("Name:       %s\n", res.Body.AppName)
 	fmt.Printf("ES Version: %s\n", res.Body.ESVersion)
 
-	if common.StringInSlice("-m", options) || common.StringInSlice("--metrics", options) {
-		return ShowAppMetrics(app)
+	if common.StringInSlice("-p", options) || common.StringInSlice("--perms", options) {
+		err = ShowAppPerms(app)
 	}
-	return nil
+	if common.StringInSlice("-m", options) || common.StringInSlice("--metrics", options) {
+		err = ShowAppMetrics(app)
+	}
+	return err
 }
 
 // ensureAppId make sures `app` is id
