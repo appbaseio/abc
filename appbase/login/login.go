@@ -25,7 +25,9 @@ func StartUserLogin(host string) error {
 	// open in browser
 	err := open(url)
 	if err != nil {
-		return err
+		fmt.Println("Failed to open browser. Please get the token manually from the link.")
+		// won't work in docker, so don't err here
+		// return err
 	}
 	// read input
 	fmt.Print("> ")
