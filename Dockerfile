@@ -1,8 +1,9 @@
 #
 # ABC Dockerfile
 # docker build -t abc .
-# docker run --rm --name abc abc
-# docker run --rm --name abc abc login google   
+# docker volume create --name abc
+# docker run -i --rm -v abc:/root --name abc abc login google
+# root is $HOME, -i for stdin, --rm to remove container
 #
 
 # Pull the base image
