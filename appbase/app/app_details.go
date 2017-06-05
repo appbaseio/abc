@@ -12,6 +12,12 @@ import (
 	"strconv"
 )
 
+type permission struct {
+	Description string `json:"description"`
+	Username    string `json:"username"`
+	Password    string `json:"password"`
+}
+
 type metricsBucket struct {
 	DocCount  int64                  `json:"doc_count"`
 	APICalls  map[string]json.Number `json:"apiCalls"`
@@ -32,6 +38,10 @@ type metricsBody struct {
 	Overall metricsOverall `json:"overall"`
 }
 
+type respBodyPerms struct {
+	Body []permission `json:"body"`
+}
+
 type respBodyMetrics struct {
 	Body metricsBody `json:"body"`
 }
@@ -39,6 +49,7 @@ type respBodyMetrics struct {
 // ShowAppMetrics ...
 func ShowAppMetrics(app string) error {
 	spinner.StartText("Fetching app metrics")
+	fmt.Println()
 	req, err := http.NewRequest("GET", common.AccAPIURL+"/app/"+app+"/metrics", nil)
 	if err != nil {
 		return err
@@ -75,6 +86,34 @@ func ShowAppMetrics(app string) error {
 	})
 	table.SetAlignment(tablewriter.ALIGN_CENTER)
 	table.Render()
+	return nil
+}
+
+// ShowAppPerms ...
+func ShowAppPerms(app string) error {
+	spinner.StartText("Fetching app credentials")
+	fmt.Println()
+	req, err := http.NewRequest("GET", common.AccAPIURL+"/app/"+app+"/permissions", nil)
+	if err != nil {
+		return err
+	}
+	resp, err := session.SendRequest(req)
+	if err != nil {
+		return err
+	}
+	spinner.Stop()
+	// decode
+	var res respBodyPerms
+	dec := json.NewDecoder(resp.Body)
+	err = dec.Decode(&res)
+	if err != nil {
+		return err
+	}
+	// output
+	for index := range ".." {
+		fmt.Println(res.Body[index].Description)
+		fmt.Printf("Username:password %s:%s\n", res.Body[index].Username, res.Body[index].Password)
+	}
 	return nil
 }
 
