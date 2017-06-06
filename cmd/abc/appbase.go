@@ -14,6 +14,8 @@ func usageAppbase() {
 	fmt.Fprintf(os.Stderr, "  user      get user details\n")
 	fmt.Fprintf(os.Stderr, "  apps      display user apps\n")
 	fmt.Fprintf(os.Stderr, "  app       display app details\n")
+	fmt.Fprintf(os.Stderr, "  create    create app\n")
+	fmt.Fprintf(os.Stderr, "  delete    delete app\n")
 }
 
 // provisionAppbaseCLI provisions the addon appbase CLI
@@ -31,6 +33,8 @@ func provisionAppbaseCLI(command string) func([]string) error {
 		run = runApp
 	case "create":
 		run = runCreate
+	case "delete":
+		run = runDelete
 	default:
 		usage()
 		os.Exit(1)
