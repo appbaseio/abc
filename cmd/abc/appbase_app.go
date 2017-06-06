@@ -65,3 +65,18 @@ func runCreate(args []string) error {
 	fmt.Println("No such option. See --help")
 	return nil
 }
+
+// runDelete runs `delete` command
+func runDelete(args []string) error {
+	flagset := baseFlagSet("delete")
+	flagset.Usage = usageFor(flagset, "abc delete {AppID|AppName}")
+	if err := flagset.Parse(args); err != nil {
+		return err
+	}
+	args = flagset.Args()
+	if len(args) == 1 {
+		return app.RunAppDelete(args[0])
+	}
+	fmt.Println("No such option. See --help")
+	return nil
+}
