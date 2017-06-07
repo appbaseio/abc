@@ -15,7 +15,7 @@ func runUser(args []string) error {
 
 	if len(args) == 0 {
 		if isLoggedIn() {
-			user.ShowUserDetails()
+			return user.ShowUserDetails()
 		}
 	} else {
 		fmt.Println("No such option. See --help")
