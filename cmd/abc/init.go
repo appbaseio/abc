@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/appbaseio/abc/adaptor"
+	"github.com/appbaseio/abc/imports/adaptor"
 )
 
 func runInit(args []string) error {

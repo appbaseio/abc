@@ -6,3 +6,4 @@
 *.rdb
 # macOS
 .DS_Store
+/adaptorx

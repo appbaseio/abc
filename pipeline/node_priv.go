@@ -1,4 +1,4 @@
-// +build oss
+// +build !oss
 
 // Copyright 2014 The Transporter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
@@ -19,7 +19,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/appbaseio/abc/adaptor"
+	adaptor "github.com/appbaseio/abc/adaptorx"
 	"github.com/appbaseio/abc/client"
 	"github.com/appbaseio/abc/commitlog"
 	"github.com/appbaseio/abc/function"
@@ -29,15 +29,6 @@ import (
 	"github.com/appbaseio/abc/offset"
 	"github.com/appbaseio/abc/pipe"
 	"github.com/compose/mejson"
-	"github.com/compose/transporter/adaptor"
-	"github.com/compose/transporter/client"
-	"github.com/compose/transporter/commitlog"
-	"github.com/compose/transporter/function"
-	"github.com/compose/transporter/log"
-	"github.com/compose/transporter/message"
-	"github.com/compose/transporter/message/ops"
-	"github.com/compose/transporter/offset"
-	"github.com/compose/transporter/pipe"
 )
 
 var (

@@ -13,10 +13,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/appbaseio/abc/adaptor"
 	"github.com/appbaseio/abc/commitlog"
 	"github.com/appbaseio/abc/events"
 	"github.com/appbaseio/abc/function"
+	"github.com/appbaseio/abc/imports/adaptor"
 	"github.com/appbaseio/abc/offset"
 	"github.com/appbaseio/abc/pipeline"
 	"github.com/dop251/goja"
