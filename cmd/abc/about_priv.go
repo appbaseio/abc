@@ -1,11 +1,11 @@
-// +build oss
+// +build !oss
 
 package main
 
 import (
 	"fmt"
 
-	"github.com/appbaseio/abc/adaptor"
+	adaptor "github.com/appbaseio/abc/adaptorx"
 )
 
 func runAbout(args []string) error {

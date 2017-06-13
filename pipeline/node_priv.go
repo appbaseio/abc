@@ -1,4 +1,4 @@
-// +build oss
+// +build !oss
 
 // Copyright 2014 The Transporter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
@@ -19,7 +19,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/appbaseio/abc/adaptor"
+	adaptor "github.com/appbaseio/abc/adaptorx"
 	"github.com/appbaseio/abc/client"
 	"github.com/appbaseio/abc/commitlog"
 	"github.com/appbaseio/abc/function"

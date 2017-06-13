@@ -7,8 +7,8 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	_ "github.com/appbaseio/abc/adaptor/all"
 	_ "github.com/appbaseio/abc/function/all"
+	_ "github.com/appbaseio/abc/imports/all"
 	"github.com/appbaseio/abc/log"
 )
 

@@ -1,11 +1,11 @@
-// +build oss
+// +build !oss
 
 package pipeline
 
 import (
 	"time"
 
-	"github.com/appbaseio/abc/adaptor"
+	adaptor "github.com/appbaseio/abc/adaptorx"
 	"github.com/appbaseio/abc/events"
 	"github.com/appbaseio/abc/log"
 )
