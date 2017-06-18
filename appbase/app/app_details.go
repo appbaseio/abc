@@ -111,8 +111,8 @@ func ShowAppPerms(app string) error {
 	}
 	// output
 	for index := range ".." {
-		fmt.Println(res.Body[index].Description)
-		fmt.Printf("Username:password %s:%s\n", res.Body[index].Username, res.Body[index].Password)
+		fmt.Printf("%s%s:%s\n", common.ColonPad(res.Body[index].Description, 20),
+			res.Body[index].Username, res.Body[index].Password)
 	}
 	return nil
 }

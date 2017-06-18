@@ -46,3 +46,13 @@ func StringInSlice(a string, list []string) bool {
 	}
 	return false
 }
+
+// ColonPad pads spaces after colon
+func ColonPad(text string, length int) string {
+	textLen := len(text)
+	text += ":"
+	for i := 0; i < (length - textLen - 1); i++ {
+		text += " "
+	}
+	return text
+}
