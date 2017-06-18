@@ -68,11 +68,11 @@ func ShowAppMetrics(app string) error {
 	}
 	// output
 	fmt.Printf("Storage:    %d\n", res.Body.Overall.Storage)
-	fmt.Printf("Documents:  %d\n", res.Body.Overall.NumDocs)
+	fmt.Printf("Records:    %d\n", res.Body.Overall.NumDocs)
 	// table
 	var docCount, callCount int64
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Date", "API Calls", "Documents"})
+	table.SetHeader([]string{"Date", "API Calls", "Records"})
 	for _, bucket := range res.Body.Month.Buckets {
 		table.Append([]string{
 			getHumanDate(bucket.DateAsStr), common.JSONNumberToString(bucket.APICalls["value"]),
