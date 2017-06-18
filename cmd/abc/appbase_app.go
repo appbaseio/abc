@@ -26,10 +26,10 @@ func runApps(args []string) error {
 // runApp runs `app` command
 func runApp(args []string) error {
 	flagset := baseFlagSet("app")
-	flagset.Usage = usageFor(flagset, "abc app [-p|-perms] [-m|-metrics] {ID|Appname}")
-	perms := flagset.Bool("p", false, "show app permissions")
+	flagset.Usage = usageFor(flagset, "abc app [-c|-creds] [-m|-metrics] {ID|Appname}")
+	creds := flagset.Bool("c", false, "show app credentials")
 	metrics := flagset.Bool("m", false, "show app metrics")
-	flagset.BoolVar(perms, "perms", false, "show app permissions") // alias
+	flagset.BoolVar(creds, "creds", false, "show app credentials") // alias
 	flagset.BoolVar(metrics, "metrics", false, "show app metrics")
 	if err := flagset.Parse(args); err != nil {
 		return err
@@ -37,7 +37,7 @@ func runApp(args []string) error {
 	args = flagset.Args()
 
 	if len(args) == 1 {
-		return app.ShowAppDetails(args[0], *perms, *metrics)
+		return app.ShowAppDetails(args[0], *creds, *metrics)
 	}
 	fmt.Println("No such option. See --help")
 	return nil
