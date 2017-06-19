@@ -3,8 +3,8 @@
 package log
 
 import (
-	"flag"
 	"fmt"
+	flag "github.com/ogier/pflag"
 
 	"github.com/Sirupsen/logrus"
 )

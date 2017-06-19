@@ -26,11 +26,9 @@ func runApps(args []string) error {
 // runApp runs `app` command
 func runApp(args []string) error {
 	flagset := baseFlagSet("app")
-	flagset.Usage = usageFor(flagset, "abc app [-c|-creds] [-m|-metrics] {ID|Appname}")
-	creds := flagset.Bool("c", false, "show app credentials")
-	metrics := flagset.Bool("m", false, "show app metrics")
-	flagset.BoolVar(creds, "creds", false, "show app credentials") // alias
-	flagset.BoolVar(metrics, "metrics", false, "show app metrics")
+	flagset.Usage = usageFor(flagset, "abc app [-c|--creds] [-m|--metrics] [ID|Appname]")
+	creds := flagset.BoolP("creds", "c", false, "show app credentials")
+	metrics := flagset.BoolP("metrics", "m", false, "show app metrics")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
@@ -46,9 +44,10 @@ func runApp(args []string) error {
 // runCreate runs `create` command
 func runCreate(args []string) error {
 	flagset := baseFlagSet("create")
-	flagset.Usage = usageFor(flagset, "abc create [-es2|-es5] [-category=category] AppName")
+	flagset.Usage = usageFor(flagset, "abc create [--es2|--es5] [--category=category] AppName")
 	// https://gobyexample.com/command-line-flags
 	isEs5 := flagset.Bool("es5", false, "is app es5")
+	isEs2 := flagset.Bool("es2", true, "is app es2")
 	category := flagset.String("category", "generic", "category for app")
 
 	if err := flagset.Parse(args); err != nil {
@@ -59,8 +58,12 @@ func runCreate(args []string) error {
 	if len(args) == 1 {
 		if *isEs5 {
 			return app.RunAppCreate(args[0], "5", *category)
+		} else if *isEs2 {
+			return app.RunAppCreate(args[0], "2", *category)
+		} else {
+			fmt.Println("App needs to be ES2 or ES5")
+			return nil
 		}
-		return app.RunAppCreate(args[0], "2", *category)
 	}
 	fmt.Println("No such option. See --help")
 	return nil
@@ -69,7 +72,7 @@ func runCreate(args []string) error {
 // runDelete runs `delete` command
 func runDelete(args []string) error {
 	flagset := baseFlagSet("delete")
-	flagset.Usage = usageFor(flagset, "abc delete {AppID|AppName}")
+	flagset.Usage = usageFor(flagset, "abc delete [AppID|AppName]")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
