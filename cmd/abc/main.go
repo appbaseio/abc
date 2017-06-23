@@ -8,6 +8,7 @@ import (
 	"text/tabwriter"
 
 	_ "github.com/appbaseio/abc/function/all"
+	"github.com/appbaseio/abc/imports"
 	_ "github.com/appbaseio/abc/imports/all"
 	"github.com/appbaseio/abc/log"
 )
@@ -16,14 +17,14 @@ const (
 	defaultPipelineFile = "pipeline.js"
 )
 
-var version = "dev" // set by release script
+var version = imports.BuildName
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "USAGE\n")
 	fmt.Fprintf(os.Stderr, "  %s <command> [flags]\n", os.Args[0])
 	usageAppbase()
 	fmt.Fprintf(os.Stderr, "\n")
-	fmt.Fprintf(os.Stderr, "COMMANDS\n")
+	fmt.Fprintf(os.Stderr, "IMPORTER\n")
 	fmt.Fprintf(os.Stderr, "  run       run pipeline loaded from a file\n")
 	fmt.Fprintf(os.Stderr, "  test      display the compiled nodes without starting a pipeline\n")
 	fmt.Fprintf(os.Stderr, "  about     show information about available adaptors\n")
