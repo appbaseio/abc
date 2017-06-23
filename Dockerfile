@@ -1,8 +1,8 @@
 #
 # abc Dockerfile
-# docker build -t abc .
+# docker build --build-arg ABC_BUILD=oss -t abc .
 # docker volume create --name abc
-# docker run -i --rm -v abc:/root --name abc abc login google
+# docker run -i --rm -v abc:/root abc login google
 # root is $HOME, -i for stdin, --rm to remove container
 #
 
@@ -22,8 +22,13 @@ ADD . /go/src/github.com/appbaseio/abc
 # Define working directory
 WORKDIR /go/src/github.com/appbaseio/abc
 
+# Get build variant
+ARG ABC_BUILD=oss
+ENV ABC_BUILD ${ABC_BUILD}
+
+# Run build
 RUN cd /go/src/github.com/appbaseio/abc && \
-	go build ./cmd/abc/...
+	go build -tags $ABC_BUILD ./cmd/abc/...
 
 # Define default entrypoint
 # Entrypoint gets extra parameters from docker run
