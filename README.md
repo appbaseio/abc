@@ -143,7 +143,7 @@ Transporter allows the user to configure a number of data adaptors as sources or
 
 Adaptors may be able to track changes as they happen in source data. This "tail" capability allows a Transporter to stay running and keep the sinks in sync.
 
-***BETA Feature***
+#### BETA Feature
 
 As of release `v0.4.0`, transporter contains support for being able to resume operations
 after being stopped. The feature is disabled by default and can be enabled with the following:
@@ -167,7 +167,8 @@ Below is a list of each adaptor and its support of the feature:
 +---------------+-------------+----------------+
 | elasticsearch |             |       X        | 
 |     file      |             |       X        | 
-|    mongodb    |      X      |       X        | 
+|    mongodb    |      X      |       X        |
+|     mssql     |             |       N/A      | 
 |  postgresql   |             |       X        | 
 |   rabbitmq    |      X      |                | 
 |   rethinkdb   |             |       X        | 
@@ -181,9 +182,11 @@ Each adaptor has its own README page with details on configuration and capabilit
 * [elasticsearch](./adaptor/elasticsearch)
 * [file](./adaptor/file)
 * [mongodb](./adaptor/mongodb)
+* mssql
 * [postgresql](./adaptor/postgres)
 * [rabbitmq](./adaptor/rabbitmq)
 * [rethinkdb](./adaptor/rethinkdb)
+
 
 #### Native Functions
 
@@ -199,180 +202,18 @@ Each native function can be used as part of a `Transform` step in the pipeline.
 
 #### Commands
 
-##### init
+The importer module has the following commands.
 
 ```
-transporter init [source adaptor name] [sink adaptor name]
+run       run pipeline loaded from a file
+test      display the compiled nodes without starting a pipeline
+about     show information about available adaptors
+init      initialize a config and pipeline file based from provided adaptors
+xlog      manage the commit log
+offset    manage the offset for sinks
 ```
 
-Generates a basic `pipeline.js` file in the current directory.
-
-_Example_
-```
-$ transporter init mongodb elasticsearch
-$ cat pipeline.js
-var source = mongodb({
-  "uri": "${MONGODB_URI}"
-  // "timeout": "30s",
-  // "tail": false,
-  // "ssl": false,
-  // "cacerts": ["/path/to/cert.pem"],
-  // "wc": 1,
-  // "fsync": false,
-  // "bulk": false,
-  // "collection_filters": "{}"
-})
-
-var sink = elasticsearch({
-  "uri": "${ELASTICSEARCH_URI}"
-  // "timeout": "10s", // defaults to 30s
-  // "aws_access_key": "ABCDEF", // used for signing requests to AWS Elasticsearch service
-  // "aws_access_secret": "ABCDEF" // used for signing requests to AWS Elasticsearch service
-})
-
-t.Source(source).Save(sink)
-// t.Source("source", source).Save("sink", sink)
-// t.Source("source", source, "namespace").Save("sink", sink, "namespace")
-$
-```
-
-Edit the `pipeline.js` file to configure the source and sink nodes and also to set the namespace.
-
-##### about
-
-`transporter about`
-
-Lists all the adaptors currently available.
-
-_Example_
-
-```
-elasticsearch - an elasticsearch sink adaptor
-file - an adaptor that reads / writes files
-mongodb - a mongodb adaptor that functions as both a source and a sink
-postgres - a postgres adaptor that functions as both a source and a sink
-rabbitmq - an adaptor that handles publish/subscribe messaging with RabbitMQ 
-rethinkdb - a rethinkdb adaptor that functions as both a source and a sink
-```
-
-Giving the name of an adaptor produces more detail, such as the sample configuration.
-
-_Example_
-
-```
-transporter about postgres
-postgres - a postgres adaptor that functions as both a source and a sink
-
- Sample configuration:
-{
-  "uri": "${POSTGRESQL_URI}"
-  // "debug": false,
-  // "tail": false,
-  // "replication_slot": "slot"
-}
-```
-
-##### run
-
-```
-transporter run [-log.level "info"] <application.js>
-```
-
-Runs the pipeline script file which has its name given as the final parameter.
-
-##### test
-
-```
-transporter test [-log.level "info"] <application.js>
-```
-
-Evaluates and connects the pipeline, sources and sinks. Establishes connections but does not run.
-Prints out the state of connections at the end. Useful for debugging new configurations.
-
-##### xlog
-
-The `xlog` command is useful for inspecting the current state of the commit log.
-It contains 3 subcommands, `current`, `oldest`, and `offset`, as well as 
-a required flag `-log_dir` which should be the path to where the commit log is stored.
-
-***NOTE*** the command should only be run against the commit log when transporter
-is not actively running.
-
-```
-transporter xlog -log_dir=/path/to/dir current
-12345
-```
-
-Returns the most recent offset appended to the commit log.
-
-```
-transporter xlog -log_dir=/path/to/dir oldest
-0
-```
-
-Returns the oldest offset in the commit log.
-
-```
-transporter xlog -log_dir=/path/to/dir show 0
-offset    : 0
-timestamp : 2017-05-16 11:00:20 -0400 EDT
-mode      : COPY
-op        : INSERT
-key       : MyCollection
-value     : {"_id":{"$oid":"58efd14b60d271d7457b4f24"},"i":0}
-```
-
-Prints out the entry stored at the provided offset.
-
-##### offset
-
-The `offset` command provides access to current state of each consumer (i.e. sink)
-offset. It contains 4 subcommands, `list`, `show`, `mark`, and `delete`, as well as 
-a required flag `-log_dir` which should be the path to where the commit log is stored.
-
-```
-transporter offset -log_dir=/path/to/dir list
-+------+---------+
-| SINK | OFFSET  |
-+------+---------+
-| sink | 1103003 |
-+------+---------+
-```
-
-Lists all consumers and their associated offset in `log_dir`.
-
-```
-transporter offset -log_dir=/path/to/dir show sink
-+-------------------+---------+
-|     NAMESPACE     | OFFSET  |
-+-------------------+---------+
-| newCollection     | 1102756 |
-| testC             | 1103003 |
-| MyCollection      |  999429 |
-| anotherCollection | 1002997 |
-+-------------------+---------+
-```
-
-Prints out each namespace and its associated offset.
-
-```
-transporter offset -log_dir=/path/to/dir mark sink 1
-OK
-```
-
-Rewrites the namespace offset map based on the provided offset.
-
-```
-transporter offset -log_dir=/path/to/dir delete sink
-OK
-```
-
-Removes the consumer (i.e. sink) log directory.
-
-##### flags
-
-`-log.level "info"` - sets the logging level. Default is info; can be debug or error.
-
+Details have been covered in the Wiki page : [Importer Commands](https://github.com/appbaseio-confidential/abc/wiki/Importer-Commands). 
 
 
 ## Building guides
