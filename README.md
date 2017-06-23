@@ -1,12 +1,108 @@
 [![Build Status](https://travis-ci.org/compose/transporter.svg?branch=master)](https://travis-ci.org/compose/transporter) [![Go Report Card](https://goreportcard.com/badge/github.com/compose/transporter)](https://goreportcard.com/report/github.com/compose/transporter) [![codecov](https://codecov.io/gh/compose/transporter/branch/master/graph/badge.svg)](https://codecov.io/gh/compose/transporter) [![Docker Repository on Quay](https://quay.io/repository/compose/transporter/status "Docker Repository on Quay")](https://quay.io/repository/compose/transporter) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/compose-transporter/Lobby)
 
-Compose Transporter helps with database transformations from one store to another.  It can also sync from one to another or several stores.
 
-Transporter
-===========
+# ABC
 
-About
------
+1. [Intro](#intro)
+2. [Installation](#installation)
+  1. [Basic Installation](#basic-installation)
+  2. [Using Docker](#using-docker)
+3. [Features](#features)
+
+
+<a name="intro"></a>
+## 1. Intro
+
+ABC is a command-line client for appbase.io with nifty features to do data sync from on store to another.
+
+It consists of two parts. 
+
+1. Appbase module
+2. Import module
+
+To get the list of all commands supported by ABC, use -
+
+```sh
+abc --help
+```
+
+
+<a name="installation"></a>
+## 2. Installation
+
+ABC can be installed and used via the traditional `go build` or using a Docker image.
+
+
+<a name="basic-installation"></a>
+### 2.1 Basic installation
+
+You can install ABC by building it locally and then moving the executable to anywhere you like. 
+
+To build it, you require **Go 1.8** insalled on your system. 
+
+```sh
+go get github.com/appbaseio-confidential/abc
+cd $GOPATH/src/github.com/appbaseio-confidential/abc
+go build -tags 'oss' ./cmd/abc/...
+./abc --help
+```
+
+<a name="using-docker"></a>
+### 2.2 Using Docker
+
+```sh
+git clone https://github.com/appbaseio-confidential/abc
+cd abc
+docker build -t abc .
+docker volume create --name abc
+```
+
+Volume is used to store abc config files across containers.
+Now `abc` can be ran through Docker like in the following example which starts google login.  
+
+```sh
+docker run -i --rm -v abc:/root abc login google
+```
+
+Some more examples
+
+```sh
+docker run -i --rm -v abc:/root abc user
+docker run -i --rm -v abc:/root abc apps
+```
+
+
+<a name="features"></a>
+## 3. Features
+
+ABC's features can be broadly categorized into 2 components. 
+
+1. Appbase features
+2. Importer features
+
+
+### 3.1 Appbase features
+
+Appbase features allows you to control your appbase.io account using ABC. You can see them under the *Appbase* heading in the list of commands.
+
+```sh
+APPBASE
+  login     login into appbase.io
+  user      get user details
+  apps      display user apps
+  app       display app details
+  create    create app
+  delete    delete app
+```
+
+You can look over help for each of these commands using the `--help` switch. 
+
+```sh
+abc login --help
+```
+
+
+### 3.2 Importer features
 
 Transporter allows the user to configure a number of data adaptors as sources or sinks. These can be databases, files or other resources. Data is read from the sources, converted into a message format, and then send down to the sink where the message is converted into a writable format for its destination. The user can also create data transformations in JavaScript which can sit between the source and sink and manipulate or filter the message flow.
 
@@ -34,7 +130,7 @@ Below is a list of each adaptor and its support of the feature:
 +---------------+-------------+----------------+
 |    adaptor    | read resume | write tracking |
 +---------------+-------------+----------------+
-| elasticsearch |     N/A     |       X        | 
+| elasticsearch |             |       X        | 
 |     file      |             |       X        | 
 |    mongodb    |      X      |       X        | 
 |  postgresql   |             |       X        | 
@@ -43,13 +139,7 @@ Below is a list of each adaptor and its support of the feature:
 +---------------+-------------+----------------+
 ```
 
-Downloading Transporter
------------------------
-
-The latest binary releases are available from the [Github Repository](https://github.com/compose/transporter/releases/latest)
-
-Adaptors
---------
+#### Adaptors
 
 Each adaptor has its own README page with details on configuration and capabilities.
 
@@ -60,8 +150,7 @@ Each adaptor has its own README page with details on configuration and capabilit
 * [rabbitmq](./adaptor/rabbitmq)
 * [rethinkdb](./adaptor/rethinkdb)
 
-Native Functions
-----------------
+#### Native Functions
 
 Each native function can be used as part of a `Transform` step in the pipeline.
 
@@ -73,10 +162,9 @@ Each native function can be used as part of a `Transform` step in the pipeline.
 * [rename](./function/rename)
 * [skip](./function/skip)
 
-Commands
---------
+#### Commands
 
-### init
+##### init
 
 ```
 transporter init [source adaptor name] [sink adaptor name]
@@ -115,13 +203,14 @@ $
 
 Edit the `pipeline.js` file to configure the source and sink nodes and also to set the namespace.
 
-### about
+##### about
 
 `transporter about`
 
 Lists all the adaptors currently available.
 
 _Example_
+
 ```
 elasticsearch - an elasticsearch sink adaptor
 file - an adaptor that reads / writes files
@@ -134,6 +223,7 @@ rethinkdb - a rethinkdb adaptor that functions as both a source and a sink
 Giving the name of an adaptor produces more detail, such as the sample configuration.
 
 _Example_
+
 ```
 transporter about postgres
 postgres - a postgres adaptor that functions as both a source and a sink
@@ -147,7 +237,7 @@ postgres - a postgres adaptor that functions as both a source and a sink
 }
 ```
 
-### run
+##### run
 
 ```
 transporter run [-log.level "info"] <application.js>
@@ -155,7 +245,7 @@ transporter run [-log.level "info"] <application.js>
 
 Runs the pipeline script file which has its name given as the final parameter.
 
-### test
+##### test
 
 ```
 transporter test [-log.level "info"] <application.js>
@@ -164,7 +254,7 @@ transporter test [-log.level "info"] <application.js>
 Evaluates and connects the pipeline, sources and sinks. Establishes connections but does not run.
 Prints out the state of connections at the end. Useful for debugging new configurations.
 
-### xlog
+##### xlog
 
 The `xlog` command is useful for inspecting the current state of the commit log.
 It contains 3 subcommands, `current`, `oldest`, and `offset`, as well as 
@@ -199,7 +289,7 @@ value     : {"_id":{"$oid":"58efd14b60d271d7457b4f24"},"i":0}
 
 Prints out the entry stored at the provided offset.
 
-### offset
+##### offset
 
 The `offset` command provides access to current state of each consumer (i.e. sink)
 offset. It contains 4 subcommands, `list`, `show`, `mark`, and `delete`, as well as 
@@ -244,41 +334,31 @@ OK
 
 Removes the consumer (i.e. sink) log directory.
 
-#### flags
+##### flags
 
 `-log.level "info"` - sets the logging level. Default is info; can be debug or error.
 
-Building Transporter
---------------------
 
-### Essentials
 
-```
-go build ./cmd/transporter/...
-```
+## Building guides
 
-### Building guides
+[macOS](https://github.com/appbaseio-confidential/abc/blob/master/READMEMACOS.md)
+[Windows](https://github.com/appbaseio-confidential/abc/blob/master/READMEWINDOWS.md)
+[Vagrant](https://github.com/appbaseio-confidential/abc/blob/master/READMEVAGRANT.md)
 
-[macOS](https://github.com/compose/transporter/blob/master/READMEMACOS.md)
-[Windows](https://github.com/compose/transporter/blob/master/READMEWINDOWS.md)
-[Vagrant](https://github.com/compose/transporter/blob/master/READMEVAGRANT.md)
 
-Transporter Resources
-=====================
+## ABC Resources
 
-* [Transporter Wiki](https://github.com/compose/transporter/wiki)
-* [Compose's articles](https://www.compose.io/articles/search/?s=transporter)
+* [ABC Wiki](https://github.com/appbaseio-confidential/abc/wiki)
 
-Contributing to Transporter
-===========================
 
-Want to help out with Transporter? Great! There are instructions to get you
+## Contributing to ABC
+
+Want to help out with ABC? Great! There are instructions to get you
 started [here](CONTRIBUTING.md).
 
-Licensing
-=========
-Transporter is licensed under the New BSD License. See LICENSE for full license text.
 
-Support and Guarantees
-======================
-Compose does not provide support nor guarantee stability or functionality of this tool. Please take adequate caution when using Transporter to ensure that it's the right tool for the job. Transporter may not account for failure scenarios that could lead to unexpected behavior. Always take backups, always test in dev, and always feel free to submit a PR with enhancements, features, and bug fixes.
+## Licensing
+
+ABC is licensed under the New BSD License. See [LICENSE](LICENSE) for full license text.
+
