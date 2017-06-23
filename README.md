@@ -7,7 +7,10 @@
 2. [Installation](#installation)
 	1. [Basic Installation](#basic-installation)
 	2. [Using Docker](#using-docker)
-3. [Features](#features)
+3. [Build Variants](#build-variants)
+4. [Features](#features)
+	1. [Appbase features](#appbase-features)
+	2. [Importer features](#importer-features)
 
 
 <a name="intro"></a>
@@ -47,6 +50,9 @@ go build -tags 'oss' ./cmd/abc/...
 ./abc --help
 ```
 
+Note - You might be wondering what is the tag `oss` doing there. That's covered in the section [Build Variants](#build-variants).
+
+
 <a name="using-docker"></a>
 ### 2.2 Using Docker
 
@@ -72,8 +78,35 @@ docker run -i --rm -v abc:/root abc apps
 ```
 
 
+<a name="build-variants"></a>
+## 3. Build Variants
+
+The ABC project you see in this repository is not the complete project. Appbase.io works on a proprietary version of ABC using this project as the base.
+Hence we use the tag 'oss' to specify that this is an open source build. 
+If you are curious, we use the tag '!oss' to make our private builds. 
+
+
+#### How to know build variant from the executable? 
+
+If you are not sure which build of `abc` you are using, you can run `abc --help` and take note of the value under the version header. 
+
+For open source build, you will see
+
+```
+VERSION
+  oss
+```
+
+For the proprietary builds, you will see 
+
+```
+VERSION
+  proprietary
+```
+
+
 <a name="features"></a>
-## 3. Features
+## 4. Features
 
 ABC's features can be broadly categorized into 2 components. 
 
@@ -81,7 +114,8 @@ ABC's features can be broadly categorized into 2 components.
 2. Importer features
 
 
-### 3.1 Appbase features
+<a name="appbase-features"></a>
+### 4.1 Appbase features
 
 Appbase features allows you to control your appbase.io account using ABC. You can see them under the *Appbase* heading in the list of commands.
 
@@ -102,7 +136,8 @@ abc login --help
 ```
 
 
-### 3.2 Importer features
+<a name="importer-features"></a>
+### 4.2 Importer features
 
 Transporter allows the user to configure a number of data adaptors as sources or sinks. These can be databases, files or other resources. Data is read from the sources, converted into a message format, and then send down to the sink where the message is converted into a writable format for its destination. The user can also create data transformations in JavaScript which can sit between the source and sink and manipulate or filter the message flow.
 
