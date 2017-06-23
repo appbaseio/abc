@@ -59,7 +59,7 @@ Note - You might be wondering what is the tag `oss` doing there. That's covered 
 ```sh
 git clone https://github.com/appbaseio-confidential/abc
 cd abc
-docker build -t abc .
+docker build --build-arg ABC_BUILD=oss -t abc .
 docker volume create --name abc
 ```
 
