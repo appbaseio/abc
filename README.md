@@ -5,8 +5,8 @@
 
 1. [Intro](#intro)
 2. [Installation](#installation)
-  1. [Basic Installation](#basic-installation)
-  2. [Using Docker](#using-docker)
+	1. [Basic Installation](#basic-installation)
+	2. [Using Docker](#using-docker)
 3. [Features](#features)
 
 
