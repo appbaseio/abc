@@ -133,6 +133,28 @@ You can look over help for each of these commands using the `--help` switch.
 abc login --help
 ```
 
+#### Example
+
+```sh
+# display all commands
+abc
+# login into system
+abc login google
+# get user details
+abc user
+# get list of apps
+abc apps
+# get details of an app
+abc app MyAppName
+# delete that app
+abc delete MyAppName
+# create it again
+abc create MyAppName
+# view its metrics. It will be 0 as it is a new app
+# here we are using AppID. We can use AppName too.
+abc app -m 2489
+```
+
 
 <a name="importer-features"></a>
 ### 4.2 Importer features
