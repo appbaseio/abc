@@ -17,3 +17,5 @@
 # es log
 /elastic.log
 
+# executable
+/abc
