@@ -14,7 +14,7 @@ Erase the other section and everything on and above this line.
 
 ### System info:
 
-- Transporter version
+- ABC version
 - OS
 - DB version(s)
 
