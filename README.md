@@ -214,11 +214,6 @@ offset    manage the offset for sinks
 Details have been covered in the Wiki page : [Importer Commands](https://github.com/appbaseio-confidential/abc/wiki/Importer-Commands). 
 
 
-## Building guides
-
-[Vagrant](https://github.com/appbaseio-confidential/abc/blob/master/READMEVAGRANT.md)
-
-
 ## ABC Resources
 
 * [ABC Wiki](https://github.com/appbaseio-confidential/abc/wiki)
