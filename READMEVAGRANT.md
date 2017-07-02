@@ -1,4 +1,4 @@
-# Building Transporter with Vagrant
+# Building ABC with Vagrant
 
 
 * ensure [vagrant](https://www.vagrantup.com/) is installed
@@ -6,7 +6,7 @@
 * ensure either [virtual box](https://www.virtualbox.org/wiki/Downloads) or [VMWare fusion](http://www.vmware.com/products/fusion) or [VMWare Workstation](http://www.vmware.com/products/workstation) is installed
 
 ```bash
-> cd transporter
+> cd abc
 > vagrant up
 ...
 > vagrant ssh
