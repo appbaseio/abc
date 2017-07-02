@@ -1,9 +1,19 @@
 /transporter
 .vagrant
-/pipeline.js
-/transformer.js
+/transform.*js
 .vscode
 *.rdb
+
+# private
+/adaptorx
+
 # macOS
 .DS_Store
-/adaptorx
+
+# test files
+/pipeline*.js
+/test*.csv
+
+# es log
+/elastic.log
+
