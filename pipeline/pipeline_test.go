@@ -8,10 +8,10 @@ import (
 
 	"github.com/appbaseio/abc/adaptor"
 	_ "github.com/appbaseio/abc/adaptor/file"
-	"github.com/appbaseio/abc/events"
 	"github.com/appbaseio/abc/offset"
 	"github.com/appbaseio/abc/private/client"
 	"github.com/appbaseio/abc/private/commitlog"
+	"github.com/appbaseio/abc/private/events"
 )
 
 // a noop node adaptor to help test

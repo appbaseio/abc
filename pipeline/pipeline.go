@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/appbaseio/abc/adaptor"
-	"github.com/appbaseio/abc/events"
 	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/private/events"
 )
 
 // A Pipeline is a the end to end description of a transporter data flow.
