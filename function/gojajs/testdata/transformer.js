@@ -1,1 +1,0 @@
-function transform(doc) { return doc }

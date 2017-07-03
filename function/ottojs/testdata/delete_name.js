@@ -1,1 +1,0 @@
-module.exports=function(doc) { doc['data'] = _.omit(doc['data'], ['name']); return doc }

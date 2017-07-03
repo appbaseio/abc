@@ -1,1 +1,0 @@
-function transform(doc) { doc['ns'] = 'table'; return doc }
