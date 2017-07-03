@@ -3,7 +3,7 @@ package offset
 import (
 	"encoding/binary"
 
-	"github.com/appbaseio/abc/commitlog"
+	"github.com/appbaseio/abc/private/commitlog"
 )
 
 const (

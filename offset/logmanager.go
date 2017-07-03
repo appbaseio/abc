@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/appbaseio/abc/commitlog"
 	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/private/commitlog"
 )
 
 const (
