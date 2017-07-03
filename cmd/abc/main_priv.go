@@ -1,4 +1,4 @@
-// +build oss
+// +build !oss
 
 package main
 
@@ -9,9 +9,9 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	// _ "github.com/appbaseio/abc/function/all"
+	_ "github.com/appbaseio/abc/function/all"
 	"github.com/appbaseio/abc/imports"
-	// _ "github.com/appbaseio/abc/imports/all"
+	_ "github.com/appbaseio/abc/imports/all"
 	"github.com/appbaseio/abc/log"
 )
 
@@ -25,6 +25,16 @@ func usage() {
 	fmt.Fprintf(os.Stderr, "USAGE\n")
 	fmt.Fprintf(os.Stderr, "  %s <command> [flags]\n", os.Args[0])
 	usageAppbase()
+	// private options
+	fmt.Fprintf(os.Stderr, "\n")
+	fmt.Fprintf(os.Stderr, "IMPORTER\n")
+	fmt.Fprintf(os.Stderr, "  run       run pipeline loaded from a file\n")
+	fmt.Fprintf(os.Stderr, "  test      display the compiled nodes without starting a pipeline\n")
+	fmt.Fprintf(os.Stderr, "  about     show information about available adaptors\n")
+	fmt.Fprintf(os.Stderr, "  init      initialize a config and pipeline file based from provided adaptors\n")
+	fmt.Fprintf(os.Stderr, "  xlog      manage the commit log\n")
+	fmt.Fprintf(os.Stderr, "  offset    manage the offset for sinks\n")
+
 	// version
 	fmt.Fprintf(os.Stderr, "\n")
 	fmt.Fprintf(os.Stderr, "VERSION\n")
@@ -40,6 +50,20 @@ func main() {
 
 	var run func([]string) error
 	switch strings.ToLower(os.Args[1]) {
+	case "run":
+		run = runRun
+	case "test":
+		run = runTest
+	case "about":
+		run = runAbout
+	case "init":
+		run = runInit
+	case "xlog":
+		run = runXlog
+	case "offset":
+		run = runOffset
+	case "import":
+		run = runImport
 	default:
 		run = provisionAppbaseCLI(os.Args[1])
 	}

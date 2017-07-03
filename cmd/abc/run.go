@@ -1,3 +1,5 @@
+// +build !oss
+
 package main
 
 func runRun(args []string) error {
