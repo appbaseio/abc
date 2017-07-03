@@ -6,6 +6,7 @@
 
 # private
 /adaptorx
+/private
 
 # macOS
 .DS_Store
