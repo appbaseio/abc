@@ -19,7 +19,6 @@ import (
 	"sync"
 	"time"
 
-	adaptor "github.com/appbaseio/abc/adaptorx"
 	"github.com/appbaseio/abc/client"
 	"github.com/appbaseio/abc/commitlog"
 	"github.com/appbaseio/abc/function"
@@ -28,6 +27,7 @@ import (
 	"github.com/appbaseio/abc/message/ops"
 	"github.com/appbaseio/abc/offset"
 	"github.com/appbaseio/abc/pipe"
+	adaptor "github.com/appbaseio/abc/private/adaptor"
 	"github.com/compose/mejson"
 )
 

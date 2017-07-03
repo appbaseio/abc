@@ -5,9 +5,9 @@ package pipeline
 import (
 	"time"
 
-	adaptor "github.com/appbaseio/abc/adaptorx"
 	"github.com/appbaseio/abc/events"
 	"github.com/appbaseio/abc/log"
+	adaptor "github.com/appbaseio/abc/private/adaptor"
 )
 
 // A Pipeline is a the end to end description of a transporter data flow.

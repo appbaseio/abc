@@ -4,5 +4,5 @@ package all
 
 import (
 	// import
-	_ "github.com/appbaseio/abc/adaptorx/all"
+	_ "github.com/appbaseio/abc/private/adaptor/all"
 )
