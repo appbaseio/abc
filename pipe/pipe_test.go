@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/appbaseio/abc/offset"
 	"github.com/appbaseio/abc/private/message"
 	"github.com/appbaseio/abc/private/message/ops"
+	"github.com/appbaseio/abc/private/offset"
 )
 
 func TestSend(t *testing.T) {

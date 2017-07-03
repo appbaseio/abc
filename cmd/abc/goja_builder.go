@@ -16,11 +16,11 @@ import (
 	"time"
 
 	"github.com/appbaseio/abc/imports/adaptor"
-	"github.com/appbaseio/abc/offset"
 	"github.com/appbaseio/abc/pipeline"
 	"github.com/appbaseio/abc/private/commitlog"
 	"github.com/appbaseio/abc/private/events"
 	"github.com/appbaseio/abc/private/function"
+	"github.com/appbaseio/abc/private/offset"
 	"github.com/dop251/goja"
 	uuid "github.com/nu7hatch/gouuid"
 	"github.com/oklog/oklog/pkg/group"
