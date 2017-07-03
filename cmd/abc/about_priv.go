@@ -5,7 +5,7 @@ package main
 import (
 	"fmt"
 
-	adaptor "github.com/appbaseio/abc/adaptorx"
+	adaptor "github.com/appbaseio/abc/private/adaptor"
 )
 
 func runAbout(args []string) error {
