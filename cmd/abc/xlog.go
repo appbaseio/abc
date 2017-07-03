@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/appbaseio/abc/commitlog"
 	"github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/private/commitlog"
 )
 
 func runXlog(args []string) error {
