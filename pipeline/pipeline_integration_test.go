@@ -11,9 +11,9 @@ import (
 
 	"github.com/appbaseio/abc/adaptor"
 	_ "github.com/appbaseio/abc/adaptor/all"
-	"github.com/appbaseio/abc/events"
 	"github.com/appbaseio/abc/offset"
 	"github.com/appbaseio/abc/private/commitlog"
+	"github.com/appbaseio/abc/private/events"
 )
 
 // set up some local files
