@@ -1,1 +1,0 @@
-module.exports=function(doc) { doc['ns'] = 'table'; return doc }

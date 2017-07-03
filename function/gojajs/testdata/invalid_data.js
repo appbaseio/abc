@@ -1,1 +1,0 @@
-function transform(doc) { doc["data"] = "not a map";return doc }

@@ -20,7 +20,6 @@ import (
 	"time"
 
 	"github.com/appbaseio/abc/adaptor"
-	"github.com/appbaseio/abc/function"
 	"github.com/appbaseio/abc/log"
 	"github.com/appbaseio/abc/message"
 	"github.com/appbaseio/abc/message/ops"
@@ -28,6 +27,7 @@ import (
 	"github.com/appbaseio/abc/pipe"
 	"github.com/appbaseio/abc/private/client"
 	"github.com/appbaseio/abc/private/commitlog"
+	"github.com/appbaseio/abc/private/function"
 	"github.com/compose/mejson"
 	"github.com/compose/transporter/adaptor"
 	"github.com/compose/transporter/client"

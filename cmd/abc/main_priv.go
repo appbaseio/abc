@@ -9,10 +9,10 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	_ "github.com/appbaseio/abc/function/all"
 	"github.com/appbaseio/abc/imports"
 	_ "github.com/appbaseio/abc/imports/all"
 	"github.com/appbaseio/abc/log"
+	_ "github.com/appbaseio/abc/private/function/all"
 )
 
 const (
