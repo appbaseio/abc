@@ -163,10 +163,8 @@ ABC allows the user to configure a number of data adaptors as sources or sinks. 
 
 Adaptors may be able to track changes as they happen in source data. This "tail" capability allows a ABC to stay running and keep the sinks in sync.
 
-#### BETA Feature
-
-As of release `v0.4.0`, ABC contains support for being able to resume operations
-after being stopped. The feature is disabled by default and can be enabled with the following:
+ABC also contains support for being able to resume operations after being stopped. 
+The feature is disabled by default and can be enabled as the following:
 
 ```
 source = mongodb({"uri": "mongo://localhost:27017/source_db"})
@@ -238,13 +236,12 @@ Details have been covered in the Wiki page : [Importer Commands](https://github.
 
 ## ABC Resources
 
-* [ABC Wiki](https://github.com/appbaseio-confidential/abc/wiki)
+Checkout [ABC Wiki](https://github.com/appbaseio-confidential/abc/wiki) for details on some ABC commands and topics.
 
 
 ## Contributing to ABC
 
-Want to help out with ABC? Great! There are instructions to get you
-started [here](CONTRIBUTING.md).
+Want to help out with ABC? Great! There are instructions to get you started [here](CONTRIBUTING.md).
 
 
 ## Licensing
