@@ -210,13 +210,13 @@ Each adaptor has its own README page with details on configuration and capabilit
 
 Each native function can be used as part of a `Transform` step in the pipeline.
 
-* [goja](./function/gojajs)
-* [omit](./function/omit)
-* [otto](./function/ottojs)
-* [pick](./function/pick)
-* [pretty](./function/pretty)
-* [rename](./function/rename)
-* [skip](./function/skip)
+* [goja](./wiki/goja)
+* [omit](./wiki/omit)
+* [otto](./wiki/otto)
+* [pick](./wiki/pick)
+* [pretty](./wiki/pretty)
+* [rename](./wiki/rename)
+* [skip](./wiki/skip)
 
 #### Commands
 
