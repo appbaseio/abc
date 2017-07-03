@@ -4,7 +4,7 @@ package adaptor
 
 import (
 	// import
-	"github.com/appbaseio/abc/private/adaptor"
+	adaptorx "github.com/appbaseio/abc/private/adaptor"
 )
 
 // Adaptors export

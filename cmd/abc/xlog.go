@@ -1,3 +1,5 @@
+// +build !oss
+
 package main
 
 import (
