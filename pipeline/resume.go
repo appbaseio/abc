@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"io"
 
-	"github.com/appbaseio/abc/message"
 	"github.com/appbaseio/abc/private/client"
 	"github.com/appbaseio/abc/private/commitlog"
+	"github.com/appbaseio/abc/private/message"
 	"github.com/compose/mejson"
 )
 
