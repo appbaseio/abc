@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/appbaseio/abc/log"
-	"github.com/appbaseio/abc/offset"
+	"github.com/appbaseio/abc/private/offset"
 	"github.com/olekukonko/tablewriter"
 )
 

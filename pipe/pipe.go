@@ -12,9 +12,9 @@ import (
 	"time"
 
 	"github.com/appbaseio/abc/log"
-	"github.com/appbaseio/abc/offset"
 	"github.com/appbaseio/abc/private/events"
 	"github.com/appbaseio/abc/private/message"
+	"github.com/appbaseio/abc/private/offset"
 )
 
 var (

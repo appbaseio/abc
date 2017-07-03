@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/appbaseio/abc/adaptor"
-	"github.com/appbaseio/abc/offset"
 	"github.com/appbaseio/abc/private/commitlog"
+	"github.com/appbaseio/abc/private/offset"
 )
 
 var (
