@@ -30,6 +30,7 @@ func runImport(args []string) error {
 	replicationSlot := flagset.String("replication-slot", "standby_replication_slot",
 		"[postgres] replication slot to use")
 	timeout := flagset.String("timeout", "10s", "source timeout")
+	srcRegex := flagset.String("src.filter", ".*", "Namespace filter for source")
 	var destURL string
 
 	// parse args
@@ -50,6 +51,7 @@ func runImport(args []string) error {
 		"typeName":         *typeName,
 		"replication_slot": *replicationSlot,
 		"timeout":          *timeout,
+		"srcRegex":         *srcRegex,
 	}
 
 	// write config file
@@ -108,7 +110,10 @@ func writeConfigFile(src string, srcConfig map[string]interface{}, destURI strin
 		appFileHandle.WriteString(fmt.Sprintf("var %s = %s(%s)\n\n", nodeName, name, confJSON))
 		nodeName = "sink"
 	}
-	appFileHandle.WriteString(`t.Source("source", source, "/.*/").Save("sink", sink, "/.*/")`)
+	appFileHandle.WriteString(
+		fmt.Sprintf(`t.Source("source", source, "/%s/").Save("sink", sink, "/.*/")`,
+			srcConfig["srcRegex"]),
+	)
 	appFileHandle.WriteString("\n")
 
 	return fname, nil
