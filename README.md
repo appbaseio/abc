@@ -14,12 +14,12 @@
 <a name="intro"></a>
 ## 1. Intro
 
-ABC is a command-line client for appbase.io with nifty features to do data sync from on store to another.
+ABC is a command-line client for appbase.io with nifty features. The paid version of this allows import data into Appbase as well. 
 
 It consists of two parts. 
 
 1. Appbase module
-2. Import module
+2. Import module (paid version)
 
 To get the list of all commands supported by ABC, use -
 
@@ -165,78 +165,7 @@ abc app -m 2489
 ABC allows the user to configure a number of data adaptors as sources or sinks. These can be databases, files or other resources. Data is read from the sources, converted into a message format, and then send down to the sink where the message is converted into a writable format for its destination. The user can also create data transformations in JavaScript which can sit between the source and sink and manipulate or filter the message flow.
 
 Adaptors may be able to track changes as they happen in source data. This "tail" capability allows a ABC to stay running and keep the sinks in sync.
-
-ABC also contains support for being able to resume operations after being stopped. 
-The feature is disabled by default and can be enabled as the following:
-
-```
-source = mongodb({"uri": "mongo://localhost:27017/source_db"})
-sink = mongodb({"uri": "mongo://localhost:27017/sink_db"})
-t.Config({"log_dir":"/data/ABC"})
-  .Source("source", source)
-  .Save("sink", sink)
-```
-
-When using the above pipeline, all messages will be appended to a commit log and 
-successful processing of a message is handled via consumer/sink offset tracking.
-
-Below is a list of each adaptor and its support of the feature:
-
-```
-+---------------+-------------+----------------+
-|    adaptor    | read resume | write tracking |
-+---------------+-------------+----------------+
-| elasticsearch |             |       X        | 
-|     file      |             |       X        | 
-|    mongodb    |      X      |       X        |
-|     mssql     |             |       N/A      | 
-|  postgresql   |             |       X        | 
-|   rabbitmq    |      X      |                | 
-|   rethinkdb   |             |       X        | 
-+---------------+-------------+----------------+
-```
-
-#### Adaptors
-
-Each adaptor has its own README page with details on configuration and capabilities.
-
-* [csv](docs/adaptors/csv)
-* [elasticsearch](docs/adaptors/elasticsearch)
-* [file](docs/adaptors/file)
-* [mongodb](docs/adaptors/mongodb)
-* [mssql](docs/adaptors/mssql)
-* [mysql](docs/adaptors/mysql)
-* [postgresql](docs/adaptors/postgres)
-* [rabbitmq](docs/adaptors/rabbitmq)
-* [rethinkdb](docs/adaptors/rethinkdb)
-
-
-#### Native Functions
-
-Each native function can be used as part of a `Transform` step in the pipeline.
-
-* [goja](docs/transforms/goja.md)
-* [omit](docs/transforms/omit.md)
-* [otto](docs/transforms/otto.md)
-* [pick](docs/transforms/pick.md)
-* [pretty](docs/transforms/pretty.md)
-* [rename](docs/transforms/rename.md)
-* [skip](docs/transforms/skip.md)
-
-#### Commands
-
-The importer module has the following commands.
-
-```
-run       run pipeline loaded from a file
-test      display the compiled nodes without starting a pipeline
-about     show information about available adaptors
-init      initialize a config and pipeline file based from provided adaptors
-xlog      manage the commit log
-offset    manage the offset for sinks
-```
-
-Details have been covered in the docs : [Importer Commands](docs/importer). 
+For more details on adaptors, see **ABC pro website**.
 
 
 ## ABC Resources
