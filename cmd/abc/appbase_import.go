@@ -14,7 +14,7 @@ import (
 )
 
 const importInfo string = `
-	abc import --type {DBType} --source {URI} [-t|--tail] [Uri|AppID|Appname]
+	abc import --src.type {DBType} --src.uri {URI} [-t|--tail] [Uri|AppID|Appname]
 `
 
 // runImport runs the import command
@@ -24,10 +24,10 @@ func runImport(args []string) error {
 
 	// custom flags
 	tail := flagset.BoolP("tail", "t", false, "allow tail feature")
-	srcType := flagset.String("type", "postgres", "type of source database")
-	srcURL := flagset.String("source", "http://user:pass@host:port/db", "url of source database")
+	srcType := flagset.String("src.type", "postgres", "type of source database")
+	srcURL := flagset.String("src.uri", "http://user:pass@host:port/db", "url of source database")
 	typeName := flagset.String("typename", "mytype", "[csv] typeName to use")
-	replicationSlot := flagset.String("replication_slot", "standby_replication_slot",
+	replicationSlot := flagset.String("replication-slot", "standby_replication_slot",
 		"[postgres] replication slot to use")
 	timeout := flagset.String("timeout", "10s", "source timeout")
 	var destURL string

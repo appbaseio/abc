@@ -19,9 +19,9 @@ Note that you only need to set the parameters that are required for the source d
 ### Examples
 
 ```sh
-./abc import --log.level=info --type=csv --typename=csvTypeName --source="file.csv" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+./abc import --log.level=info --src.type=csv --typename=csvTypeName --src.uri="file.csv" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
 ```sh
-./abc import --log.level=info --type=postgres -t --replication_slot="standby_replication_slot" --source="postgresql://USER:PASS@HOST:PORT/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+./abc import --log.level=info --src.type=postgres -t --replication-slot="standby_replication_slot" --src.uri="postgresql://USER:PASS@HOST:PORT/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
