@@ -125,9 +125,12 @@ APPBASE
   app       display app details
   create    create app
   delete    delete app
+  import    import data from various sources into appbase app
 ```
 
 You can look over help for each of these commands using the `--help` switch. 
+Alternatively we have detailed docs for them at [docs/appbase folder](docs/appbase).
+
 
 ```sh
 abc login --help
