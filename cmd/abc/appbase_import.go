@@ -46,6 +46,7 @@ func runImport(args []string) error {
 
 	// create source config
 	var srcConfig = map[string]interface{}{
+		"_name_":           *srcType,
 		"uri":              *srcURL,
 		"tail":             *tail,
 		"typeName":         *typeName,
@@ -54,8 +55,13 @@ func runImport(args []string) error {
 		"srcRegex":         *srcRegex,
 	}
 
+	var destConfig = map[string]interface{}{
+		"uri":    destURL,
+		"_name_": "elasticsearch",
+	}
+
 	// write config file
-	file, err := writeConfigFile(*srcType, srcConfig, destURL)
+	file, err := writeConfigFile(srcConfig, destConfig)
 	if err != nil {
 		return err
 	}
@@ -72,7 +78,7 @@ func runImport(args []string) error {
 	return builder.run()
 }
 
-func writeConfigFile(src string, srcConfig map[string]interface{}, destURI string) (string, error) {
+func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]interface{}) (string, error) {
 	fname := "pipeline_" + strconv.FormatInt(time.Now().Unix(), 10) + ".js"
 
 	if _, err := os.Stat(fname); err == nil {
@@ -84,7 +90,7 @@ func writeConfigFile(src string, srcConfig map[string]interface{}, destURI strin
 	}
 	defer appFileHandle.Close()
 
-	args := []string{src, "elasticsearch"}
+	args := []string{srcConfig["_name_"].(string), destConfig["_name_"].(string)}
 	var config = make(map[string]interface{})
 
 	nodeName := "source"
@@ -96,7 +102,9 @@ func writeConfigFile(src string, srcConfig map[string]interface{}, destURI strin
 			}
 		} else {
 			config = map[string]interface{}{}
-			config["uri"] = destURI
+			for k, v := range destConfig {
+				config[k] = v
+			}
 		}
 		// get adaptor
 		a, _ := adaptor.GetAdaptor(name, config)
