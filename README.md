@@ -236,12 +236,12 @@ xlog      manage the commit log
 offset    manage the offset for sinks
 ```
 
-Details have been covered in the Wiki page : [Importer Commands](https://github.com/appbaseio-confidential/abc/wiki/Importer-Commands). 
+Details have been covered in the docs : [Importer Commands](docs/importer). 
 
 
 ## ABC Resources
 
-Checkout [ABC Wiki](https://github.com/appbaseio-confidential/abc/wiki) for details on some ABC commands and topics.
+Checkout the [docs folder](docs/) for details on some ABC commands and topics.
 
 
 ## Contributing to ABC
