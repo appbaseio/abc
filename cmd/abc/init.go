@@ -4,6 +4,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/joho/godotenv"
 	"os"
 	"strings"
 
@@ -13,11 +14,26 @@ import (
 func runInit(args []string) error {
 	flagset := baseFlagSet("init")
 	flagset.Usage = usageFor(flagset, "abc init [source] [sink]")
+	configFile := flagset.StringP("env", "e", "[FILE]", "Generate pipeline.js from an env file")
+
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
-
 	args = flagset.Args()
+
+	// env file
+	if *configFile != "" && *configFile != "[FILE]" {
+		if len(args) > 0 {
+			return fmt.Errorf("wrong number of arguments provided, expected 0, got %d", len(args))
+		}
+		err := genPipelineFromEnv(*configFile)
+		if err != nil {
+			return fmt.Errorf("There was an error %s", err)
+		}
+		return nil
+	}
+
+	// normal pipeline.js
 	if len(args) != 2 {
 		return fmt.Errorf("wrong number of arguments provided, expected 2, got %d", len(args))
 	}
@@ -48,5 +64,43 @@ func runInit(args []string) error {
 	}
 	appFileHandle.WriteString(`t.Source("source", source, "/.*/").Save("sink", sink, "/.*/")`)
 	appFileHandle.WriteString("\n")
+	return nil
+}
+
+func genPipelineFromEnv(filename string) error {
+	var config map[string]string
+	config, err := godotenv.Read(filename)
+	if err != nil {
+		return err
+	}
+	// source
+	srcMap := map[string]string{
+		"src.uri":  "uri",
+		"src.type": "_name_",
+		"src.tail": "tail", // TODO: data type here
+	}
+	src := map[string]interface{}{}
+	for k, v := range srcMap {
+		if val, ok := config[k]; ok {
+			src[v] = val
+		}
+	}
+	// sink
+	destMap := map[string]string{
+		"dest.uri":  "uri",
+		"dest.type": "_name_",
+	}
+	dest := map[string]interface{}{}
+	for k, v := range destMap {
+		if val, ok := config[k]; ok {
+			dest[v] = val
+		}
+	}
+	// generate file
+	file, err := writeConfigFile(src, dest)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("Writing %s...", file)
 	return nil
 }
