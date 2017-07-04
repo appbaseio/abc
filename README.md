@@ -197,13 +197,15 @@ Below is a list of each adaptor and its support of the feature:
 
 Each adaptor has its own README page with details on configuration and capabilities.
 
-* [elasticsearch](./adaptor/elasticsearch)
-* [file](./adaptor/file)
-* [mongodb](./adaptor/mongodb)
-* mssql
-* [postgresql](./adaptor/postgres)
-* [rabbitmq](./adaptor/rabbitmq)
-* [rethinkdb](./adaptor/rethinkdb)
+* [csv](docs/adaptors/csv)
+* [elasticsearch](docs/adaptors/elasticsearch)
+* [file](docs/adaptors/file)
+* [mongodb](docs/adaptors/mongodb)
+* [mssql](docs/adaptors/mssql)
+* [mysql](docs/adaptors/mysql)
+* [postgresql](docs/adaptors/postgres)
+* [rabbitmq](docs/adaptors/rabbitmq)
+* [rethinkdb](docs/adaptors/rethinkdb)
 
 
 #### Native Functions
