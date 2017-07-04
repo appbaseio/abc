@@ -3,6 +3,6 @@
 
 ##### Checks
 
-- [ ] I have mentioned my `abc` version in the issue.
+- [ ] I have mentioned my `abc` version in the issue, if applicable.
 - [ ] This issue is not a duplicate.
 - [ ] This issue has a description.
