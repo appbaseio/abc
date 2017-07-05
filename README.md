@@ -6,9 +6,9 @@
 3. [Features](#features)
 	1. [Appbase features](#appbase-features)
 	2. [Importer features](#importer-features)
-4. [Installation](#installation)
-	1. [Basic Installation](#basic-installation)
-	2. [Using Docker](#using-docker)
+4. [Development setup](#development-setup)
+	1. [Local Setup](#local-setup)
+	2. [Docker Setup](#docker-setup)
 5. [Build Variants](#build-variants)
 6. [ABC Resources](#abc-resources)
 	1. [Contributing to ABC](#contributing-to-abc)
@@ -144,13 +144,13 @@ For more details on adaptors, see **ABC pro website**.
 
 
 
-<a name="installation"></a>
-## 4. Installation
+<a name="development-setup"></a>
+## 4. Development Setup
 
-ABC can be installed and used via the traditional `go build` or using a Docker image.
+ABC can be built locally via the traditional `go build` or by building a Docker image.
 
-<a name="basic-installation"></a>
-### 4.1 Basic installation
+<a name="local-setup"></a>
+### 4.1 Local Setup
 
 You can install ABC by building it locally and then moving the executable to anywhere you like. 
 
@@ -165,8 +165,8 @@ go build -tags 'oss' ./cmd/abc/...
 
 Note - You might be wondering what is the tag `oss` doing there. That's covered in the section [Build Variants](#build-variants).
 
-<a name="using-docker"></a>
-### 4.2 Using Docker
+<a name="docker-setup"></a>
+### 4.2 Docker Setup
 
 ```sh
 git clone https://github.com/appbaseio/abc
@@ -185,8 +185,11 @@ docker run -i --rm -v abc:/root abc login google
 Some more examples
 
 ```sh
-docker run -i --rm -v abc:/root abc user
-docker run -i --rm -v abc:/root abc apps
+# setting alias for easy usage
+alias abc=docker run -i --rm -v abc:/root abc
+# using alias now :)
+abc user
+abc apps
 ```
 
 
