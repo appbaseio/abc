@@ -2,14 +2,15 @@
 # ABC
 
 1. [Intro](#intro)
-2. [Installation](#installation)
+2. [Getting Started](#getting-started)
+3. [Features](#features)
+  1. [Appbase features](#appbase-features)
+  2. [Importer features](#importer-features)
+4. [Installation](#installation)
 	1. [Basic Installation](#basic-installation)
 	2. [Using Docker](#using-docker)
-3. [Build Variants](#build-variants)
-4. [Features](#features)
-	1. [Appbase features](#appbase-features)
-	2. [Importer features](#importer-features)
-5. [ABC Resources](#abc-resources)
+5. [Build Variants](#build-variants)
+6. [ABC Resources](#abc-resources)
 	1. [Contributing to ABC](#contributing-to-abc)
 	2. [Licensing](#licensing)
 
@@ -29,79 +30,58 @@ To get the list of all commands supported by ABC, use -
 abc --help
 ```
 
-<a name="installation"></a>
-## 2. Installation
 
-ABC can be installed and used via the traditional `go build` or using a Docker image.
 
-<a name="basic-installation"></a>
-### 2.1 Basic installation
+<a name="getting-started"></a>
+## 2. Getting Started
 
-You can install ABC by building it locally and then moving the executable to anywhere you like. 
+ABC can be downloaded as an executable as well as through a Docker image. 
 
-To build it, you require **Go 1.8** insalled on your system. 
+#### Using Executable
+
+Download `abc`'s executable for your platform and preferrably put it in a PATH directory.
+The access it as -
 
 ```sh
-go get github.com/appbaseio/abc
-cd $GOPATH/src/github.com/appbaseio/abc
-go build -tags 'oss' ./cmd/abc/...
-./abc --help
+> abc
 ```
 
-Note - You might be wondering what is the tag `oss` doing there. That's covered in the section [Build Variants](#build-variants).
+You should see a list of commands that `abc` supports.
+Try logging in for example.
 
-<a name="using-docker"></a>
-### 2.2 Using Docker
+#### Using Docker
+
+To use the Docker image, pull it as 
 
 ```sh
-git clone https://github.com/appbaseio/abc
-cd abc
-docker build --build-arg ABC_BUILD=oss -t abc .
+docker pull appbaseio/abc
+```
+
+Then create the volume to store config files across containers.
+
+```sh
 docker volume create --name abc
 ```
 
-Volume is used to store abc config files across containers.
-Now `abc` can be ran through Docker like in the following example which starts google login.  
+Finally you should be able to use `abc`
 
 ```sh
-docker run -i --rm -v abc:/root abc login google
+docker run -i --rm -v abc:/root appbaseio/abc
 ```
 
-Some more examples
+This command may look too long to you. We can create an alias to make things better. 
 
 ```sh
-docker run -i --rm -v abc:/root abc user
-docker run -i --rm -v abc:/root abc apps
+# create alias
+alias abc=docker run -i --rm -v abc:/root appbaseio/abc
+# run a command
+abc login google
 ```
 
-<a name="build-variants"></a>
-## 3. Build Variants
 
-The ABC project you see in this repository is not the complete project. Appbase.io works on a proprietary version of ABC using this project as the base.
-Hence we use the tag 'oss' to specify that this is an open source build. 
-If you are curious, we use the tag '!oss' to make our private builds. 
-
-
-#### How to know build variant from the executable? 
-
-If you are not sure which build of `abc` you are using, you can run `abc --help` and take note of the value under the version header. 
-
-For open source build, you will see
-
-```
-VARIANT
-  oss
-```
-
-For the proprietary builds, you will see 
-
-```
-VARIANT
-  !oss
-```
 
 <a name="features"></a>
-## 4. Features
+## 3. Features
 
 ABC's features can be broadly categorized into 2 components. 
 
@@ -109,7 +89,7 @@ ABC's features can be broadly categorized into 2 components.
 2. Importer features
 
 <a name="appbase-features"></a>
-### 4.1 Appbase features
+### 3.1 Appbase features
 
 Appbase features allows you to control your appbase.io account using ABC. You can see them under the *Appbase* heading in the list of commands.
 
@@ -155,25 +135,102 @@ abc app -m 2489
 ```
 
 <a name="importer-features"></a>
-### 4.2 Importer features
+### 3.2 Importer features
 
 ABC allows the user to configure a number of data adaptors as sources or sinks. These can be databases, files or other resources. Data is read from the sources, converted into a message format, and then send down to the sink where the message is converted into a writable format for its destination. The user can also create data transformations in JavaScript which can sit between the source and sink and manipulate or filter the message flow.
 
 Adaptors may be able to track changes as they happen in source data. This "tail" capability allows a ABC to stay running and keep the sinks in sync.
 For more details on adaptors, see **ABC pro website**.
 
+
+
+<a name="installation"></a>
+## 4. Installation
+
+ABC can be installed and used via the traditional `go build` or using a Docker image.
+
+<a name="basic-installation"></a>
+### 4.1 Basic installation
+
+You can install ABC by building it locally and then moving the executable to anywhere you like. 
+
+To build it, you require **Go 1.8** insalled on your system. 
+
+```sh
+go get github.com/appbaseio/abc
+cd $GOPATH/src/github.com/appbaseio/abc
+go build -tags 'oss' ./cmd/abc/...
+./abc --help
+```
+
+Note - You might be wondering what is the tag `oss` doing there. That's covered in the section [Build Variants](#build-variants).
+
+<a name="using-docker"></a>
+### 4.2 Using Docker
+
+```sh
+git clone https://github.com/appbaseio/abc
+cd abc
+docker build --build-arg ABC_BUILD=oss -t abc .
+docker volume create --name abc
+```
+
+Volume is used to store abc config files across containers.
+Now `abc` can be ran through Docker like in the following example which starts google login.  
+
+```sh
+docker run -i --rm -v abc:/root abc login google
+```
+
+Some more examples
+
+```sh
+docker run -i --rm -v abc:/root abc user
+docker run -i --rm -v abc:/root abc apps
+```
+
+
+
+<a name="build-variants"></a>
+## 5. Build Variants
+
+The ABC project you see in this repository is not the complete project. Appbase.io works on a proprietary version of ABC using this project as the base.
+Hence we use the tag 'oss' to specify that this is an open source build. 
+If you are curious, we use the tag '!oss' to make our private builds. 
+
+
+#### How to know build variant from the executable? 
+
+If you are not sure which build of `abc` you are using, you can run `abc --help` and take note of the value under the version header. 
+
+For open source build, you will see
+
+```
+VARIANT
+  oss
+```
+
+For the proprietary builds, you will see 
+
+```
+VARIANT
+  !oss
+```
+
+
+
 <a name="abc-resources"></a>
-## 5. ABC Resources
+## 6. ABC Resources
 
 Checkout the [docs folder](docs/) for details on some ABC commands and topics.
 
 <a name="contributing-to-abc"></a>
-### 5.1 Contributing to ABC
+### 6.1 Contributing to ABC
 
 Want to help out with ABC? Great! There are instructions to get you started [here](CONTRIBUTING.md).
 
 <a name="licensing"></a>
-### 5.2 Licensing
+### 6.2 Licensing
 
 ABC is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for full license text.
 
