@@ -1,6 +1,6 @@
 # user
 
-`user` command shows details of the authenticated user. (Related [login](login))
+`user` command shows details of the authenticated user. (Related [login](login.md))
 
 It takes no additional parameters and displays user name, user email and list of user apps when it is executed.
 
