@@ -9,7 +9,9 @@
 4. [Features](#features)
 	1. [Appbase features](#appbase-features)
 	2. [Importer features](#importer-features)
-
+5. [ABC Resources](#abc-resources)
+	1. [Contributing to ABC](#contributing-to-abc)
+	2. [Licensing](#licensing)
 
 <a name="intro"></a>
 ## 1. Intro
@@ -27,12 +29,12 @@ To get the list of all commands supported by ABC, use -
 abc --help
 ```
 
-
+<a name="installation"></a>
 ## 2. Installation
 
 ABC can be installed and used via the traditional `go build` or using a Docker image.
 
-
+<a name="basic-installation"></a>
 ### 2.1 Basic installation
 
 You can install ABC by building it locally and then moving the executable to anywhere you like. 
@@ -48,7 +50,7 @@ go build -tags 'oss' ./cmd/abc/...
 
 Note - You might be wondering what is the tag `oss` doing there. That's covered in the section [Build Variants](#build-variants).
 
-
+<a name="using-docker"></a>
 ### 2.2 Using Docker
 
 ```sh
@@ -72,7 +74,7 @@ docker run -i --rm -v abc:/root abc user
 docker run -i --rm -v abc:/root abc apps
 ```
 
-
+<a name="build-variants"></a>
 ## 3. Build Variants
 
 The ABC project you see in this repository is not the complete project. Appbase.io works on a proprietary version of ABC using this project as the base.
@@ -98,7 +100,7 @@ VERSION
   proprietary
 ```
 
-
+<a name="features"></a>
 ## 4. Features
 
 ABC's features can be broadly categorized into 2 components. 
@@ -106,7 +108,7 @@ ABC's features can be broadly categorized into 2 components.
 1. Appbase features
 2. Importer features
 
-
+<a name="appbase-features"></a>
 ### 4.1 Appbase features
 
 Appbase features allows you to control your appbase.io account using ABC. You can see them under the *Appbase* heading in the list of commands.
@@ -152,7 +154,7 @@ abc create MyAppName
 abc app -m 2489
 ```
 
-
+<a name="importer-features"></a>
 ### 4.2 Importer features
 
 ABC allows the user to configure a number of data adaptors as sources or sinks. These can be databases, files or other resources. Data is read from the sources, converted into a message format, and then send down to the sink where the message is converted into a writable format for its destination. The user can also create data transformations in JavaScript which can sit between the source and sink and manipulate or filter the message flow.
@@ -160,18 +162,18 @@ ABC allows the user to configure a number of data adaptors as sources or sinks. 
 Adaptors may be able to track changes as they happen in source data. This "tail" capability allows a ABC to stay running and keep the sinks in sync.
 For more details on adaptors, see **ABC pro website**.
 
-
-## ABC Resources
+<a name="abc-resources"></a>
+## 5. ABC Resources
 
 Checkout the [docs folder](docs/) for details on some ABC commands and topics.
 
-
-## Contributing to ABC
+<a name="contributing-to-abc"></a>
+### 5.1 Contributing to ABC
 
 Want to help out with ABC? Great! There are instructions to get you started [here](CONTRIBUTING.md).
 
-
-## Licensing
+<a name="licensing"></a>
+### 5.2 Licensing
 
 ABC is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for full license text.
 
