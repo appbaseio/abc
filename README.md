@@ -6,11 +6,11 @@
 3. [Features](#features)
 	1. [Appbase features](#appbase-features)
 	2. [Importer features](#importer-features)
-4. [Development setup](#development-setup)
+4. [Development setup](#development)
 	1. [Local Setup](#local-setup)
 	2. [Docker Setup](#docker-setup)
-5. [Build Variants](#build-variants)
-6. [ABC Resources](#abc-resources)
+	3. [Build Variants](#build-variants)
+5. [ABC Resources](#abc-resources)
 	1. [Contributing to ABC](#contributing-to-abc)
 	2. [Licensing](#licensing)
 
@@ -144,8 +144,8 @@ For more details on adaptors, see **ABC pro website**.
 
 
 
-<a name="development-setup"></a>
-## 4. Development Setup
+<a name="development"></a>
+## 4. Development
 
 ABC can be built locally via the traditional `go build` or by building a Docker image.
 
@@ -192,10 +192,8 @@ abc user
 abc apps
 ```
 
-
-
 <a name="build-variants"></a>
-## 5. Build Variants
+### 4.3 Build Variants
 
 The ABC project you see in this repository is not the complete project. Appbase.io works on a proprietary version of ABC using this project as the base.
 Hence we use the tag 'oss' to specify that this is an open source build. 
