@@ -221,17 +221,17 @@ VARIANT
 
 
 <a name="abc-resources"></a>
-## 6. ABC Resources
+## 5. ABC Resources
 
 Checkout the [docs folder](docs/) for details on some ABC commands and topics.
 
 <a name="contributing-to-abc"></a>
-### 6.1 Contributing to ABC
+### 5.1 Contributing to ABC
 
 Want to help out with ABC? Great! There are instructions to get you started [here](CONTRIBUTING.md).
 
 <a name="licensing"></a>
-### 6.2 Licensing
+### 5.2 Licensing
 
 ABC is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for full license text.
 
