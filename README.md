@@ -42,8 +42,8 @@ You can install ABC by building it locally and then moving the executable to any
 To build it, you require **Go 1.8** insalled on your system. 
 
 ```sh
-go get github.com/appbaseio-confidential/abc
-cd $GOPATH/src/github.com/appbaseio-confidential/abc
+go get github.com/appbaseio/abc
+cd $GOPATH/src/github.com/appbaseio/abc
 go build -tags 'oss' ./cmd/abc/...
 ./abc --help
 ```
@@ -54,7 +54,7 @@ Note - You might be wondering what is the tag `oss` doing there. That's covered 
 ### 2.2 Using Docker
 
 ```sh
-git clone https://github.com/appbaseio-confidential/abc
+git clone https://github.com/appbaseio/abc
 cd abc
 docker build --build-arg ABC_BUILD=oss -t abc .
 docker volume create --name abc
