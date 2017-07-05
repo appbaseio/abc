@@ -19,7 +19,8 @@ const (
 	defaultPipelineFile = "pipeline.js"
 )
 
-var version = imports.BuildName
+var version = "0.0.0"
+var variant = imports.BuildName
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "USAGE\n")
@@ -35,10 +36,10 @@ func usage() {
 	fmt.Fprintf(os.Stderr, "  xlog      manage the commit log\n")
 	fmt.Fprintf(os.Stderr, "  offset    manage the offset for sinks\n")
 
-	// version
+	// variant
 	fmt.Fprintf(os.Stderr, "\n")
-	fmt.Fprintf(os.Stderr, "VERSION\n")
-	fmt.Fprintf(os.Stderr, "  %s\n", version)
+	fmt.Fprintf(os.Stderr, "VARIANT\n")
+	fmt.Fprintf(os.Stderr, "  %s\n", variant)
 	fmt.Fprintf(os.Stderr, "\n")
 }
 

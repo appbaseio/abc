@@ -89,15 +89,15 @@ If you are not sure which build of `abc` you are using, you can run `abc --help`
 For open source build, you will see
 
 ```
-VERSION
+VARIANT
   oss
 ```
 
 For the proprietary builds, you will see 
 
 ```
-VERSION
-  proprietary
+VARIANT
+  !oss
 ```
 
 <a name="features"></a>
