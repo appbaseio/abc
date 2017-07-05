@@ -13,6 +13,19 @@ To view the complete list of input parameters supported, use -
 abc import --help
 ```
 
+At the time of writing, the list of parameters supported looks like -
+
+```
+--log.level="info"                           Only log messages with the given severity or above. Valid levels: [debug, info, error]
+--replication-slot=standby_replication_slot  [postgres] replication slot to use
+--src.filter=.*                              Namespace filter for source
+--src.type=postgres                          type of source database
+--src.uri=http://user:pass@host:port/db      url of source database
+--tail=false                                 allow tail feature
+--timeout=10s                                source timeout
+--typename=mytype                            [csv] typeName to use
+```
+
 Note that you only need to set the parameters that are required for the source database type. For example, you don't set `replication_slot` when taking CSV as the source. 
 
 
