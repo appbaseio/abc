@@ -44,9 +44,9 @@ func runApp(args []string) error {
 // runCreate runs `create` command
 func runCreate(args []string) error {
 	flagset := baseFlagSet("create")
-	flagset.Usage = usageFor(flagset, "abc create [--es2|--es5] [--category=category] AppName")
+	flagset.Usage = usageFor(flagset, "abc create [--es2|--es6] [--category=category] AppName")
 	// https://gobyexample.com/command-line-flags
-	isEs5 := flagset.Bool("es5", false, "is app es5")
+	isEs6 := flagset.Bool("es6", false, "is app es6")
 	isEs2 := flagset.Bool("es2", true, "is app es2")
 	category := flagset.String("category", "generic", "category for app")
 
@@ -56,12 +56,12 @@ func runCreate(args []string) error {
 	args = flagset.Args()
 
 	if len(args) == 1 {
-		if *isEs5 {
-			return app.RunAppCreate(args[0], "5", *category)
+		if *isEs6 {
+			return app.RunAppCreate(args[0], "6", *category)
 		} else if *isEs2 {
 			return app.RunAppCreate(args[0], "2", *category)
 		} else {
-			fmt.Println("App needs to be ES2 or ES5")
+			fmt.Println("App needs to be ES2 or ES6")
 			return nil
 		}
 	}
