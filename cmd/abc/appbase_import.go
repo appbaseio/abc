@@ -8,10 +8,26 @@ import (
 	"fmt"
 	"github.com/appbaseio/abc/imports/adaptor"
 	"github.com/appbaseio/abc/log"
+	"github.com/joho/godotenv"
 	"os"
 	"strconv"
 	"time"
 )
+
+// GLOBALS
+var srcParamMap = map[string]string{
+	"src.uri":          "uri",
+	"src.type":         "_name_",
+	"tail":             "tail", // TODO: data type here
+	"replication_slot": "replication_slot",
+	"typename":         "typeName",
+	"timeout":          "timeout",
+}
+
+var destParamMap = map[string]string{
+	"dest.uri":  "uri",
+	"dest.type": "_name_",
+}
 
 const importInfo string = `
 	abc import --src.type {DBType} --src.uri {URI} [-t|--tail] [Uri|AppID|Appname]
@@ -143,4 +159,33 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 	appFileHandle.WriteString("\n")
 
 	return fname, nil
+}
+
+func genPipelineFromEnv(filename string) (string, error) {
+	var config map[string]string
+	config, err := godotenv.Read(filename)
+	if err != nil {
+		return "", err
+	}
+	// source
+	src := map[string]interface{}{}
+	for k, v := range srcParamMap {
+		if val, ok := config[k]; ok {
+			src[v] = val
+		}
+	}
+	// sink
+	dest := map[string]interface{}{}
+	for k, v := range destParamMap {
+		if val, ok := config[k]; ok {
+			dest[v] = val
+		}
+	}
+	// generate file
+	file, err := writeConfigFile(src, dest)
+	if err != nil {
+		return "", err
+	}
+	fmt.Printf("Writing %s...\n", file)
+	return file, nil
 }
