@@ -26,7 +26,7 @@ func runInit(args []string) error {
 		if len(args) > 0 {
 			return fmt.Errorf("wrong number of arguments provided, expected 0, got %d", len(args))
 		}
-		err := genPipelineFromEnv(*configFile)
+		_, err := genPipelineFromEnv(*configFile)
 		if err != nil {
 			return fmt.Errorf("There was an error %s", err)
 		}
@@ -67,17 +67,20 @@ func runInit(args []string) error {
 	return nil
 }
 
-func genPipelineFromEnv(filename string) error {
+func genPipelineFromEnv(filename string) (string, error) {
 	var config map[string]string
 	config, err := godotenv.Read(filename)
 	if err != nil {
-		return err
+		return "", err
 	}
 	// source
 	srcMap := map[string]string{
-		"src.uri":  "uri",
-		"src.type": "_name_",
-		"src.tail": "tail", // TODO: data type here
+		"src.uri":          "uri",
+		"src.type":         "_name_",
+		"tail":             "tail", // TODO: data type here
+		"replication_slot": "replication_slot",
+		"typeName":         "typeName",
+		"timeout":          "timeout",
 	}
 	src := map[string]interface{}{}
 	for k, v := range srcMap {
@@ -99,8 +102,8 @@ func genPipelineFromEnv(filename string) error {
 	// generate file
 	file, err := writeConfigFile(src, dest)
 	if err != nil {
-		return err
+		return "", err
 	}
 	fmt.Printf("Writing %s...", file)
-	return nil
+	return file, nil
 }
