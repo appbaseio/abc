@@ -29,12 +29,26 @@ At the time of writing, the list of parameters supported looks like -
 Note that you only need to set the parameters that are required for the source database type. For example, you don't set `replication_slot` when taking CSV as the source. 
 
 
-### Examples
+## Examples
+
+
+#### CSV
 
 ```sh
-./abc import --log.level=info --src.type=csv --typename=csvTypeName --src.uri="file.csv" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+./abc import --src.type=csv --typename=csvTypeName --src.uri="file.csv" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
+#### Postgres
+
 ```sh
-./abc import --log.level=info --src.type=postgres -t --replication-slot="standby_replication_slot" --src.uri="postgresql://USER:PASS@HOST:PORT/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+./abc import --src.type=postgres -t --replication-slot="standby_replication_slot" --src.uri="postgresql://USER:PASS@HOST:PORT/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
+
+#### MySQL
+
+```sh
+./abc import --src.type=mysql --src.uri="USER:PASS@tcp(HOST:PORT)/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+```
+
+For more source URL patterns, see [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql#examples)'s GitHub page. 
+
