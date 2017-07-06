@@ -38,19 +38,26 @@ Note that you only need to set the parameters that are required for the source d
 abc import --src.type=csv --typename=csvTypeName --src.uri="file.csv" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
-### Postgres
+
+### ElasticSearch
 
 ```sh
-abc import --src.type=postgres -t --replication-slot="standby_replication_slot" --src.uri="postgresql://USER:PASS@HOST:PORT/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+abc import --src.type=elasticsearch --src.uri="http://USER:PASS@HOST:PORT/INDEX" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
-### MySQL
+We can also use an Appbase app as source.
 
 ```sh
-abc import --src.type=mysql --src.uri="USER:PASS@tcp(HOST:PORT)/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+abc import --src.type=elasticsearch --src.uri="https://USER:PASS@scalr.api.appbase.io/APPNAME2" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
-For more source URL patterns, see [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql#examples)'s GitHub page. 
+
+### MongoDB
+
+```sh
+abc import --src.type=mongodb -t --src.uri="mongodb://USER:PASS@HOST:PORT/DB" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+```
+
 
 ### MSSQL
 
@@ -61,3 +68,17 @@ abc import --src.type=mssql --src.uri="sqlserver://USER:PASSWORD@SERVER:PORT?dat
 For more source URL patterns, see [go-mssqldb](https://github.com/denisenkom/go-mssqldb#connection-parameters-and-dsn)'s GitHub page. 
 
 
+### MySQL
+
+```sh
+abc import --src.type=mysql --src.uri="USER:PASS@tcp(HOST:PORT)/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+```
+
+For more source URL patterns, see [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql#examples)'s GitHub page. 
+
+
+### Postgres
+
+```sh
+abc import --src.type=postgres -t --replication-slot="standby_replication_slot" --src.uri="postgresql://USER:PASS@HOST:PORT/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+```
