@@ -32,23 +32,32 @@ Note that you only need to set the parameters that are required for the source d
 ## Examples
 
 
-#### CSV
+### CSV
 
 ```sh
-./abc import --src.type=csv --typename=csvTypeName --src.uri="file.csv" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+abc import --src.type=csv --typename=csvTypeName --src.uri="file.csv" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
-#### Postgres
+### Postgres
 
 ```sh
-./abc import --src.type=postgres -t --replication-slot="standby_replication_slot" --src.uri="postgresql://USER:PASS@HOST:PORT/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+abc import --src.type=postgres -t --replication-slot="standby_replication_slot" --src.uri="postgresql://USER:PASS@HOST:PORT/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
-#### MySQL
+### MySQL
 
 ```sh
-./abc import --src.type=mysql --src.uri="USER:PASS@tcp(HOST:PORT)/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+abc import --src.type=mysql --src.uri="USER:PASS@tcp(HOST:PORT)/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
 For more source URL patterns, see [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql#examples)'s GitHub page. 
+
+### MSSQL
+
+```sh
+abc import --src.type=mssql --src.uri="sqlserver://USER:PASSWORD@SERVER:PORT?database=DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+```
+
+For more source URL patterns, see [go-mssqldb](https://github.com/denisenkom/go-mssqldb#connection-parameters-and-dsn)'s GitHub page. 
+
 
