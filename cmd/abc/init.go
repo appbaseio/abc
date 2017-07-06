@@ -107,6 +107,6 @@ func genPipelineFromEnv(filename string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	fmt.Printf("Writing %s...", file)
+	fmt.Printf("Writing %s...\n", file)
 	return file, nil
 }

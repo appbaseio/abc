@@ -31,12 +31,26 @@ func runImport(args []string) error {
 		"[postgres] replication slot to use")
 	timeout := flagset.String("timeout", "10s", "source timeout")
 	srcRegex := flagset.String("src.filter", ".*", "Namespace filter for source")
-	var destURL string
 
+	// use external config
+	config := flagset.String("config", "", "Path to external config file, if specified, only that is used")
+
+	var destURL string
 	// parse args
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
+
+	// use the config file
+	if *config != "" {
+		file, err := genPipelineFromEnv(*config)
+		if err != nil {
+			return err
+		}
+		return execBuilder(file)
+	}
+
+	// use command line params
 	args = flagset.Args()
 	if len(args) == 1 {
 		destURL = args[0]
@@ -70,6 +84,10 @@ func runImport(args []string) error {
 	// return nil
 
 	// run config file
+	return execBuilder(file)
+}
+
+func execBuilder(file string) error {
 	builder, err := newBuilder(file)
 	if err != nil {
 		return err
