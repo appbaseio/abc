@@ -49,8 +49,6 @@ func main() {
 
 	var run func([]string) error
 	switch strings.ToLower(os.Args[1]) {
-	case "test":
-		run = runTest
 	case "xlog":
 		run = runXlog
 	case "offset":
