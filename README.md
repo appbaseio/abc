@@ -94,7 +94,7 @@ ABC's features can be broadly categorized into 2 components.
 Appbase features allows you to control your appbase.io account using ABC. You can see them under the *Appbase* heading in the list of commands.
 
 ```sh
-APPBASE
+COMMANDS
   login     login into appbase.io
   user      get user details
   apps      display user apps
