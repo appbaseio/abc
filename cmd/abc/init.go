@@ -79,7 +79,7 @@ func genPipelineFromEnv(filename string) (string, error) {
 		"src.type":         "_name_",
 		"tail":             "tail", // TODO: data type here
 		"replication_slot": "replication_slot",
-		"typeName":         "typeName",
+		"typename":         "typeName",
 		"timeout":          "timeout",
 	}
 	src := map[string]interface{}{}
