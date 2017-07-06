@@ -25,6 +25,11 @@ func LoadUserSessionAsString() (string, error) {
 		}
 		return string(dat), nil
 	}
+	// load env token else
+	token := os.Getenv("ABC_TOKEN")
+	if len(token) > 0 {
+		return token, nil
+	}
 	return "", err
 }
 

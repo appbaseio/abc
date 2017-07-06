@@ -7,6 +7,7 @@ import (
 	"github.com/appbaseio/abc/appbase/spinner"
 	"github.com/appbaseio/abc/appbase/user"
 	"github.com/appbaseio/abc/log"
+	"os"
 	"os/exec"
 	"runtime"
 )
@@ -14,7 +15,12 @@ import (
 // IsUserAuthenticated checks if user is logged in or not
 func IsUserAuthenticated() bool {
 	data, err := session.LoadUserSessionAsString()
-	return err == nil && data != ""
+	if err == nil && data != "" {
+		return true
+	}
+	// env token
+	token := os.Getenv("ABC_TOKEN")
+	return len(token) > 0
 }
 
 // StartUserLogin starts user login process
