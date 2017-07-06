@@ -26,14 +26,6 @@ func usage() {
 	fmt.Fprintf(os.Stderr, "USAGE\n")
 	fmt.Fprintf(os.Stderr, "  %s <command> [flags]\n", os.Args[0])
 	usageAppbase()
-	// private options
-	fmt.Fprintf(os.Stderr, "\n")
-	fmt.Fprintf(os.Stderr, "IMPORTER\n")
-	fmt.Fprintf(os.Stderr, "  test      display the compiled nodes without starting a pipeline\n")
-	fmt.Fprintf(os.Stderr, "  about     show information about available adaptors\n")
-	fmt.Fprintf(os.Stderr, "  xlog      manage the commit log\n")
-	fmt.Fprintf(os.Stderr, "  offset    manage the offset for sinks\n")
-
 	// variant
 	fmt.Fprintf(os.Stderr, "\n")
 	fmt.Fprintf(os.Stderr, "VARIANT\n")
@@ -49,10 +41,6 @@ func main() {
 
 	var run func([]string) error
 	switch strings.ToLower(os.Args[1]) {
-	case "xlog":
-		run = runXlog
-	case "offset":
-		run = runOffset
 	case "import":
 		run = runImport
 	default:

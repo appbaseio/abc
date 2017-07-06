@@ -10,7 +10,7 @@ import (
 // usageAppbase adds help on using Appbase commands
 func usageAppbase() {
 	fmt.Fprintf(os.Stderr, "\n")
-	fmt.Fprintf(os.Stderr, "APPBASE\n")
+	fmt.Fprintf(os.Stderr, "COMMANDS\n")
 	fmt.Fprintf(os.Stderr, "  login     login into appbase.io\n")
 	fmt.Fprintf(os.Stderr, "  user      get user details\n")
 	fmt.Fprintf(os.Stderr, "  apps      display user apps\n")
