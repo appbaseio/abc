@@ -11,6 +11,21 @@ import (
 	"github.com/appbaseio/abc/imports/adaptor"
 )
 
+// GLOBALS
+var srcParamMap = map[string]string{
+	"src.uri":          "uri",
+	"src.type":         "_name_",
+	"tail":             "tail", // TODO: data type here
+	"replication_slot": "replication_slot",
+	"typename":         "typeName",
+	"timeout":          "timeout",
+}
+
+var destParamMap = map[string]string{
+	"dest.uri":  "uri",
+	"dest.type": "_name_",
+}
+
 func runInit(args []string) error {
 	flagset := baseFlagSet("init")
 	flagset.Usage = usageFor(flagset, "abc init [source] [sink]")
@@ -74,27 +89,15 @@ func genPipelineFromEnv(filename string) (string, error) {
 		return "", err
 	}
 	// source
-	srcMap := map[string]string{
-		"src.uri":          "uri",
-		"src.type":         "_name_",
-		"tail":             "tail", // TODO: data type here
-		"replication_slot": "replication_slot",
-		"typename":         "typeName",
-		"timeout":          "timeout",
-	}
 	src := map[string]interface{}{}
-	for k, v := range srcMap {
+	for k, v := range srcParamMap {
 		if val, ok := config[k]; ok {
 			src[v] = val
 		}
 	}
 	// sink
-	destMap := map[string]string{
-		"dest.uri":  "uri",
-		"dest.type": "_name_",
-	}
 	dest := map[string]interface{}{}
-	for k, v := range destMap {
+	for k, v := range destParamMap {
 		if val, ok := config[k]; ok {
 			dest[v] = val
 		}
