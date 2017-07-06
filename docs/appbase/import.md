@@ -16,12 +16,14 @@ abc import --help
 At the time of writing, the list of parameters supported looks like -
 
 ```
+--config=                                    Path to external config file, if specified, only that is used
 --log.level="info"                           Only log messages with the given severity or above. Valid levels: [debug, info, error]
 --replication-slot=standby_replication_slot  [postgres] replication slot to use
 --src.filter=.*                              Namespace filter for source
 --src.type=postgres                          type of source database
 --src.uri=http://user:pass@host:port/db      url of source database
 --tail=false                                 allow tail feature
+--test=false                                 if set to true, only pipeline is created and sync is not started. Useful for checking your configuration
 --timeout=10s                                source timeout
 --typename=mytype                            [csv] typeName to use
 ```
@@ -82,3 +84,27 @@ For more source URL patterns, see [go-sql-driver/mysql](https://github.com/go-sq
 ```sh
 abc import --src.type=postgres -t --replication-slot="standby_replication_slot" --src.uri="postgresql://USER:PASS@HOST:PORT/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
+
+### Using a config file
+
+```sh
+abc import --config=test.env  
+```
+
+File extension doesn't matter. 
+The file `test.env` should be an INI/ENV like file with key value pair containing the values of attributes required for importing.
+Example of a test.env file is --
+
+```ini
+src.type=csv
+src.uri=/full/path/to/file.csv
+typename=csvTypeName
+
+dest.type=elasticsearch
+dest.uri=https://USER:PASS@scalr.api.appbase.io/APPNAME
+```
+
+Note that the key names are same as what we have in `import` parameters. 
+Only exception is that all hyphens in a key name are to be replaced by underscores. 
+(e.g. `replication-slot` becomes `replication_slot` in the config file)
+
