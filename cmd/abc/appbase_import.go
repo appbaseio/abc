@@ -176,7 +176,9 @@ func genPipelineFromEnv(filename string) (string, error) {
 		return "", err
 	}
 	// source
-	src := map[string]interface{}{}
+	src := map[string]interface{}{
+		"srcRegex": ".*", // custom param defaults
+	}
 	for k, v := range srcParamMap {
 		if val, ok := config[k]; ok {
 			src[v] = val
