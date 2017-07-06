@@ -51,8 +51,6 @@ func main() {
 	switch strings.ToLower(os.Args[1]) {
 	case "test":
 		run = runTest
-	case "about":
-		run = runAbout
 	case "xlog":
 		run = runXlog
 	case "offset":
