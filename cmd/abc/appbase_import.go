@@ -103,6 +103,7 @@ func runImport(args []string) error {
 	return execBuilder(file)
 }
 
+// execBuilder executes a pipeline file
 func execBuilder(file string) error {
 	builder, err := newBuilder(file)
 	if err != nil {
@@ -112,6 +113,7 @@ func execBuilder(file string) error {
 	return builder.run()
 }
 
+// writeConfigFile writes config information in a pipeline file
 func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]interface{}) (string, error) {
 	fname := "pipeline_" + strconv.FormatInt(time.Now().Unix(), 10) + ".js"
 
@@ -161,6 +163,7 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 	return fname, nil
 }
 
+// genPipelineFromEnv generates a pipeline file from config file
 func genPipelineFromEnv(filename string) (string, error) {
 	var config map[string]string
 	config, err := godotenv.Read(filename)
