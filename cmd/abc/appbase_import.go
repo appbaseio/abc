@@ -18,7 +18,7 @@ import (
 var srcParamMap = map[string]string{
 	"src.uri":          "uri",
 	"src.type":         "_name_",
-	"tail":             "tail", // TODO: data type here
+	"tail":             "tail",
 	"replication_slot": "replication_slot",
 	"typename":         "typeName",
 	"timeout":          "timeout",
@@ -175,6 +175,14 @@ func genPipelineFromEnv(filename string) (string, error) {
 	for k, v := range srcParamMap {
 		if val, ok := config[k]; ok {
 			src[v] = val
+			// tail should be boolean
+			if k == "tail" {
+				if val == "true" {
+					src[v] = true
+				} else {
+					src[v] = false
+				}
+			}
 		}
 	}
 	// sink
