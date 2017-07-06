@@ -47,6 +47,8 @@ func runImport(args []string) error {
 		"[postgres] replication slot to use")
 	timeout := flagset.String("timeout", "10s", "source timeout")
 	srcRegex := flagset.String("src.filter", ".*", "Namespace filter for source")
+	test := flagset.Bool("test", false, `if set to true, only pipeline is created and sync is not started. 
+		Useful for checking your configuration`)
 
 	// use external config
 	config := flagset.String("config", "", "Path to external config file, if specified, only that is used")
@@ -63,7 +65,7 @@ func runImport(args []string) error {
 		if err != nil {
 			return err
 		}
-		return execBuilder(file)
+		return execBuilder(file, *test)
 	}
 
 	// use command line params
@@ -100,16 +102,19 @@ func runImport(args []string) error {
 	// return nil
 
 	// run config file
-	return execBuilder(file)
+	return execBuilder(file, *test)
 }
 
 // execBuilder executes a pipeline file
-func execBuilder(file string) error {
+func execBuilder(file string, isTest bool) error {
 	builder, err := newBuilder(file)
 	if err != nil {
 		return err
 	}
-
+	if isTest {
+		fmt.Println(builder)
+		return nil
+	}
 	return builder.run()
 }
 
