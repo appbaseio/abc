@@ -25,6 +25,7 @@ At the time of writing, the list of parameters supported looks like -
 --tail=false                                 allow tail feature
 --test=false                                 if set to true, only pipeline is created and sync is not started. Useful for checking your configuration
 --timeout=10s                                source timeout
+--transform-file=                            transform file to use
 --typename=mytype                            [csv] typeName to use
 ```
 

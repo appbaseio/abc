@@ -1,6 +1,6 @@
 /transporter
 .vagrant
-/transform.*js
+/transform*js
 .vscode
 *.rdb
 
