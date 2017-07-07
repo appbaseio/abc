@@ -17,7 +17,7 @@ type deleteRespBody struct {
 func RunAppDelete(app string) error {
 	spinner.Start()
 	// get appID from name
-	app, err := ensureAppID(app)
+	app, err := EnsureAppID(app)
 	if err != nil {
 		return err
 	}

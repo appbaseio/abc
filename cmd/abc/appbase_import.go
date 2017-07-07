@@ -6,12 +6,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/appbaseio/abc/appbase/importer"
 	"github.com/appbaseio/abc/imports/adaptor"
 	"github.com/appbaseio/abc/log"
 	"github.com/joho/godotenv"
 	"io/ioutil"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -33,7 +35,7 @@ var destParamMap = map[string]string{
 }
 
 const importInfo string = `
-	abc import --src.type {DBType} --src.uri {URI} [-t|--tail] [Uri|AppID|Appname]
+	abc import --src.type {DBType} --src.uri {URI} [-t|--tail] [Uri|Appname]
 `
 
 // runImport runs the import command
@@ -139,6 +141,14 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 
 	args := []string{srcConfig["_name_"].(string), destConfig["_name_"].(string)}
 	var config = make(map[string]interface{})
+
+	// check appname as destination uri
+	if !strings.Contains(destConfig["uri"].(string), "/") {
+		destConfig["uri"], err = importer.GetAppURL(destConfig["uri"].(string))
+		if err != nil {
+			return "", err
+		}
+	}
 
 	nodeName := "source"
 	for _, name := range args {

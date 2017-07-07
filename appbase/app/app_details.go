@@ -12,7 +12,8 @@ import (
 	"strconv"
 )
 
-type permission struct {
+// Permission represents an app permission object
+type Permission struct {
 	Description string `json:"description"`
 	Username    string `json:"username"`
 	Password    string `json:"password"`
@@ -39,7 +40,7 @@ type metricsBody struct {
 }
 
 type respBodyPerms struct {
-	Body []permission `json:"body"`
+	Body []Permission `json:"body"`
 }
 
 type respBodyMetrics struct {
@@ -93,28 +94,37 @@ func ShowAppMetrics(app string) error {
 func ShowAppPerms(app string) error {
 	spinner.StartText("Fetching app credentials")
 	fmt.Println()
-	req, err := http.NewRequest("GET", common.AccAPIURL+"/app/"+app+"/permissions", nil)
-	if err != nil {
-		return err
-	}
-	resp, err := session.SendRequest(req)
+	permissions, err := GetAppPerms(app)
 	if err != nil {
 		return err
 	}
 	spinner.Stop()
+	// output
+	for index := range ".." {
+		fmt.Printf("%s%s:%s\n", common.ColonPad(permissions[index].Description, 20),
+			permissions[index].Username, permissions[index].Password)
+	}
+	return nil
+}
+
+// GetAppPerms ...
+func GetAppPerms(app string) ([]Permission, error) {
+	req, err := http.NewRequest("GET", common.AccAPIURL+"/app/"+app+"/permissions", nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := session.SendRequest(req)
+	if err != nil {
+		return nil, err
+	}
 	// decode
 	var res respBodyPerms
 	dec := json.NewDecoder(resp.Body)
 	err = dec.Decode(&res)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	// output
-	for index := range ".." {
-		fmt.Printf("%s%s:%s\n", common.ColonPad(res.Body[index].Description, 20),
-			res.Body[index].Username, res.Body[index].Password)
-	}
-	return nil
+	return res.Body, nil
 }
 
 func getHumanDate(date string) string {

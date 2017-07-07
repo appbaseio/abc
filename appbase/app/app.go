@@ -76,7 +76,7 @@ func ShowUserApps() error {
 // ShowAppDetails shows the app details
 func ShowAppDetails(app string, perms bool, metrics bool) error {
 	spinner.StartText("Loading app details")
-	app, err := ensureAppID(app)
+	app, err := EnsureAppID(app)
 	if err != nil {
 		return err
 	}
@@ -111,8 +111,8 @@ func ShowAppDetails(app string, perms bool, metrics bool) error {
 	return err
 }
 
-// ensureAppId make sures `app` is id
-func ensureAppID(app string) (string, error) {
+// EnsureAppID make sures `app` is id
+func EnsureAppID(app string) (string, error) {
 	// check if num https://stackoverflow.com/questions/22593259/
 	if _, err := strconv.Atoi(app); err == nil {
 		return app, nil // return as is

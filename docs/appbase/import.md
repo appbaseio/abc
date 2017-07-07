@@ -4,7 +4,7 @@ Import command can be used to import data from any supported database source int
 It goes like - 
 
 ```
-abc import --source {URI} --type {DBType} --tail [URI|Appname|Appid]
+abc import --source {URI} --type {DBType} --tail [URI|Appname]
 ```
 
 To view the complete list of input parameters supported, use -
