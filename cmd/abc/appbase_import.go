@@ -9,12 +9,14 @@ import (
 	"github.com/appbaseio/abc/imports/adaptor"
 	"github.com/appbaseio/abc/log"
 	"github.com/joho/godotenv"
+	"io/ioutil"
 	"os"
 	"strconv"
 	"time"
 )
 
 // GLOBALS
+// map from real input params to what goes in writeConfig
 var srcParamMap = map[string]string{
 	"src.uri":          "uri",
 	"src.type":         "_name_",
@@ -22,6 +24,7 @@ var srcParamMap = map[string]string{
 	"replication_slot": "replication_slot",
 	"typename":         "typeName",
 	"timeout":          "timeout",
+	"transform_file":   "_transform_",
 }
 
 var destParamMap = map[string]string{
@@ -49,6 +52,8 @@ func runImport(args []string) error {
 	srcRegex := flagset.String("src.filter", ".*", "Namespace filter for source")
 	test := flagset.Bool("test", false, `if set to true, only pipeline is created and sync is not started. 
 		Useful for checking your configuration`)
+
+	transformFile := flagset.String("transform-file", "", "transform file to use")
 
 	// use external config
 	config := flagset.String("config", "", "Path to external config file, if specified, only that is used")
@@ -85,6 +90,7 @@ func runImport(args []string) error {
 		"replication_slot": *replicationSlot,
 		"timeout":          *timeout,
 		"srcRegex":         *srcRegex,
+		"_transform_":      *transformFile,
 	}
 
 	var destConfig = map[string]interface{}{
@@ -159,10 +165,20 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 		appFileHandle.WriteString(fmt.Sprintf("var %s = %s(%s)\n\n", nodeName, name, confJSON))
 		nodeName = "sink"
 	}
-	appFileHandle.WriteString(
-		fmt.Sprintf(`t.Source("source", source, "/%s/").Save("sink", sink, "/.*/")`,
-			srcConfig["srcRegex"]),
-	)
+	// custom transform file
+	if srcConfig["_transform_"] != "" {
+		dat, err := ioutil.ReadFile(srcConfig["_transform_"].(string))
+		if err != nil {
+			return "", err
+		}
+		appFileHandle.WriteString(string(dat))
+	} else {
+		// no transform file
+		appFileHandle.WriteString(
+			fmt.Sprintf(`t.Source("source", source, "/%s/").Save("sink", sink, "/.*/")`,
+				srcConfig["srcRegex"]),
+		)
+	}
 	appFileHandle.WriteString("\n")
 
 	return fname, nil
@@ -177,7 +193,8 @@ func genPipelineFromEnv(filename string) (string, error) {
 	}
 	// source
 	src := map[string]interface{}{
-		"srcRegex": ".*", // custom param defaults
+		"srcRegex":    ".*", // custom param defaults
+		"_transform_": "",
 	}
 	for k, v := range srcParamMap {
 		if val, ok := config[k]; ok {
