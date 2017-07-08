@@ -19,6 +19,7 @@ import (
 	"github.com/appbaseio/abc/private/commitlog"
 	"github.com/appbaseio/abc/private/events"
 	"github.com/appbaseio/abc/private/function"
+	"github.com/appbaseio/abc/private/function/mapping"
 	"github.com/appbaseio/abc/private/offset"
 	"github.com/appbaseio/abc/private/pipeline"
 	"github.com/dop251/goja"
@@ -185,6 +186,24 @@ func (t *Transporter) Config(call goja.FunctionCall) goja.Value {
 		t.config = &c
 	}
 	return t.vm.ToValue(t)
+}
+
+// Mapping .. set mapping
+func (t *Transformer) Mapping(call goja.FunctionCall) goja.Value {
+	if cfg, ok := call.Argument(0).Export().(map[string]interface{}); ok {
+		mapping.CurrentMapping = cfg
+		mapping.IsMappingSet = true
+	}
+	return t.vm.ToValue(t)
+}
+
+// Mapping ..
+func (n *Node) Mapping(call goja.FunctionCall) goja.Value {
+	if cfg, ok := call.Argument(0).Export().(map[string]interface{}); ok {
+		mapping.CurrentMapping = cfg
+		mapping.IsMappingSet = true
+	}
+	return n.vm.ToValue(n)
 }
 
 func (t *Transporter) Source(call goja.FunctionCall) goja.Value {
