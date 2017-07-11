@@ -31,6 +31,8 @@ At the time of writing, the list of parameters supported looks like -
 
 Note that you only need to set the parameters that are required for the source database type. For example, you don't set `replication_slot` when taking CSV as the source. 
 
+**Note** - Help for [transform-file](../importer/transform_file.md) is available here.
+
 
 ## Examples
 
