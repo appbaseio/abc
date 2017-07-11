@@ -1,4 +1,4 @@
 package common
 
 // AccAPIURL holds the url of Accounts API
-const AccAPIURL string = "http://localhost:3000"
+const AccAPIURL string = "https://accapi.appbase.io" // http://localhost:3000"

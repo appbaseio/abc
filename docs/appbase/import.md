@@ -4,7 +4,7 @@ Import command can be used to import data from any supported database source int
 It goes like - 
 
 ```
-abc import --source {URI} --type {DBType} --tail [URI|Appname]
+abc import --src.uri {URI} --src.type {DBType} --tail [URI|Appname]
 ```
 
 To view the complete list of input parameters supported, use -
@@ -89,7 +89,7 @@ abc import --src.type=postgres -t --replication-slot="standby_replication_slot" 
 ### Using a config file
 
 ```sh
-abc import --config=test.env  
+abc import --config=test.env
 ```
 
 File extension doesn't matter. 
