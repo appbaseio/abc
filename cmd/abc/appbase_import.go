@@ -25,8 +25,8 @@ var srcParamMap = map[string]string{
 	"tail":             "tail",
 	"replication_slot": "replication_slot",
 	"typename":         "typeName",
-	"timeout":          "timeout",
-	"transform_file":   "_transform_",
+	// "timeout":          "timeout",
+	"transform_file": "_transform_",
 }
 
 var destParamMap = map[string]string{
@@ -50,7 +50,7 @@ func runImport(args []string) error {
 	typeName := flagset.String("typename", "mytype", "[csv] typeName to use")
 	replicationSlot := flagset.String("replication-slot", "standby_replication_slot",
 		"[postgres] replication slot to use")
-	timeout := flagset.String("timeout", "10s", "source timeout")
+	// timeout := flagset.String("timeout", "10s", "source timeout")
 	srcRegex := flagset.String("src.filter", ".*", "Namespace filter for source")
 	test := flagset.Bool("test", false, `if set to true, only pipeline is created and sync is not started. 
 		Useful for checking your configuration`)
@@ -90,9 +90,9 @@ func runImport(args []string) error {
 		"tail":             *tail,
 		"typeName":         *typeName,
 		"replication_slot": *replicationSlot,
-		"timeout":          *timeout,
-		"srcRegex":         *srcRegex,
-		"_transform_":      *transformFile,
+		// "timeout":          *timeout,
+		"srcRegex":    *srcRegex,
+		"_transform_": *transformFile,
 	}
 
 	var destConfig = map[string]interface{}{
