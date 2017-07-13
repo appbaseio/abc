@@ -17,6 +17,7 @@ func usageAppbase() {
 	fmt.Fprintf(os.Stderr, "  app       display app details\n")
 	fmt.Fprintf(os.Stderr, "  create    create app\n")
 	fmt.Fprintf(os.Stderr, "  delete    delete app\n")
+	fmt.Fprintf(os.Stderr, "  logout    logout session\n")
 	if imports.IsPrivate {
 		fmt.Fprintf(os.Stderr, "  import    import data to appbase app\n")
 	}
@@ -39,6 +40,8 @@ func provisionAppbaseCLI(command string) func([]string) error {
 		run = runCreate
 	case "delete":
 		run = runDelete
+	case "logout":
+		run = runLogout
 	default:
 		usage()
 		os.Exit(1)

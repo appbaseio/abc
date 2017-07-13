@@ -72,6 +72,19 @@ func SaveUserSession(data string) error {
 	return err
 }
 
+// DeleteUserSession deletes user session
+func DeleteUserSession() error {
+	sessionFile, err := getSessionFilePath()
+	if err != nil {
+		return err
+	}
+	err = os.Remove(sessionFile)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // attachCookiesToRequest attaches cookies to a request
 func attachCookiesToRequest(req *http.Request) error {
 	cookies, err := LoadUserSessionAsCookie()
