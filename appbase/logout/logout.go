@@ -1,6 +1,7 @@
 package logout
 
 import (
+	"fmt"
 	"github.com/appbaseio/abc/appbase/session"
 	"os"
 )
@@ -13,5 +14,6 @@ func UserLogout() error {
 	}
 	// remove env var
 	os.Unsetenv("ABC_TOKEN")
+	fmt.Println("Logged out successfully")
 	return nil
 }
