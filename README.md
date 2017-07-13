@@ -101,6 +101,7 @@ COMMANDS
   app       display app details
   create    create app
   delete    delete app
+  logout    logout session
   import    import data from various sources into appbase app
 ```
 
