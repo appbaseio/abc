@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/importer"
 	"github.com/appbaseio/abc/imports/adaptor"
 	"github.com/appbaseio/abc/log"
@@ -122,6 +123,13 @@ func execBuilder(file string, isTest bool) error {
 	if isTest {
 		fmt.Println(builder)
 		return nil
+	}
+	// delete if not a devBuild
+	if !common.DevBuild {
+		err = os.Remove(file)
+		if err != nil {
+			return err
+		}
 	}
 	return builder.run()
 }
