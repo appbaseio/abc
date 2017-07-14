@@ -1,13 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"github.com/appbaseio/abc/appbase/user"
 )
 
 func runUser(args []string) error {
 	flagset := baseFlagSet("user")
-	flagset.Usage = usageFor(flagset, "abc user")
+	basicUsage := "abc user"
+	flagset.Usage = usageFor(flagset, basicUsage)
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
@@ -18,7 +18,7 @@ func runUser(args []string) error {
 			return user.ShowUserDetails()
 		}
 	} else {
-		fmt.Println("No such option. See --help")
+		showShortHelp(basicUsage)
 	}
 	return nil
 }

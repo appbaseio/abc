@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"github.com/appbaseio/abc/appbase/logout"
 )
 
 // runLogout runs the logout command
 func runLogout(args []string) error {
 	flagset := baseFlagSet("logout")
-	flagset.Usage = usageFor(flagset, "abc logout")
+	basicUsage := "abc logout"
+	flagset.Usage = usageFor(flagset, basicUsage)
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
@@ -20,7 +20,7 @@ func runLogout(args []string) error {
 			return logout.UserLogout()
 		}
 	default:
-		fmt.Println("Wrong number of parameters. See help (--help).")
+		showShortHelp(basicUsage)
 	}
 	return nil
 }

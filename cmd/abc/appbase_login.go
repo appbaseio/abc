@@ -9,7 +9,8 @@ import (
 // runLogin runs the login command
 func runLogin(args []string) error {
 	flagset := baseFlagSet("login")
-	flagset.Usage = usageFor(flagset, "abc login [google|github]")
+	basicUsage := "abc login [google|github]"
+	flagset.Usage = usageFor(flagset, basicUsage)
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
@@ -24,7 +25,7 @@ func runLogin(args []string) error {
 		fmt.Println("Logging in..")
 		return login.StartUserLogin(args[0])
 	default:
-		fmt.Println("Wrong number of parameters. See help (--help).")
+		showShortHelp(basicUsage)
 	}
 	return nil
 }

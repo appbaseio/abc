@@ -4,7 +4,6 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/importer"
@@ -35,14 +34,12 @@ var destParamMap = map[string]string{
 	"dest.type": "_name_",
 }
 
-const importInfo string = `
-	abc import --src.type {DBType} --src.uri {URI} [-t|--tail] [Uri|Appname]
-`
+const basicUsage string = `abc import --src.type {DBType} --src.uri {URI} [-t|--tail] [Uri|Appname]`
 
 // runImport runs the import command
 func runImport(args []string) error {
 	flagset := baseFlagSet("import")
-	flagset.Usage = usageFor(flagset, importInfo)
+	flagset.Usage = usageFor(flagset, basicUsage)
 
 	// custom flags
 	tail := flagset.BoolP("tail", "t", false, "allow tail feature")
@@ -81,7 +78,8 @@ func runImport(args []string) error {
 	if len(args) == 1 {
 		destURL = args[0]
 	} else {
-		return errors.New("Invalid set of parameters")
+		showShortHelp(basicUsage)
+		return nil
 	}
 
 	// create source config

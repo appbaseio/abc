@@ -75,3 +75,9 @@ func usageFor(fs *flag.FlagSet, short string) func() {
 		fmt.Fprintf(os.Stderr, "\n")
 	}
 }
+
+func showShortHelp(short string) {
+	fmt.Fprintf(os.Stderr, "USAGE\n")
+	fmt.Fprintf(os.Stderr, "  %s\n\n", short)
+	fmt.Println("Use --help option for more info.")
+}

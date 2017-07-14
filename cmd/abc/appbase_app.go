@@ -8,7 +8,8 @@ import (
 // runApps runs `apps` command
 func runApps(args []string) error {
 	flagset := baseFlagSet("apps")
-	flagset.Usage = usageFor(flagset, "abc apps")
+	basicUsage := "abc apps"
+	flagset.Usage = usageFor(flagset, basicUsage)
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
@@ -18,7 +19,7 @@ func runApps(args []string) error {
 	case 0:
 		return app.ShowUserApps()
 	default:
-		fmt.Println("No such option. See --help")
+		showShortHelp(basicUsage)
 	}
 	return nil
 }
@@ -26,7 +27,8 @@ func runApps(args []string) error {
 // runApp runs `app` command
 func runApp(args []string) error {
 	flagset := baseFlagSet("app")
-	flagset.Usage = usageFor(flagset, "abc app [-c|--creds] [-m|--metrics] [ID|Appname]")
+	basicUsage := "abc app [-c|--creds] [-m|--metrics] [ID|Appname]"
+	flagset.Usage = usageFor(flagset, basicUsage)
 	creds := flagset.BoolP("creds", "c", false, "show app credentials")
 	metrics := flagset.BoolP("metrics", "m", false, "show app metrics")
 	if err := flagset.Parse(args); err != nil {
@@ -37,14 +39,15 @@ func runApp(args []string) error {
 	if len(args) == 1 {
 		return app.ShowAppDetails(args[0], *creds, *metrics)
 	}
-	fmt.Println("No such option. See --help")
+	showShortHelp(basicUsage)
 	return nil
 }
 
 // runCreate runs `create` command
 func runCreate(args []string) error {
 	flagset := baseFlagSet("create")
-	flagset.Usage = usageFor(flagset, "abc create [--es2|--es6] [--category=category] AppName")
+	basicUsage := "abc create [--es2|--es6] [--category=category] AppName"
+	flagset.Usage = usageFor(flagset, basicUsage)
 	// https://gobyexample.com/command-line-flags
 	isEs6 := flagset.Bool("es6", false, "is app es6")
 	isEs2 := flagset.Bool("es2", true, "is app es2")
@@ -65,14 +68,15 @@ func runCreate(args []string) error {
 			return nil
 		}
 	}
-	fmt.Println("No such option. See --help")
+	showShortHelp(basicUsage)
 	return nil
 }
 
 // runDelete runs `delete` command
 func runDelete(args []string) error {
 	flagset := baseFlagSet("delete")
-	flagset.Usage = usageFor(flagset, "abc delete [AppID|AppName]")
+	basicUsage := "abc delete [AppID|AppName]"
+	flagset.Usage = usageFor(flagset, basicUsage)
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
@@ -80,6 +84,6 @@ func runDelete(args []string) error {
 	if len(args) == 1 {
 		return app.RunAppDelete(args[0])
 	}
-	fmt.Println("No such option. See --help")
+	showShortHelp(basicUsage)
 	return nil
 }
