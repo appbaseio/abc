@@ -1,5 +1,3 @@
-// +build oss
-
 package main
 
 import (
@@ -9,9 +7,8 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	// _ "github.com/appbaseio/abc/private/function/all"
 	"github.com/appbaseio/abc/imports"
-	// _ "github.com/appbaseio/abc/imports/all"
+	_ "github.com/appbaseio/abc/imports/all"
 	"github.com/appbaseio/abc/log"
 )
 
@@ -40,9 +37,16 @@ func main() {
 	}
 
 	var run func([]string) error
-	switch strings.ToLower(os.Args[1]) {
-	default:
-		run = provisionAppbaseCLI(os.Args[1])
+	command := strings.ToLower(os.Args[1])
+	if command == "import" {
+		if imports.IsPrivate {
+			run = runImport
+		} else {
+			usage()
+			os.Exit(1)
+		}
+	} else {
+		run = provisionAppbaseCLI(command)
 	}
 
 	if err := run(os.Args[2:]); err != nil {
