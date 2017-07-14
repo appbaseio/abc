@@ -15,6 +15,7 @@
 /pipeline*.js
 /test*.csv
 /test*.env
+/test*.json
 
 # es log
 /elastic.log
