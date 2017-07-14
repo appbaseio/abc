@@ -2,6 +2,7 @@ package app
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
@@ -38,6 +39,10 @@ func RunAppCreate(appName string, esVersion string, category string) error {
 	err = dec.Decode(&res)
 	if err != nil {
 		return err
+	}
+	// decode successful but failed to create for some reason
+	if res.Body.ID == 0 {
+		return errors.New("Failed to create app")
 	}
 	// output
 	fmt.Printf("ID:    %d\n", res.Body.ID)
