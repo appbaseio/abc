@@ -7,6 +7,7 @@ import (
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
 	"github.com/appbaseio/abc/appbase/spinner"
+	"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
@@ -33,16 +34,18 @@ func RunAppCreate(appName string, esVersion string, category string) error {
 		return err
 	}
 	spinner.Stop()
+	// status code not 200
+	if resp.StatusCode != 200 {
+		defer resp.Body.Close()
+		bodyBytes, _ := ioutil.ReadAll(resp.Body)
+		return fmt.Errorf("There was an error %s", string(bodyBytes))
+	}
 	// decode
 	var res createRespBody
 	dec := json.NewDecoder(resp.Body)
 	err = dec.Decode(&res)
 	if err != nil {
 		return err
-	}
-	// decode successful but failed to create for some reason
-	if res.Body.ID == 0 {
-		return errors.New("Failed to create app")
 	}
 	// output
 	fmt.Printf("ID:    %d\n", res.Body.ID)
