@@ -16,7 +16,7 @@ const (
 	defaultPipelineFile = "pipeline.js"
 )
 
-var version = "0.0.0"
+var version = "0.1.0"
 var variant = imports.BuildName
 
 func usage() {
@@ -25,9 +25,8 @@ func usage() {
 	usageAppbase()
 	// variant
 	fmt.Fprintf(os.Stderr, "\n")
-	fmt.Fprintf(os.Stderr, "VARIANT\n")
-	fmt.Fprintf(os.Stderr, "  %s\n", variant)
-	fmt.Fprintf(os.Stderr, "\n")
+	fmt.Fprintf(os.Stderr, "VERSION\n")
+	fmt.Fprintf(os.Stderr, "  %s (%s)\n", version, variant)
 }
 
 func main() {

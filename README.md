@@ -203,20 +203,20 @@ If you are curious, we use the tag '!oss' to make our private builds.
 
 #### How to know build variant from the executable? 
 
-If you are not sure which build of `abc` you are using, you can run `abc --help` and take note of the value under the version header. 
+If you are not sure which build of `abc` you are using, you can run `abc --help` and take note of the value under the VERSION header. 
 
 For open source build, you will see
 
 ```
-VARIANT
-  oss
+VERSION
+  ... (oss)
 ```
 
 For the proprietary builds, you will see 
 
 ```
-VARIANT
-  !oss
+VERSION
+  ... (!oss)
 ```
 
 
