@@ -8,8 +8,6 @@ import (
 	"github.com/appbaseio/abc/appbase/user"
 	"github.com/appbaseio/abc/log"
 	"os"
-	"os/exec"
-	"runtime"
 )
 
 // IsUserAuthenticated checks if user is logged in or not
@@ -29,7 +27,7 @@ func StartUserLogin(host string) error {
 	fmt.Printf("Opening %s in the browser.\n", url)
 	fmt.Println("Once authenticated, copy the token from there and paste it into terminal.")
 	// open in browser
-	err := open(url)
+	err := common.OpenURL(url)
 	if err != nil {
 		fmt.Println("Failed to open browser. Please get the token manually from the link.")
 		// won't work in docker, so don't err here
@@ -56,23 +54,4 @@ func StartUserLogin(host string) error {
 	}
 	spinner.Stop()
 	return err
-}
-
-// https://stackoverflow.com/a/39324149/2295672
-// open opens the specified URL in the default browser of the user.
-func open(url string) error {
-	var cmd string
-	var args []string
-
-	switch runtime.GOOS {
-	case "windows":
-		cmd = "cmd"
-		args = []string{"/c", "start"}
-	case "darwin":
-		cmd = "open"
-	default: // "linux", "freebsd", "openbsd", "netbsd"
-		cmd = "xdg-open"
-	}
-	args = append(args, url)
-	return exec.Command(cmd, args...).Start()
 }

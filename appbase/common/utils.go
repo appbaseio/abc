@@ -3,6 +3,8 @@ package common
 import (
 	"encoding/json"
 	"github.com/appbaseio/abc/log"
+	"os/exec"
+	"runtime"
 	"strings"
 )
 
@@ -55,4 +57,23 @@ func ColonPad(text string, length int) string {
 		text += " "
 	}
 	return text
+}
+
+// OpenURL opens the specified URL in the default browser of the user.
+// https://stackoverflow.com/a/39324149/2295672
+func OpenURL(url string) error {
+	var cmd string
+	var args []string
+
+	switch runtime.GOOS {
+	case "windows":
+		cmd = "cmd"
+		args = []string{"/c", "start"}
+	case "darwin":
+		cmd = "open"
+	default: // "linux", "freebsd", "openbsd", "netbsd"
+		cmd = "xdg-open"
+	}
+	args = append(args, url)
+	return exec.Command(cmd, args...).Start()
 }
