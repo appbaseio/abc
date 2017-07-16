@@ -7,39 +7,25 @@ Here is how a configuration file looks like-
 ```ini
 src.type=json
 src.uri=/full/path/to/file.json
+typename=typename
 
 dest.type=elasticsearch
 dest.uri=appname
 ```
 
-The `file.json` should contain a json object with table namespaces as its keys.
-The keys in return should contain an array containing the data that belongs to that namespace.
+The `file.json` should contain a json array with individual rows as its contents.
 
 Example - 
 
 ```js
-{
-	"pokemons": [
-		{
-			"_id": 1,
-			"name": "Raichu"
-		},
-		{
-			"_id": 1,
-			"name": "Bulbasaur"
-		}
-	],
-	"bitbeasts": [
-		{
-			"_id": 1,
-			"name": "Dragoon",
-			"owner": "Tyson"
-		},
-		{
-			"_id": 2,
-			"name": "Dranzer",
-			"owner": "Kai"
-		}
-	]
-}
+[
+	{
+		"_id": 1,
+		"name": "Raichu"
+	},
+	{
+		"_id": 2,
+		"name": "Bulbasaur"
+	}
+]
 ```
