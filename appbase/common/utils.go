@@ -77,3 +77,8 @@ func OpenURL(url string) error {
 	args = append(args, url)
 	return exec.Command(cmd, args...).Start()
 }
+
+// SizeInKB shows size in KB
+func SizeInKB(size int) int {
+	return size / 1024 // original size in bytes
+}

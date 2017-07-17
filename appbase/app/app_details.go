@@ -31,7 +31,7 @@ type metricsBuckets struct {
 
 type metricsOverall struct {
 	NumDocs int64 `json:"numDocs"`
-	Storage int64 `json:"storage"`
+	Storage int   `json:"storage"`
 }
 
 type metricsBody struct {
@@ -68,8 +68,8 @@ func ShowAppMetrics(app string) error {
 		return err
 	}
 	// output
-	fmt.Printf("Storage:    %d\n", res.Body.Overall.Storage)
-	fmt.Printf("Records:    %d\n", res.Body.Overall.NumDocs)
+	fmt.Printf("Storage(KB): %d\n", common.SizeInKB(res.Body.Overall.Storage))
+	fmt.Printf("Records:     %d\n", res.Body.Overall.NumDocs)
 	// table
 	var docCount, callCount int64
 	table := tablewriter.NewWriter(os.Stdout)

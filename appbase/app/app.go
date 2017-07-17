@@ -62,11 +62,11 @@ func ShowUserApps() error {
 	}
 	// output
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Id", "Name", "API Calls", "Records", "Storage"})
+	table.SetHeader([]string{"Id", "Name", "API Calls", "Records", "Storage (KB)"})
 	for appID, appData := range res.Body {
 		table.Append([]string{
 			appID, common.GetKeyForValue(apps, appID), strconv.Itoa(appData.APICalls),
-			strconv.Itoa(appData.Records), strconv.Itoa(appData.Storage),
+			strconv.Itoa(appData.Records), strconv.Itoa(common.SizeInKB(appData.Storage)),
 		})
 	}
 	table.Render()
