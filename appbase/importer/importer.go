@@ -3,14 +3,19 @@
 package importer
 
 import (
+	"errors"
 	"fmt"
 	"github.com/appbaseio/abc/appbase/app"
+	"github.com/appbaseio/abc/appbase/login"
 	// "github.com/appbaseio/abc/log"
 	"strings"
 )
 
 // GetAppURL returns the full url of an app
 func GetAppURL(appName string) (string, error) {
+	if !login.IsUserAuthenticated() {
+		return "", errors.New("User not logged in. Unable to fetch app url")
+	}
 	appID, err := app.EnsureAppID(appName)
 	if err != nil {
 		return "", err
