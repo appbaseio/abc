@@ -16,17 +16,12 @@ const (
 	defaultPipelineFile = "pipeline.js"
 )
 
-var version = "0.1.0"
-var variant = imports.BuildName
-
 func usage() {
 	fmt.Fprintf(os.Stderr, "USAGE\n")
 	fmt.Fprintf(os.Stderr, "  %s <command> [flags]\n", os.Args[0])
 	usageAppbase()
-	// variant
-	fmt.Fprintf(os.Stderr, "\n")
-	fmt.Fprintf(os.Stderr, "VERSION\n")
-	fmt.Fprintf(os.Stderr, "  %s (%s)\n", version, variant)
+	fmt.Fprintln(os.Stderr, "")
+	fmt.Fprintf(os.Stderr, "Run 'abc COMMAND --help' for more information on a command.\n")
 }
 
 func main() {
