@@ -37,6 +37,7 @@ type appRespBody struct {
 // ShowUserApps shows the list of user apps
 func ShowUserApps() error {
 	spinner.StartText("Loading user app list")
+	defer spinner.Stop()
 	// get name id mapping
 	apps, err := user.GetUserApps()
 	if err != nil {
@@ -76,6 +77,8 @@ func ShowUserApps() error {
 // ShowAppDetails shows the app details
 func ShowAppDetails(app string, perms bool, metrics bool) error {
 	spinner.StartText("Loading app details")
+	defer spinner.Stop()
+	// fetch app basic details
 	app, err := EnsureAppID(app)
 	if err != nil {
 		return err

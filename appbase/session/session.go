@@ -3,6 +3,7 @@ package session
 import (
 	b64 "encoding/base64"
 	"encoding/json"
+	"errors"
 	"github.com/appbaseio/abc/log"
 	"io/ioutil"
 	"net/http"
@@ -30,7 +31,7 @@ func LoadUserSessionAsString() (string, error) {
 	if len(token) > 0 {
 		return token, nil
 	}
-	return "", err
+	return "", errors.New("user not logged in")
 }
 
 // LoadUserSessionAsCookie loads and returns arrays of cookies

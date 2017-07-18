@@ -23,6 +23,8 @@ type createRespBody struct {
 // RunAppCreate runs app create command
 func RunAppCreate(appName string, esVersion string, category string) error {
 	spinner.Start()
+	defer spinner.Stop()
+	// create app
 	body := fmt.Sprintf(`{"category": %s, "es_version": %s}`, category, esVersion)
 	req, err := http.NewRequest("PUT", common.AccAPIURL+"/app/"+appName, strings.NewReader(body))
 	if err != nil {

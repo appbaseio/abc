@@ -50,6 +50,8 @@ type respBodyMetrics struct {
 // ShowAppMetrics ...
 func ShowAppMetrics(app string) error {
 	spinner.StartText("Fetching app metrics")
+	defer spinner.Stop()
+	// show metrics
 	fmt.Println()
 	req, err := http.NewRequest("GET", common.AccAPIURL+"/app/"+app+"/metrics", nil)
 	if err != nil {

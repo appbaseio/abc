@@ -35,6 +35,6 @@ func isLoggedIn() bool {
 	if login.IsUserAuthenticated() {
 		return true
 	}
-	fmt.Println("Not logged in")
+	fmt.Println("user not logged in")
 	return false
 }
