@@ -34,8 +34,8 @@ func LoadUserSessionAsString() (string, error) {
 }
 
 // LoadUserSessionAsCookie loads and returns arrays of cookies
-func LoadUserSessionAsCookie() ([3]http.Cookie, error) {
-	cookies := [3]http.Cookie{}
+func LoadUserSessionAsCookie() ([1]http.Cookie, error) {
+	cookies := [1]http.Cookie{}
 	sessionData, err := LoadUserSessionAsString()
 	if err != nil {
 		return cookies, err
@@ -47,18 +47,14 @@ func LoadUserSessionAsCookie() ([3]http.Cookie, error) {
 	}
 	// Decode JSON
 	type Cookie struct {
-		Ga            string `json:"_ga"`
 		AppbaseAccAPI string `json:"appbase_accapi"`
-		Session       string `json:"session"`
 	}
 	var ck Cookie
 	err = json.Unmarshal(sDec, &ck)
 	if err != nil {
 		return cookies, err
 	}
-	cookies[0] = http.Cookie{Name: "_ga", Value: ck.Ga}
-	cookies[1] = http.Cookie{Name: "appbase_accapi", Value: ck.AppbaseAccAPI}
-	cookies[2] = http.Cookie{Name: "session", Value: ck.Session}
+	cookies[0] = http.Cookie{Name: "appbase_accapi", Value: ck.AppbaseAccAPI}
 	return cookies, nil
 }
 
