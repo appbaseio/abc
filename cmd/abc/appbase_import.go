@@ -155,6 +155,13 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 			return "", err
 		}
 	}
+	// check file path as source [json, csv]
+	if common.StringInSlice(srcConfig["_name_"].(string), []string{"json", "csv"}) {
+		err = common.IsFileValid(srcConfig["uri"].(string))
+		if err != nil {
+			return "", err
+		}
+	}
 
 	nodeName := "source"
 	for _, name := range args {

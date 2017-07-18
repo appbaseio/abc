@@ -3,6 +3,7 @@ package common
 import (
 	"encoding/json"
 	"github.com/appbaseio/abc/log"
+	"os"
 	"os/exec"
 	"runtime"
 	"strings"
@@ -81,4 +82,12 @@ func OpenURL(url string) error {
 // SizeInKB shows size in KB
 func SizeInKB(size int) int {
 	return size / 1024 // original size in bytes
+}
+
+// IsFileValid check if the file is valid
+func IsFileValid(file string) error {
+	if _, err := os.Stat(file); os.IsNotExist(err) {
+		return err
+	}
+	return nil
 }
