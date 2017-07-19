@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/login"
 	"github.com/appbaseio/abc/appbase/user"
 )
@@ -22,8 +23,11 @@ func runLogin(args []string) error {
 			return user.ShowUserEmail()
 		}
 	case 1:
-		fmt.Println("Logging in..")
-		return login.StartUserLogin(args[0])
+		if common.StringInSlice(args[0], []string{"google", "github"}) {
+			fmt.Println("Logging in..")
+			return login.StartUserLogin(args[0])
+		}
+		showShortHelp(basicUsage)
 	default:
 		showShortHelp(basicUsage)
 	}
