@@ -1,5 +1,9 @@
 package app
 
+import (
+	"strings"
+)
+
 type fullApp struct {
 	id   string
 	name string
@@ -22,5 +26,18 @@ func (a appsSorter) Swap(i, j int) {
 }
 
 func (a appsSorter) Less(i, j int) bool {
-	return a.apps[i].id < a.apps[j].id
+	switch a.key {
+	case "id":
+		return a.apps[i].id < a.apps[j].id
+	case "name":
+		return strings.ToLower(a.apps[i].name) < strings.ToLower(a.apps[j].name)
+	case "api-calls":
+		return a.apps[i].APICalls > a.apps[j].APICalls
+	case "records":
+		return a.apps[i].Records > a.apps[j].Records
+	case "storage":
+		return a.apps[i].Storage > a.apps[j].Storage
+	default:
+		return a.apps[i].id < a.apps[j].id
+	}
 }

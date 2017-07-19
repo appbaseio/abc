@@ -10,6 +10,7 @@ func runApps(args []string) error {
 	flagset := baseFlagSet("apps")
 	basicUsage := "abc apps"
 	flagset.Usage = usageFor(flagset, basicUsage)
+	sort := flagset.String("sort", "id", "sort by id, name, api-calls, records, storage")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
@@ -17,7 +18,7 @@ func runApps(args []string) error {
 
 	switch len(args) {
 	case 0:
-		return app.ShowUserApps()
+		return app.ShowUserApps(*sort)
 	default:
 		showShortHelp(basicUsage)
 	}

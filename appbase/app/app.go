@@ -40,7 +40,7 @@ type appRespBody struct {
 }
 
 // ShowUserApps shows the list of user apps
-func ShowUserApps() error {
+func ShowUserApps(sortOption string) error {
 	spinner.StartText("Loading user app list")
 	defer spinner.Stop()
 	// get name id mapping
@@ -68,6 +68,7 @@ func ShowUserApps() error {
 	}
 	// sort
 	var as appsSorter
+	as.key = sortOption
 	as.apps = make([]fullApp, 0)
 	for appID, appData := range res.Body {
 		var fa fullApp
