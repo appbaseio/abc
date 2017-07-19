@@ -91,3 +91,18 @@ func IsFileValid(file string) error {
 	}
 	return nil
 }
+
+// RemoveDuplicates removes duplicate values in a slice
+// https://groups.google.com/forum/#!topic/golang-nuts/-pqkICuokio
+func RemoveDuplicates(xs *[]string) {
+	found := make(map[string]bool)
+	j := 0
+	for i, x := range *xs {
+		if !found[x] {
+			found[x] = true
+			(*xs)[j] = (*xs)[i]
+			j++
+		}
+	}
+	*xs = (*xs)[:j]
+}

@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 )
 
 type appBody struct {
@@ -26,8 +27,11 @@ type respBody struct {
 }
 
 type appDetailBody struct {
-	AppName   string `json:"appname"`
-	ESVersion string `json:"es_version"`
+	AppName   string    `json:"appname"`
+	ESVersion string    `json:"es_version"`
+	Owner     string    `json:"owner"`
+	Users     []string  `json:"users"`
+	CreatedAt time.Time `json:"created_at, string"`
 }
 
 type appRespBody struct {
@@ -100,10 +104,19 @@ func ShowAppDetails(app string, perms bool, metrics bool) error {
 	if err != nil {
 		return err
 	}
+	// prepare output
+	common.RemoveDuplicates(&res.Body.Users)
+	users := ""
+	for _, user := range res.Body.Users {
+		users += user + ", "
+	}
 	// output
 	fmt.Printf("ID:         %s\n", app)
 	fmt.Printf("Name:       %s\n", res.Body.AppName)
+	fmt.Printf("Owner:      %s\n", res.Body.Owner)
+	fmt.Printf("Users:      %s\n", users[:len(users)-2])
 	fmt.Printf("ES Version: %s\n", res.Body.ESVersion)
+	fmt.Printf("Created on: %s\n", res.Body.CreatedAt.Format("Mon Jan _2 15:04:05 2006"))
 
 	if perms {
 		err = ShowAppPerms(app)
