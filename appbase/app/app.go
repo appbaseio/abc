@@ -11,6 +11,7 @@ import (
 	"github.com/olekukonko/tablewriter"
 	"net/http"
 	"os"
+	"sort"
 	"strconv"
 	"time"
 )
@@ -65,13 +66,23 @@ func ShowUserApps() error {
 	if err != nil {
 		return err
 	}
+	// sort
+	var as appsSorter
+	as.apps = make([]fullApp, 0)
+	for appID, appData := range res.Body {
+		var fa fullApp
+		fa.id, fa.name = appID, common.GetKeyForValue(apps, appID)
+		fa.APICalls, fa.Records, fa.Storage = appData.APICalls, appData.Records, appData.Storage
+		as.apps = append(as.apps, fa)
+	}
+	sort.Sort(as)
 	// output
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"Id", "Name", "API Calls", "Records", "Storage (KB)"})
-	for appID, appData := range res.Body {
+	for _, app := range as.apps {
 		table.Append([]string{
-			appID, common.GetKeyForValue(apps, appID), strconv.Itoa(appData.APICalls),
-			strconv.Itoa(appData.Records), strconv.Itoa(common.SizeInKB(appData.Storage)),
+			app.id, app.name, strconv.Itoa(app.APICalls),
+			strconv.Itoa(app.Records), strconv.Itoa(common.SizeInKB(app.Storage)),
 		})
 	}
 	table.Render()
