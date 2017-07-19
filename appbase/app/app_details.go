@@ -20,7 +20,7 @@ type Permission struct {
 }
 
 type metricsBucket struct {
-	DocCount  int64                  `json:"doc_count"`
+	// DocCount  int64                  `json:"doc_count"`
 	APICalls  map[string]json.Number `json:"apiCalls"`
 	DateAsStr string                 `json:"key_as_string"`
 }
@@ -73,19 +73,17 @@ func ShowAppMetrics(app string) error {
 	fmt.Printf("Storage(KB): %d\n", common.SizeInKB(res.Body.Overall.Storage))
 	fmt.Printf("Records:     %d\n", res.Body.Overall.NumDocs)
 	// table
-	var docCount, callCount int64
+	var callCount int64
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Date", "API Calls", "Records"})
+	table.SetHeader([]string{"Date", "API Calls"})
 	for _, bucket := range res.Body.Month.Buckets {
 		table.Append([]string{
 			getHumanDate(bucket.DateAsStr), common.JSONNumberToString(bucket.APICalls["value"]),
-			strconv.FormatInt(bucket.DocCount, 10),
 		})
-		docCount = docCount + bucket.DocCount
 		callCount = callCount + common.JSONNumberToInt(bucket.APICalls["value"])
 	}
 	table.SetFooter([]string{"Total",
-		strconv.FormatInt(callCount, 10), strconv.FormatInt(docCount, 10),
+		strconv.FormatInt(callCount, 10),
 	})
 	table.SetAlignment(tablewriter.ALIGN_CENTER)
 	table.Render()
