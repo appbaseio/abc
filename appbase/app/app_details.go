@@ -77,6 +77,9 @@ func ShowAppMetrics(app string) error {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"Date", "API Calls"})
 	for _, bucket := range res.Body.Month.Buckets {
+		if bucket.APICalls["value"] == "0" {
+			continue
+		}
 		table.Append([]string{
 			getHumanDate(bucket.DateAsStr), common.JSONNumberToString(bucket.APICalls["value"]),
 		})
