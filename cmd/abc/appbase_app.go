@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/appbaseio/abc/appbase/app"
+	"github.com/appbaseio/abc/appbase/common"
 )
 
 // runApps runs `apps` command
@@ -18,7 +19,10 @@ func runApps(args []string) error {
 
 	switch len(args) {
 	case 0:
-		return app.ShowUserApps(*sort)
+		if common.StringInSlice(*sort, app.SortOptions) {
+			return app.ShowUserApps(*sort)
+		}
+		fmt.Printf("Invalid parameter '%s' passed to sort. See --help\n", *sort)
 	default:
 		showShortHelp(basicUsage)
 	}

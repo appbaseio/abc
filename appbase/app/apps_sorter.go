@@ -4,6 +4,9 @@ import (
 	"strings"
 )
 
+// SortOptions holds the list of valid sort options
+var SortOptions = []string{"id", "name", "api-calls", "records", "storage"}
+
 type fullApp struct {
 	id   string
 	name string
