@@ -8,7 +8,7 @@ The [PostgreSQL](https://www.postgresql.org/) adaptor is capable of reading and 
 ```ini
 src.type=postgres
 src.uri=postgres://127.0.0.1:5432/test
-tail=true
+tail=false
 
 dest.type=elasticsearch
 dest.uri=https://USER:PASSWORD@SERVER/INDEX
