@@ -23,8 +23,11 @@ func IsUserAuthenticated() bool {
 
 // StartUserLogin starts user login process
 func StartUserLogin(host string) error {
-	url := fmt.Sprintf("%s/login/%s?next=%s/user/token", common.AccAPIURL, host, common.AccAPIURL)
-	fmt.Printf("Opening %s in the browser.\n", url)
+	url := fmt.Sprintf(
+		"%s/logout?next=%s/login/%s?next=%s/user/token",
+		common.AccAPIURL, common.AccAPIURL, host, common.AccAPIURL)
+	fmt.Printf("Opening the following url in the browser.\n")
+	fmt.Println(url)
 	fmt.Println("Once authenticated, copy the token from there and paste it into terminal.")
 	// open in browser
 	err := common.OpenURL(url)
