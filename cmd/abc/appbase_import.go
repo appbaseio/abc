@@ -214,6 +214,10 @@ func genPipelineFromEnv(filename string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	// save keys as small
+	for k := range config {
+		config[strings.ToLower(k)] = config[k]
+	}
 	// source
 	src := map[string]interface{}{
 		"srcRegex":    ".*", // custom param defaults
