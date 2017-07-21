@@ -41,33 +41,38 @@ goja({"filename": "/path/to/transform.js"})
 ### example
 
 message in
-```JSON
+
+```js
 {
     "_id": 0,
     "name": "abc",
-    "type": "function"
+    "type": "software"
 }
 ```
 
 config
-```javascript
+
+```js
 goja({"filename":"transform.js"})
 ```
 
 transform function (i.e. `transform.js`)
-```javascript
+
+```js
 function transform(doc) {
     doc["data"]["name_type"] = doc["data"]["name"] + " " + doc["data"]["type"];
+    data["ns"] = "items";  // new namespace
     return doc
 }
 ```
 
 message out
-```JSON
+
+```js
 {
     "_id": 0,
     "name": "abc",
-    "type": "function",
-    "name_type": "abc function"
+    "type": "software",
+    "name_type": "abc software"
 }
 ```
