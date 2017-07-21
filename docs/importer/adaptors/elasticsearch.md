@@ -9,11 +9,11 @@ ES can be both a source and a sink.
 ### Example
 
 ```ini
-src.type=elasticsearch
-src.uri=https://user:pass@es_cluster/index
+src_type=elasticsearch
+src_uri=https://user:pass@es_cluster/index
 
-dest.type=elasticsearch
-dest.uri=abctests
+dest_type=elasticsearch
+dest_uri=abctests
 # uri field can have appbase appname as well as full URI
 ```
 

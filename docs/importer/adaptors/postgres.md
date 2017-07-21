@@ -6,12 +6,12 @@ The [PostgreSQL](https://www.postgresql.org/) adaptor is capable of reading and 
 ### Example
 
 ```ini
-src.type=postgres
-src.uri=postgres://127.0.0.1:5432/test
+src_type=postgres
+src_uri=postgres://127.0.0.1:5432/test
 tail=false
 
-dest.type=elasticsearch
-dest.uri=https://USER:PASSWORD@SERVER/INDEX
+dest_type=elasticsearch
+dest_uri=https://USER:PASSWORD@SERVER/INDEX
 ```
 
 

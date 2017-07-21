@@ -7,10 +7,10 @@ We have an additional parameter `typename` in csv adaptor because csv files only
 So we need to define it manually.
 
 ```ini
-src.type=csv
-src.uri=/full/local/path/to/file.csv
-src.typename=type_name_to_use
+src_type=csv
+src_uri=/full/local/path/to/file.csv
+src_typename=type_name_to_use
 
-dest.type=elasticsearch
-dest.uri=https://USER:PASSWORD@SERVER/INDEX
+dest_type=elasticsearch
+dest_uri=https://USER:PASSWORD@SERVER/INDEX
 ```

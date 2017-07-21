@@ -5,13 +5,13 @@ The [MongoDB](https://www.mongodb.com/) adaptor is capable of reading/tailing co
 Here is how a configuration file looks like
 
 ```ini
-src.type=mongodb
-src.uri=mongodb://user:pass@SERVER:PORT/DBNAME
+src_type=mongodb
+src_uri=mongodb://user:pass@SERVER:PORT/DBNAME
 tail=false
 
-dest.type=elasticsearch
-dest.uri=APP_NAME
-# dest.uri=https://USER:PASSWORD@SERVER/INDEX
+dest_type=elasticsearch
+dest_uri=APP_NAME
+# dest_uri=https://USER:PASSWORD@SERVER/INDEX
 ```
 
 ### Notes

@@ -20,18 +20,19 @@ import (
 // GLOBALS
 // map from real input params to what goes in writeConfig
 var srcParamMap = map[string]string{
-	"src.uri":          "uri",
-	"src.type":         "_name_",
+	"src_uri":          "uri",
+	"src_type":         "_name_",
 	"tail":             "tail",
 	"replication_slot": "replication_slot",
 	"typename":         "typeName",
+	"src_filter":       "srcRegex",
 	// "timeout":          "timeout",
-	"transform_file": "_transform_",
+	"transform_uri": "_transform_",
 }
 
 var destParamMap = map[string]string{
-	"dest.uri":  "uri",
-	"dest.type": "_name_",
+	"dest_uri":  "uri",
+	"dest_type": "_name_",
 }
 
 const basicUsage string = `abc import --src.type {DBType} --src.uri {URI} [-t|--tail] [Uri|Appname]`
@@ -43,17 +44,17 @@ func runImport(args []string) error {
 
 	// custom flags
 	tail := flagset.BoolP("tail", "t", false, "allow tail feature")
-	srcType := flagset.String("src.type", "postgres", "type of source database")
-	srcURL := flagset.String("src.uri", "http://user:pass@host:port/db", "url of source database")
+	srcType := flagset.String("src_type", "postgres", "type of source database")
+	srcURL := flagset.String("src_uri", "http://user:pass@host:port/db", "url of source database")
 	typeName := flagset.String("typename", "mytype", "[csv] typeName to use")
-	replicationSlot := flagset.String("replication-slot", "standby_replication_slot",
+	replicationSlot := flagset.String("replication_slot", "standby_replication_slot",
 		"[postgres] replication slot to use")
 	// timeout := flagset.String("timeout", "10s", "source timeout")
-	srcRegex := flagset.String("src.filter", ".*", "Namespace filter for source")
+	srcRegex := flagset.String("src_filter", ".*", "Namespace filter for source")
 	test := flagset.Bool("test", false, `if set to true, only pipeline is created and sync is not started. 
 		Useful for checking your configuration`)
 
-	transformFile := flagset.String("transform-file", "", "transform file to use")
+	transformFile := flagset.String("transform_uri", "", "transform file to use")
 
 	// use external config
 	config := flagset.String("config", "", "Path to external config file, if specified, only that is used")
