@@ -2,7 +2,7 @@
 
 `otto()` creates a JavaScript VM that receives and sends data through the defined javascript function for processing. The parameter passed to the function has been converted from a go map[string]interface{} to a JS object of the following form:
 
-```JSON
+```js
 {
     "ns":"message.namespace",
     "ts":12345, // time represented in milliseconds since epoch
@@ -16,7 +16,7 @@
 
 ***NOTE*** when working with data from MongoDB, the _id field will be represented in the following fashion:
 
-```JSON
+```js
 {
     "ns":"message.namespace",
     "ts":12345, // time represented in milliseconds since epoch
