@@ -24,13 +24,13 @@ At the time of writing, the list of parameters supported looks like -
 --src_uri=http://user:pass@host:port/db      url of source database
 --tail=false                                 allow tail feature
 --test=false                                 if set to true, only pipeline is created and sync is not started. Useful for checking your configuration
---transform_uri=                             URI of transform file to use
+--transform_file=                             URI of transform file to use
 --typename=mytype                            [csv] typeName to use
 ```
 
 Note that you only need to set the parameters that are required for the source database type. For example, you don't set `replication_slot` when taking CSV as the source. 
 
-**Note** - Help for [transform_uri](../importer/transform_file.md) is available here.
+**Note** - Help for [transform_file](../importer/transform_file.md) is available here.
 
 
 ## Examples

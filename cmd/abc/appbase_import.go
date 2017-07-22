@@ -27,7 +27,7 @@ var srcParamMap = map[string]string{
 	"typename":         "typeName",
 	"src_filter":       "srcRegex",
 	// "timeout":          "timeout",
-	"transform_uri": "_transform_",
+	"transform_file": "_transform_",
 }
 
 var destParamMap = map[string]string{
@@ -54,7 +54,7 @@ func runImport(args []string) error {
 	test := flagset.Bool("test", false, `if set to true, only pipeline is created and sync is not started. 
 		Useful for checking your configuration`)
 
-	transformFile := flagset.String("transform_uri", "", "transform file to use")
+	transformFile := flagset.String("transform_file", "", "transform file to use")
 
 	// use external config
 	config := flagset.String("config", "", "Path to external config file, if specified, only that is used")
