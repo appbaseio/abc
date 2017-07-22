@@ -45,3 +45,15 @@ Note that mapping are set on a type level so the mapping object should contain t
 Also the type name used is for the sink, so the type name should be consistent with the namespace that is generated after going through 
 all the [transforms](transforms/) i.e. if you have a transform that 
 changes namespace in any way, the type names used in mapping should take care of that.
+
+
+#### src_filter and transform file
+
+src_filter option will not work when you are using a transform file. 
+In that case, put the filter in the namespace selector in `.Source` method.
+
+Example
+
+```js
+t.Source("source", source, "/.*log/").Save("sink", sink, "/.*/")
+```
