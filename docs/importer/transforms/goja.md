@@ -56,7 +56,7 @@ config
 goja({"filename":"transform.js"})
 ```
 
-transform function (i.e. `transform.js`)
+transform function in `transform.js`
 
 ```js
 function transform(doc) {
@@ -76,3 +76,6 @@ message out
     "name_type": "abc software"
 }
 ```
+
+**NOTE** - All JavaScript files using goja should have a function named `transform` that handles the transformation. 
+No other function name will work.
