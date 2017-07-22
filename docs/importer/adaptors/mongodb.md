@@ -20,4 +20,6 @@ For **tailing** to work, the user accessing the database will need to have `oplo
 An admin user should have oplog access by default though if you are using a mongo database from an third-party provider like 
 [mlab](https://mlab.com), this might not be the case. It is best to contact provider's support team in this case.
 Also, you can see the provider docs for how to get `oplog` access.
-Here is the [doc for mlab](http://docs.mlab.com/oplog/).
+
+Read this excellent [blog post](http://www.sohamkamani.com/blog/2016/06/30/docker-mongo-replica-set/) for how to setup oplog access on your own cluster.
+In case you are using mlab which is a very popular mongo provider, see the [oplog doc for mlab](http://docs.mlab.com/oplog/).
