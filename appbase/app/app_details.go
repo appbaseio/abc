@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 )
 
 // Permission represents an app permission object
@@ -132,5 +133,9 @@ func GetAppPerms(app string) ([]Permission, error) {
 }
 
 func getHumanDate(date string) string {
-	return date[8:10] + "-" + date[5:7]
+	t, err := time.Parse("2006-01-02", date[0:10])
+	if err != nil {
+		return date
+	}
+	return t.Format("2006-Jan-02")
 }
