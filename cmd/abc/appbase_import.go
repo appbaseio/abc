@@ -156,6 +156,13 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 			return "", err
 		}
 	}
+	// check appname as source uri
+	if (!strings.Contains(srcConfig["uri"].(string), "/")) && srcConfig["_name_"].(string) == "elasticsearch" {
+		srcConfig["uri"], err = importer.GetAppURL(srcConfig["uri"].(string))
+		if err != nil {
+			return "", err
+		}
+	}
 	// check file path as source [json, csv]
 	if common.StringInSlice(srcConfig["_name_"].(string), []string{"json", "csv"}) {
 		err = common.IsFileValid(srcConfig["uri"].(string))
