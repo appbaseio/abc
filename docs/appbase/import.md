@@ -55,6 +55,12 @@ We can also use an Appbase app as source.
 abc import --src_type=elasticsearch --src_uri="https://USER:PASS@scalr.api.appbase.io/APPNAME2" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
+We can even use the app's name as URI once we are logged in.
+
+```sh
+abc import --src_type=elasticsearch --src_uri=APPNAME2 APPNAME
+```
+
 
 ### MongoDB
 
