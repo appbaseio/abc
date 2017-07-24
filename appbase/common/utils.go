@@ -106,3 +106,11 @@ func RemoveDuplicates(xs *[]string) {
 	}
 	*xs = (*xs)[:j]
 }
+
+// Max function
+func Max(a, b int) int {
+	if a >= b {
+		return a
+	}
+	return b
+}

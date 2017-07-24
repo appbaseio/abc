@@ -76,7 +76,8 @@ func ShowAppMetrics(app string) error {
 	var callCount int64
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"Date", "API Calls"})
-	for _, bucket := range res.Body.Month.Buckets {
+	latest := res.Body.Month.Buckets[common.Max(0, len(res.Body.Month.Buckets)-30):len(res.Body.Month.Buckets)]
+	for _, bucket := range latest {
 		if bucket.APICalls["value"] == "0" {
 			continue
 		}
