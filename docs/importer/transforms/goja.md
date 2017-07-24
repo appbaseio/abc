@@ -38,15 +38,18 @@ goja({"filename": "/path/to/transform.js"})
 // js({"filename": "/path/to/transform.js"})
 ```
 
-### example
+### example (add columns, change namespace)
 
 message in
 
 ```js
 {
-    "_id": 0,
-    "name": "abc",
-    "type": "software"
+    "ns": "old_namespace",
+    "data": {
+        "_id": 0,
+        "name": "abc",
+        "type": "software"
+    }
 }
 ```
 
@@ -70,10 +73,13 @@ message out
 
 ```js
 {
-    "_id": 0,
-    "name": "abc",
-    "type": "software",
-    "name_type": "abc software"
+    "ns": "items",
+    "data": {
+        "_id": 0,
+        "name": "abc",
+        "type": "software",
+        "name_type": "abc software"
+    }
 }
 ```
 
