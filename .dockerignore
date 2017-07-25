@@ -1,3 +1,5 @@
 # https://github.com/moby/moby/blob/master/.dockerignore
 .git
 .go-pkg-cache
+build/
+abc
