@@ -73,7 +73,7 @@ This command may look too long to you. We can create an alias to make things bet
 
 ```sh
 # create alias
-alias abc=docker run -i --rm -v abc:/root appbaseio/abc
+alias abc='docker run -i --rm -v abc:/root appbaseio/abc'
 # run a command
 abc login google
 ```
