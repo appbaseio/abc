@@ -7,7 +7,7 @@
 #
 
 # Pull the base image
-FROM golang:1.8
+FROM golang:1.8-alpine 
 MAINTAINER Avi Aryan <avi.aryan123@gmail.com>
 
 # Set GOPATH
