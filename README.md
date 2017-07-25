@@ -1,6 +1,9 @@
 
 # ABC
 
+**Latest version is 0.2.0.** Download the compiled binaries from [releases section](https://github.com/appbaseio/abc/releases).
+
+
 1. [Intro](#intro)
 2. [Getting Started](#getting-started)
 3. [Features](#features)
