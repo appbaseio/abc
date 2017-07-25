@@ -187,7 +187,7 @@ Some more examples
 
 ```sh
 # setting alias for easy usage
-alias abc=docker run -i --rm -v abc:/root abc
+alias abc='docker run -i --rm -v abc:/root abc'
 # using alias now :)
 abc user
 abc apps
