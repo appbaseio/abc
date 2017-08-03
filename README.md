@@ -42,7 +42,7 @@ ABC can be downloaded as an executable as well as through a Docker image.
 
 #### Using Executable
 
-Download `abc`'s executable for your platform and preferrably put it in a PATH directory.
+Download `abc`'s executable [from releases](https://github.com/appbaseio/abc/releases) for your platform and preferrably put it in a PATH directory.
 The access it as -
 
 ```sh
