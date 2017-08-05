@@ -1,26 +1,45 @@
-// +build !oss
-
-package importer
+package app
 
 import (
 	"errors"
 	"fmt"
-	"github.com/appbaseio/abc/appbase/app"
+	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/login"
-	// "github.com/appbaseio/abc/log"
+	"github.com/appbaseio/abc/appbase/spinner"
 	"strings"
 )
+
+// OpenAppDataView ...
+func OpenAppDataView(app string) error {
+	spinner.StartText("Making Dejavu URL")
+	defer spinner.Stop()
+	url, err := GetAppURL(app)
+	if err != nil {
+		return err
+	}
+	djURL, err := common.MakeDejavuURL(url)
+	if err != nil {
+		return err
+	}
+	spinner.Stop()
+	fmt.Printf("Opening url %s\n", djURL)
+	err = common.OpenURL(djURL)
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
 // GetAppURL returns the full url of an app
 func GetAppURL(appName string) (string, error) {
 	if !login.IsUserAuthenticated() {
 		return "", errors.New("User not logged in. Unable to fetch app url")
 	}
-	appID, err := app.EnsureAppID(appName)
+	appID, err := EnsureAppID(appName)
 	if err != nil {
 		return "", err
 	}
-	perms, err := app.GetAppPerms(appID)
+	perms, err := GetAppPerms(appID)
 	if err != nil {
 		return "", err
 	}

@@ -5,8 +5,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/appbaseio/abc/appbase/app"
 	"github.com/appbaseio/abc/appbase/common"
-	"github.com/appbaseio/abc/appbase/importer"
 	"github.com/appbaseio/abc/imports/adaptor"
 	"github.com/appbaseio/abc/log"
 	"github.com/joho/godotenv"
@@ -151,14 +151,14 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 
 	// check appname as destination uri
 	if !strings.Contains(destConfig["uri"].(string), "/") {
-		destConfig["uri"], err = importer.GetAppURL(destConfig["uri"].(string))
+		destConfig["uri"], err = app.GetAppURL(destConfig["uri"].(string))
 		if err != nil {
 			return "", err
 		}
 	}
 	// check appname as source uri
 	if (!strings.Contains(srcConfig["uri"].(string), "/")) && srcConfig["_name_"].(string) == "elasticsearch" {
-		srcConfig["uri"], err = importer.GetAppURL(srcConfig["uri"].(string))
+		srcConfig["uri"], err = app.GetAppURL(srcConfig["uri"].(string))
 		if err != nil {
 			return "", err
 		}

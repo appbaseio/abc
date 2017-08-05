@@ -32,16 +32,20 @@ func runApps(args []string) error {
 // runApp runs `app` command
 func runApp(args []string) error {
 	flagset := baseFlagSet("app")
-	basicUsage := "abc app [-c|--creds] [-m|--metrics] [ID|Appname]"
+	basicUsage := "abc app [-c|--creds] [-m|--metrics] [--data-view] [ID|Appname]"
 	flagset.Usage = usageFor(flagset, basicUsage)
 	creds := flagset.BoolP("creds", "c", false, "show app credentials")
 	metrics := flagset.BoolP("metrics", "m", false, "show app metrics")
+	dataView := flagset.Bool("data-view", false, "open app data view using Dejavu")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
 	args = flagset.Args()
 
 	if len(args) == 1 {
+		if *dataView {
+			return app.OpenAppDataView(args[0])
+		}
 		return app.ShowAppDetails(args[0], *creds, *metrics)
 	}
 	showShortHelp(basicUsage)
