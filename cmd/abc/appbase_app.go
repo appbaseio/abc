@@ -37,6 +37,7 @@ func runApp(args []string) error {
 	creds := flagset.BoolP("creds", "c", false, "show app credentials")
 	metrics := flagset.BoolP("metrics", "m", false, "show app metrics")
 	dataView := flagset.Bool("data-view", false, "open app data view using Dejavu")
+	queryView := flagset.Bool("query-view", false, "open app query view using Mirage")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
@@ -45,6 +46,8 @@ func runApp(args []string) error {
 	if len(args) == 1 {
 		if *dataView {
 			return app.OpenAppDataView(args[0])
+		} else if *queryView {
+			return app.OpenAppQueryView(args[0])
 		}
 		return app.ShowAppDetails(args[0], *creds, *metrics)
 	}

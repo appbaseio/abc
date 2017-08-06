@@ -30,6 +30,27 @@ func OpenAppDataView(app string) error {
 	return nil
 }
 
+// OpenAppQueryView ...
+func OpenAppQueryView(app string) error {
+	spinner.StartText("Making Mirage URL")
+	defer spinner.Stop()
+	url, err := GetAppURL(app)
+	if err != nil {
+		return err
+	}
+	mgURL, err := common.MakeMirageURL(url)
+	if err != nil {
+		return err
+	}
+	spinner.Stop()
+	fmt.Printf("Opening url %s\n", mgURL)
+	err = common.OpenURL(mgURL)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // GetAppURL returns the full url of an app
 func GetAppURL(appName string) (string, error) {
 	if !login.IsUserAuthenticated() {

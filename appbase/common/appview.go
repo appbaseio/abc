@@ -24,3 +24,16 @@ func MakeDejavuURL(appURL string) (string, error) {
 
 	return url, nil
 }
+
+// MakeMirageURL ...
+func MakeMirageURL(appURL string) (string, error) {
+	idx := strings.LastIndex(appURL, "/")
+	hostURL := appURL[:idx]
+	appName := appURL[idx+1:]
+	jsonStr := fmt.Sprintf("{\"appname\":\"%s\",\"url\":\"%s\",\"selectedType\":[]}", appName, hostURL)
+	jsonStr = url.QueryEscape(jsonStr)
+	url := "https://opensource.appbase.io/mirage/#?app=" + jsonStr
+	log.Debugln(url)
+
+	return url, nil
+}
