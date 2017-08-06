@@ -1,9 +1,10 @@
 package common
 
 import (
-	b64 "encoding/base64"
+	// b64 "encoding/base64"
 	"fmt"
 	"github.com/appbaseio/abc/log"
+	"net/url"
 	"strings"
 )
 
@@ -13,7 +14,8 @@ func MakeDejavuURL(appURL string) (string, error) {
 	hostURL := appURL[:idx]
 	appName := appURL[idx+1:]
 	jsonStr := fmt.Sprintf("{\"appname\":\"%s\",\"url\":\"%s\",\"selectedType\":[]}", appName, hostURL)
-	jsonStr = b64.StdEncoding.EncodeToString([]byte(jsonStr))
+	// jsonStr = b64.StdEncoding.EncodeToString([]byte(jsonStr))
+	jsonStr = url.QueryEscape(jsonStr)
 	url := "https://opensource.appbase.io/dejavu/live/#?app=" + jsonStr
 	log.Debugln(url)
 	// base64 encode
