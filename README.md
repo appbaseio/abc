@@ -8,7 +8,10 @@
 
 # ABC
 
-**Latest version is 0.2.0.** Download the compiled binaries from [releases section](https://github.com/appbaseio/abc/releases).
+ABC is a command-line too to interact with appbase.io. 
+It can also serve as a swiss army knife to import data from any popular data source (Postgres, SQL, Mongo) to ElasticSearch. 
+This feature works with minimum configuration and is totally automatic. 
+In certain sources like Postgres and Mongo, you can even tail the database and keep ElasticSearch cluster in sync with the data in the source.
 
 
 1. [Intro](#intro)
@@ -27,12 +30,10 @@
 <a name="intro"></a>
 ## 1. Intro
 
-ABC is a command-line client for appbase.io with nifty features. The paid version of this allows import data into Appbase as well. 
-
-It consists of two parts. 
+ABC consists of two parts. 
 
 1. Appbase module
-2. Import module (paid version)
+2. Import module (closed source)
 
 To get the list of all commands supported by ABC, use -
 
@@ -49,7 +50,7 @@ ABC can be downloaded as an executable as well as through a Docker image.
 
 #### Using Executable
 
-Download `abc`'s executable [from releases](https://github.com/appbaseio/abc/releases) for your platform and preferrably put it in a PATH directory.
+Download `abc`'s executable [from releases](https://github.com/appbaseio/abc/releases/latest) for your platform and preferrably put it in a PATH directory.
 The access it as -
 
 ```sh
