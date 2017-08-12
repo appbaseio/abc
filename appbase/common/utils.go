@@ -52,6 +52,11 @@ func StringInSlice(a string, list []string) bool {
 
 // ColonPad pads spaces after colon
 func ColonPad(text string, length int) string {
+	// remove brackets in names, they are long
+	bracket := strings.Index(text, "(")
+	if bracket > -1 {
+		text = text[:bracket]
+	}
 	textLen := len(text)
 	text += ":"
 	for i := 0; i < (length - textLen - 1); i++ {

@@ -105,9 +105,9 @@ func ShowAppPerms(app string) error {
 	}
 	spinner.Stop()
 	// output
-	for index := range ".." {
-		fmt.Printf("%s%s:%s\n", common.ColonPad(permissions[index].Description, 20),
-			permissions[index].Username, permissions[index].Password)
+	for _, p := range permissions {
+		fmt.Printf("%s%s:%s\n", common.ColonPad(p.Description, 20),
+			p.Username, p.Password)
 	}
 	return nil
 }
