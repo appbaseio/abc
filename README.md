@@ -1,4 +1,8 @@
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/appbaseio/abc)](https://goreportcard.com/report/github.com/appbaseio/abc)
+[![Travis branch](https://img.shields.io/travis/appbaseio/abc/dev.svg)]()
+[![license](https://img.shields.io/github/license/appbaseio/abc.svg)]()
+
 # ABC
 
 **Latest version is 0.2.0.** Download the compiled binaries from [releases section](https://github.com/appbaseio/abc/releases).
