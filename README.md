@@ -3,6 +3,9 @@
 [![Travis branch](https://img.shields.io/travis/appbaseio/abc/dev.svg)]()
 [![license](https://img.shields.io/github/license/appbaseio/abc.svg)]()
 
+
+![abc banner image](https://user-images.githubusercontent.com/4047597/29240054-14e0e19a-7f7b-11e7-898b-ba6bad756b1d.png)
+
 # ABC
 
 **Latest version is 0.2.0.** Download the compiled binaries from [releases section](https://github.com/appbaseio/abc/releases).
