@@ -12,19 +12,20 @@
 ABC is a command-line too to interact with appbase.io. 
 It can also serve as a swiss army knife to import data from any popular data source (Postgres, SQL, Mongo) to ElasticSearch. 
 This feature works with minimum configuration and is totally automatic. 
-In certain sources like Postgres and Mongo, you can even tail the database and keep ElasticSearch cluster in sync with the data in the source.
+In certain sources like Postgres and Mongo, you can even keep the database and ElasticSearch cluster in sync such that any change from source gets added in destination as well.
 
 
 1. [Intro](#intro)
-2. [Getting Started](#getting-started)
-3. [Features](#features)
+2. [Key Benefits](#key-benefits)
+3. [Getting Started](#getting-started)
+4. [Features](#features)
 	1. [Appbase features](#appbase-features)
 	2. [Importer features](#importer-features)
-4. [Development setup](#development)
+5. [Development setup](#development)
 	1. [Local Setup](#local-setup)
 	2. [Docker Setup](#docker-setup)
 	3. [Build Variants](#build-variants)
-5. [ABC Resources](#abc-resources)
+6. [ABC Resources](#abc-resources)
 	1. [Contributing to ABC](#contributing-to-abc)
 	2. [Licensing](#licensing)
 
@@ -43,9 +44,20 @@ abc --help
 ```
 
 
+<a name="key-benefits"></a>
+## 2. Key Benefits
+
+ABC comes with a lots of benefits over any other traditional solution to the same problem. Some of the key points are as follows -
+
+- Whether your data resides in Postgres or a JSON file or MongoDB or in all three places, abc can index the data into Elasticsearch. Besides these, it also supports CSV, MySQL, SQLServer, and Elasticsearch itself to an Elasticsearch index.
+- It can keep the Elasticsearch index synced in realtime with the data source. (Note: Currently only supported for MongoDB and Postgres)
+- `abc import` is a single line CLI command that allows doing all of the above. It doesn’t require any external dependencies, takes zero lines of code configuration, and runs as an isolated process with a minimal resource footprint.
+- abc also supports configureable user defined transformations for advanced uses to map data types, columns or transform the data itself before it gets indexed into Elasticsearch.
+
+
 
 <a name="getting-started"></a>
-## 2. Getting Started
+## 3. Getting Started
 
 ABC can be downloaded as an executable as well as through a Docker image. 
 
@@ -93,7 +105,7 @@ abc login google
 
 
 <a name="features"></a>
-## 3. Features
+## 4. Features
 
 ABC's features can be broadly categorized into 2 components. 
 
@@ -101,7 +113,7 @@ ABC's features can be broadly categorized into 2 components.
 2. Importer features
 
 <a name="appbase-features"></a>
-### 3.1 Appbase features
+### 4.1 Appbase features
 
 Appbase features allows you to control your appbase.io account using ABC. You can see them under the *Appbase* heading in the list of commands.
 
@@ -148,7 +160,7 @@ abc app -m 2489
 ```
 
 <a name="importer-features"></a>
-### 3.2 Importer features
+### 4.2 Importer features
 
 ABC allows the user to configure a number of data adaptors as sources or sinks. These can be databases, files or other resources. Data is read from the sources, converted into a message format, and then send down to the sink where the message is converted into a writable format for its destination. The user can also create data transformations in JavaScript which can sit between the source and sink and manipulate or filter the message flow.
 
@@ -158,12 +170,12 @@ For more details on adaptors, see [Import docs](docs/appbase/import.md).
 
 
 <a name="development"></a>
-## 4. Development
+## 5. Development
 
 ABC can be built locally via the traditional `go build` or by building a Docker image.
 
 <a name="local-setup"></a>
-### 4.1 Local Setup
+### 5.1 Local Setup
 
 You can install ABC by building it locally and then moving the executable to anywhere you like. 
 
@@ -179,7 +191,7 @@ go build -tags 'oss' ./cmd/abc/...
 Note - You might be wondering what is the tag `oss` doing there. That's covered in the section [Build Variants](#build-variants).
 
 <a name="docker-setup"></a>
-### 4.2 Docker Setup
+### 5.2 Docker Setup
 
 ```sh
 git clone https://github.com/appbaseio/abc
@@ -206,7 +218,7 @@ abc apps
 ```
 
 <a name="build-variants"></a>
-### 4.3 Build Variants
+### 5.3 Build Variants
 
 The ABC project you see in this repository is not the complete project. Appbase.io works on a proprietary version of ABC using this project as the base.
 Hence we use the tag 'oss' to specify that this is an open source build. 
@@ -234,17 +246,17 @@ VERSION
 
 
 <a name="abc-resources"></a>
-## 5. ABC Resources
+## 6. ABC Resources
 
 Checkout the [docs folder](docs/) for details on some ABC commands and topics.
 
 <a name="contributing-to-abc"></a>
-### 5.1 Contributing to ABC
+### 6.1 Contributing to ABC
 
 Want to help out with ABC? Great! There are instructions to get you started [here](CONTRIBUTING.md).
 
 <a name="licensing"></a>
-### 5.2 Licensing
+### 6.2 Licensing
 
 ABC is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for full license text.
 
