@@ -27,6 +27,7 @@ func (f levelFlag) Set(level string) error {
 }
 
 func init() {
+	origLogger.Level = logrus.ErrorLevel // default: error
 	AddFlags(flag.CommandLine)
 }
 
