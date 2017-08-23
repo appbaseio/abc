@@ -64,9 +64,13 @@ func GetAppURL(appName string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	realName, err := EnsureAppName(appName)
+	if err != nil {
+		return "", err
+	}
 	for _, perm := range perms {
 		if strings.Contains(strings.ToLower(perm.Description), "admin") {
-			return fmt.Sprintf("https://%s:%s@scalr.api.appbase.io/%s", perm.Username, perm.Password, appName), nil
+			return fmt.Sprintf("https://%s:%s@scalr.api.appbase.io/%s", perm.Username, perm.Password, realName), nil
 		}
 	}
 	return "", fmt.Errorf("App with name %s not found", appName)

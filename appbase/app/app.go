@@ -156,3 +156,21 @@ func EnsureAppID(app string) (string, error) {
 	}
 	return "", errors.New("App with name " + app + " not found.")
 }
+
+// EnsureAppName make sures `app` is name
+func EnsureAppName(app string) (string, error) {
+	// check if string https://stackoverflow.com/questions/22593259/
+	if _, err := strconv.Atoi(app); err != nil {
+		return app, nil // return as is
+	}
+	// convert to name
+	apps, err := user.GetUserApps()
+	if err != nil {
+		return "", err
+	}
+	name := common.GetKeyForValue(apps, app)
+	if name == "" {
+		return "", errors.New("App with ID " + app + " not found.")
+	}
+	return name, nil
+}
