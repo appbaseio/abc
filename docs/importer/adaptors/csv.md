@@ -9,7 +9,7 @@ So we need to define it manually.
 ```ini
 src_type=csv
 src_uri=/full/local/path/to/file.csv
-src_typename=type_name_to_use
+typename=type_name_to_use
 
 dest_type=elasticsearch
 dest_uri=https://USER:PASSWORD@SERVER/INDEX
