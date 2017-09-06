@@ -1,18 +1,23 @@
 #!/bin/sh
 # https://golang.org/doc/install/source#environment
+cd build
 
-VERSION=0.3.0
+VERSION=0.4.0
 
 export GOARCH=amd64
 
 export GOOS=darwin
 
-go build -o "build/abc-${GOOS}-${VERSION}" -tags '!oss' ./cmd/abc/...
+go build -o "abc-${VERSION}" -tags '!oss' ./../cmd/abc/...
+zip -r "abc-${GOOS}-${VERSION}.zip" "abc-${VERSION}"
 
 export GOOS=windows
 
-go build -o "build/abc-${GOOS}-${VERSION}.exe"  -tags '!oss' ./cmd/abc/...
+go build -o "abc-${VERSION}.exe"  -tags '!oss' ./../cmd/abc/...
+zip -r "abc-${GOOS}-${VERSION}.zip" "abc-${VERSION}.exe"
 
 export GOOS=linux
 
-go build -o "build/abc-${GOOS}-${VERSION}" -tags '!oss' ./cmd/abc/...
+rm "abc-${VERSION}"
+go build -o "abc-${VERSION}" -tags '!oss' ./../cmd/abc/...
+zip -r "abc-${GOOS}-${VERSION}.zip" "abc-${VERSION}"
