@@ -6,7 +6,7 @@ import (
 	"runtime"
 )
 
-var version = "0.4.0"
+var version = "0.4.1"
 var variant = imports.BuildName
 
 // runVersion runs the logout command
