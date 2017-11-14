@@ -1,8 +1,8 @@
 #!/bin/sh
 # https://golang.org/doc/install/source#environment
-cd build
+mkdir -p build && cd build
 
-VERSION=0.4.0
+VERSION=0.4.1
 
 export GOARCH=amd64
 
