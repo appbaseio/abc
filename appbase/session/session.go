@@ -31,7 +31,7 @@ func LoadUserSessionAsString() (string, error) {
 	if len(token) > 0 {
 		return token, nil
 	}
-	return "", errors.New("user not logged in")
+	return "", errors.New("user not logged in, see --help on how to login.")
 }
 
 // LoadUserSessionAsCookie loads and returns arrays of cookies
