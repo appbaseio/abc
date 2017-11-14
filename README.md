@@ -179,13 +179,14 @@ ABC can be built locally via the traditional `go build` or by building a Docker 
 
 You can install ABC by building it locally and then moving the executable to anywhere you like. 
 
-To build it, you require **Go 1.8** insalled on your system. 
+To build it, you will require **Go 1.8** or above installed on your system. 
 
 ```sh
-go get github.com/appbaseio/abc
+go get github.com/appbaseio/abc # alternatively, clone the repo in the `$GOPATH/src/github.com/appbaseio/abc` dir
 cd $GOPATH/src/github.com/appbaseio/abc
+go get ./...  # installs the project dependencies
 go build -tags 'oss' ./cmd/abc/...
-./abc --help
+./abc --help  # voila, you just built abc from source!
 ```
 
 Note - You might be wondering what is the tag `oss` doing there. That's covered in the section [Build Variants](#build-variants).
