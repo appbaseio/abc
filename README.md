@@ -184,7 +184,6 @@ To build it, you will require **Go 1.8** or above installed on your system.
 ```sh
 go get github.com/appbaseio/abc # alternatively, clone the repo in the `$GOPATH/src/github.com/appbaseio/abc` dir
 cd $GOPATH/src/github.com/appbaseio/abc
-go get ./...  # installs the project dependencies
 go build -tags 'oss' ./cmd/abc/...
 ./abc --help  # voila, you just built abc from source!
 ```
