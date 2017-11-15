@@ -1,0 +1,59 @@
+{
+	"comment": "",
+	"ignore": "",
+	"package": [
+		{
+			"path": "appengine/cloudsql",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "IZLh2U73thwE6b8tSPS1peY+rPE=",
+			"path": "github.com/briandowns/spinner",
+			"revision": "48dbb65d7bd5c74ab50d53d04c949f20e3d14944",
+			"revisionTime": "2017-06-14T15:48:58Z"
+		},
+		{
+			"checksumSHA1": "OyHwjTve4QySr5Dnc3yNsYTijoI=",
+			"path": "github.com/denisenkom/go-mssqldb",
+			"revision": "88555645b640cc621e32f8693d7586a1aa1575f4",
+			"revisionTime": "2017-10-06T17:24:03Z"
+		},
+		{
+			"checksumSHA1": "YtcDWSOBq801CwMYM+XjwuFGULM=",
+			"path": "github.com/fatih/color",
+			"revision": "5df930a27be2502f99b292b7cc09ebad4d0891f4",
+			"revisionTime": "2017-09-26T11:14:11Z"
+		},
+		{
+			"checksumSHA1": "lrMJVb7MNqPHrt+YVw+HTFfFpy8=",
+			"path": "github.com/go-sql-driver/mysql",
+			"revision": "404c02a8a39c65a587e5ceedbd6e29c2ca185aca",
+			"revisionTime": "2017-11-14T08:18:14Z"
+		},
+		{
+			"checksumSHA1": "LLeSp9OOGrofG5MSTcpDguAOIfI=",
+			"path": "github.com/joho/godotenv",
+			"revision": "6d367c18edf6ca7fd004efd6863e4c5728fa858e",
+			"revisionTime": "2017-11-10T01:03:15Z"
+		},
+		{
+			"checksumSHA1": "89I9MhxW2SaTiVDFGOyTbok5p+g=",
+			"path": "github.com/mattn/go-colorable",
+			"revision": "6fcc0c1fd9b620311d821b106a400b35dc95c497",
+			"revisionTime": "2017-11-11T06:59:53Z"
+		},
+		{
+			"checksumSHA1": "qmf2OPIdr1nS6FGwGndELHFXHFU=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c",
+			"revisionTime": "2017-11-07T05:05:31Z"
+		},
+		{
+			"checksumSHA1": "srxWPDlzsC2TlKJnQsCMSGx/RYg=",
+			"path": "github.com/ogier/pflag",
+			"revision": "45c278ab3607870051a2ea9040bb85fcb8557481",
+			"revisionTime": "2016-01-29T22:01:14Z"
+		}
+	],
+	"rootPath": "github.com/appbaseio/abc"
+}
