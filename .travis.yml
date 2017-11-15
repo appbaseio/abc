@@ -7,7 +7,6 @@ env:
   global:
   - ABC_BUILD=oss
 script:
-- go get ./...
 - go build -tags 'oss' ./cmd/abc/...
 install: true
 branches:
