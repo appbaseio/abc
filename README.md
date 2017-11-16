@@ -227,7 +227,7 @@ If you are curious, we use the tag '!oss' to make our private builds.
 
 #### How to know build variant from the executable? 
 
-If you are not sure which build of `abc` you are using, you can run `abc --help` and take note of the value under the VERSION header. 
+If you are not sure which build of `abc` you are using, you can run `abc version` and take note of the value under the VERSION header. 
 
 For open source build, you will see
 
@@ -251,12 +251,14 @@ VERSION
 Checkout the [docs folder](docs/) for details on some ABC commands and topics.
 
 <a name="contributing-to-abc"></a>
+
 ### 6.1 Contributing to ABC
 
 Want to help out with ABC? Great! There are instructions to get you started [here](CONTRIBUTING.md).
 
 <a name="licensing"></a>
+
 ### 6.2 Licensing
 
-ABC is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for full license text.
+ABC's oss variant is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for full license text. ABC's !oss (read non-oss) variant which includes the `abc import` command and bundled in the binary is free to use while in beta.
 
