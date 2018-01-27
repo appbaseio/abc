@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/appbaseio/abc/imports"
 	"os"
 	"strings"
+
+	"github.com/appbaseio/abc/imports"
 )
 
 // usageAppbase adds help on using Appbase commands
@@ -22,6 +23,7 @@ func usageAppbase() {
 		fmt.Fprintf(os.Stderr, "  import    import data to appbase app\n")
 	}
 	fmt.Fprintf(os.Stderr, "  version   show build details\n")
+	fmt.Fprintf(os.Stderr, "  license   show project license and credits\n")
 }
 
 // provisionAppbaseCLI provisions the addon appbase CLI
@@ -45,6 +47,8 @@ func provisionAppbaseCLI(command string) func([]string) error {
 		run = runLogout
 	case "version", "--version":
 		run = runVersion
+	case "license":
+		run = runLicense
 	default:
 		usage()
 		os.Exit(1)

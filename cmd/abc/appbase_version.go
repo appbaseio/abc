@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/appbaseio/abc/imports"
 	"runtime"
+
+	"github.com/appbaseio/abc/imports"
 )
 
-var version = "0.4.1"
+var version = "0.5.0"
 var variant = imports.BuildName
 
 // runVersion runs the logout command
