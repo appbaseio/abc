@@ -1,7 +1,7 @@
 # Import command
 
-Import command can be used to import data from any supported database source into appbase.io/ES cluster. 
-It goes like - 
+Import command can be used to import data from any supported database source into appbase.io/ES cluster.
+It goes like -
 
 ```
 abc import --src_uri {URI} --src_type {DBType} --tail [URI|Appname]
@@ -28,7 +28,7 @@ At the time of writing, the list of parameters supported looks like -
 --typename=mytype                            [csv] typeName to use
 ```
 
-Note that you only need to set the parameters that are required for the source database type. For example, you don't set `replication_slot` when taking CSV as the source. 
+Note that you only need to set the parameters that are required for the source database type. For example, you don't set `replication_slot` when taking CSV as the source.
 
 **Note** - Help for [transform_file](../importer/transform_file.md) is available here.
 
@@ -61,6 +61,11 @@ We can even use the app's name as URI once we are logged in.
 abc import --src_type=elasticsearch --src_uri=APPNAME2 APPNAME
 ```
 
+### Kafka
+
+```sh
+abc import --src_type=kafka --src_uri="kafka://USER:PASS@HOST:PORT/TOPIC1,TOPIC2" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+```
 
 ### MongoDB
 
@@ -75,7 +80,7 @@ abc import --src_type=mongodb -t --src_uri="mongodb://USER:PASS@HOST:PORT/DB" "h
 abc import --src_type=mssql --src_uri="sqlserver://USER:PASSWORD@SERVER:PORT?database=DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
-For more source URL patterns, see [go-mssqldb](https://github.com/denisenkom/go-mssqldb#connection-parameters-and-dsn)'s GitHub page. 
+For more source URL patterns, see [go-mssqldb](https://github.com/denisenkom/go-mssqldb#connection-parameters-and-dsn)'s GitHub page.
 
 
 ### MySQL
@@ -84,7 +89,7 @@ For more source URL patterns, see [go-mssqldb](https://github.com/denisenkom/go-
 abc import --src_type=mysql --src_uri="USER:PASS@tcp(HOST:PORT)/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
-For more source URL patterns, see [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql#examples)'s GitHub page. 
+For more source URL patterns, see [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql#examples)'s GitHub page.
 
 
 ### Postgres
@@ -99,7 +104,7 @@ abc import --src_type=postgres -t --replication_slot="standby_replication_slot" 
 abc import --config=test.env
 ```
 
-File extension doesn't matter. 
+File extension doesn't matter.
 The file `test.env` should be an INI/ENV like file with key value pair containing the values of attributes required for importing.
 Example of a test.env file is --
 
@@ -112,5 +117,4 @@ dest_type=elasticsearch
 dest_uri=https://USER:PASS@scalr.api.appbase.io/APPNAME
 ```
 
-Note that the key names are same as what we have in `import` parameters. 
-
+Note that the key names are same as what we have in `import` parameters.
