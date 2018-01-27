@@ -7,16 +7,58 @@
 			"revision": ""
 		},
 		{
+			"checksumSHA1": "88gxUasLA3ylXzA8j3RKgLx8+50=",
+			"path": "github.com/Shopify/sarama",
+			"revision": "0f4f8caef994ca7e4f9072c1858b7c6761ed498f",
+			"revisionTime": "2018-01-22T13:27:47Z"
+		},
+		{
+			"checksumSHA1": "E9jynZBUOaspPa/5rgtUIK0jw3Y=",
+			"path": "github.com/Shopify/toxiproxy/client",
+			"revision": "a32143133e8cdad36feb1ad9a48ffefb7451b7d9",
+			"revisionTime": "2017-12-04T20:47:12Z"
+		},
+		{
 			"checksumSHA1": "IZLh2U73thwE6b8tSPS1peY+rPE=",
 			"path": "github.com/briandowns/spinner",
 			"revision": "48dbb65d7bd5c74ab50d53d04c949f20e3d14944",
 			"revisionTime": "2017-06-14T15:48:58Z"
 		},
 		{
+			"checksumSHA1": "y5jNubzKRkINhwbaQvttsHVumAU=",
+			"path": "github.com/davecgh/go-spew/spew",
+			"revision": "ecdeabc65495df2dec95d7c4a4c3e021903035e5",
+			"revisionTime": "2017-10-02T20:02:53Z"
+		},
+		{
+			"checksumSHA1": "8jpS123oh7X8khCYQ75XzcO8YlY=",
+			"path": "github.com/davecgh/go-spew/spew/testdata",
+			"revision": "ecdeabc65495df2dec95d7c4a4c3e021903035e5",
+			"revisionTime": "2017-10-02T20:02:53Z"
+		},
+		{
 			"checksumSHA1": "OyHwjTve4QySr5Dnc3yNsYTijoI=",
 			"path": "github.com/denisenkom/go-mssqldb",
 			"revision": "88555645b640cc621e32f8693d7586a1aa1575f4",
 			"revisionTime": "2017-10-06T17:24:03Z"
+		},
+		{
+			"checksumSHA1": "ec9CO+oMAOVzkOT9qa31b0g7Adk=",
+			"path": "github.com/eapache/go-resiliency/breaker",
+			"revision": "ef9aaa7ea8bd2448429af1a77cf41b2b3b34bdd6",
+			"revisionTime": "2018-01-01T20:33:13Z"
+		},
+		{
+			"checksumSHA1": "V0JjiCPV0vMxmTZoEreGXe6IO1o=",
+			"path": "github.com/eapache/go-xerial-snappy",
+			"revision": "bb955e01b9346ac19dc29eb16586c90ded99a98c",
+			"revisionTime": "2016-06-09T14:24:08Z"
+		},
+		{
+			"checksumSHA1": "xohsjI4JEiTzmRuPsQ6DV9PQhr0=",
+			"path": "github.com/eapache/queue",
+			"revision": "44cc805cf13205b55f69e14bcb69867d1ae92f98",
+			"revisionTime": "2016-08-05T00:47:13Z"
 		},
 		{
 			"checksumSHA1": "YtcDWSOBq801CwMYM+XjwuFGULM=",
@@ -29,6 +71,12 @@
 			"path": "github.com/go-sql-driver/mysql",
 			"revision": "404c02a8a39c65a587e5ceedbd6e29c2ca185aca",
 			"revisionTime": "2017-11-14T08:18:14Z"
+		},
+		{
+			"checksumSHA1": "IjqIqRcJB98vHedl7i611ua9Iic=",
+			"path": "github.com/golang/snappy",
+			"revision": "553a641470496b2327abcac10b36396bd98e45c9",
+			"revisionTime": "2017-02-15T23:32:05Z"
 		},
 		{
 			"checksumSHA1": "LLeSp9OOGrofG5MSTcpDguAOIfI=",
@@ -53,6 +101,24 @@
 			"path": "github.com/ogier/pflag",
 			"revision": "45c278ab3607870051a2ea9040bb85fcb8557481",
 			"revisionTime": "2016-01-29T22:01:14Z"
+		},
+		{
+			"checksumSHA1": "eqhPmF05vYMFrmgVRT1sjKKcf2Q=",
+			"path": "github.com/pierrec/lz4",
+			"revision": "ed8d4cc3b461464e69798080a0092bd028910298",
+			"revisionTime": "2018-01-13T15:17:03Z"
+		},
+		{
+			"checksumSHA1": "78+ukkUZmWfC36XqI5KJFP9peh4=",
+			"path": "github.com/pierrec/xxHash/xxHash32",
+			"revision": "a0006b13c722f7f12368c00a3d3c2ae8a999a0c6",
+			"revisionTime": "2017-07-14T08:24:55Z"
+		},
+		{
+			"checksumSHA1": "fDorGU/ZWWl47lW1tq6hKkJJMD0=",
+			"path": "github.com/rcrowley/go-metrics",
+			"revision": "8732c616f52954686704c8645fe1a9d59e9df7c1",
+			"revisionTime": "2018-01-25T23:19:41Z"
 		}
 	],
 	"rootPath": "github.com/appbaseio/abc"
