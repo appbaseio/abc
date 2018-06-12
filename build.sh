@@ -2,7 +2,7 @@
 # https://golang.org/doc/install/source#environment
 mkdir -p build && cd build
 
-VERSION=0.5.0
+VERSION=0.5.1
 
 export GOARCH=amd64
 
