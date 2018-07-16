@@ -13,4 +13,6 @@ dest_type=elasticsearch
 dest_uri=https://USER:PASSWORD@SERVER/INDEX
 ```
 
+Syncing only a particular table is possible with the `--src_filter` switch.
+
 For other types of source URIs that are supported, visit [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql#examples)'s GitHub page. 
