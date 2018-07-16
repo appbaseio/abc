@@ -53,6 +53,7 @@ func runImport(args []string) error {
 	srcRegex := flagset.String("src_filter", ".*", "Namespace filter for source")
 	test := flagset.Bool("test", false, `if set to true, only pipeline is created and sync is not started. 
 		Useful for checking your configuration`)
+	sacPath := flagset.String("sac_path", "./ServiceAccountKey.json", "Path to firebase service account credentials file")
 
 	transformFile := flagset.String("transform_file", "", "transform file to use")
 
@@ -92,6 +93,7 @@ func runImport(args []string) error {
 		"replication_slot": *replicationSlot,
 		// "timeout":          *timeout,
 		"srcRegex":    *srcRegex,
+		"sacPath":     *sacPath,
 		"_transform_": *transformFile,
 	}
 
