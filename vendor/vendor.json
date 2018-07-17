@@ -7,6 +7,12 @@
 			"revision": ""
 		},
 		{
+			"checksumSHA1": "5xkD3/lKIHEuJjdkKyNxtqUzlnQ=",
+			"path": "firebase.google.com/go",
+			"revision": "10499b49dc50d23cef37bba14c36e252318b8323",
+			"revisionTime": "2018-06-11T22:34:23Z"
+		},
+		{
 			"checksumSHA1": "88gxUasLA3ylXzA8j3RKgLx8+50=",
 			"path": "github.com/Shopify/sarama",
 			"revision": "0f4f8caef994ca7e4f9072c1858b7c6761ed498f",
