@@ -35,7 +35,8 @@ import (
 	"testing"
 
 	. "github.com/golang/protobuf/proto"
-	pb "github.com/golang/protobuf/proto/testdata"
+	proto3pb "github.com/golang/protobuf/proto/proto3_proto"
+	pb "github.com/golang/protobuf/proto/test_proto"
 )
 
 // Four identical base messages.
@@ -44,6 +45,9 @@ var messageWithoutExtension = &pb.MyMessage{Count: Int32(7)}
 var messageWithExtension1a = &pb.MyMessage{Count: Int32(7)}
 var messageWithExtension1b = &pb.MyMessage{Count: Int32(7)}
 var messageWithExtension2 = &pb.MyMessage{Count: Int32(7)}
+var messageWithExtension3a = &pb.MyMessage{Count: Int32(7)}
+var messageWithExtension3b = &pb.MyMessage{Count: Int32(7)}
+var messageWithExtension3c = &pb.MyMessage{Count: Int32(7)}
 
 // Two messages with non-message extensions.
 var messageWithInt32Extension1 = &pb.MyMessage{Count: Int32(8)}
@@ -82,6 +86,20 @@ func init() {
 	if err := SetExtension(messageWithInt32Extension1, pb.E_Ext_Number, Int32(24)); err != nil {
 		panic("SetExtension on Int32-2 failed: " + err.Error())
 	}
+
+	// messageWithExtension3{a,b,c} has unregistered extension.
+	if RegisteredExtensions(messageWithExtension3a)[200] != nil {
+		panic("expect extension 200 unregistered")
+	}
+	bytes := []byte{
+		0xc0, 0x0c, 0x01, // id=200, wiretype=0 (varint), data=1
+	}
+	bytes2 := []byte{
+		0xc0, 0x0c, 0x02, // id=200, wiretype=0 (varint), data=2
+	}
+	SetRawExtension(messageWithExtension3a, 200, bytes)
+	SetRawExtension(messageWithExtension3b, 200, bytes)
+	SetRawExtension(messageWithExtension3c, 200, bytes2)
 }
 
 var EqualTests = []struct {
@@ -131,6 +149,8 @@ var EqualTests = []struct {
 		&pb.MyMessage{RepBytes: [][]byte{[]byte("sham"), []byte("wow")}},
 		true,
 	},
+	// In proto3, []byte{} and []byte(nil) are equal.
+	{"proto3 bytes, empty vs nil", &proto3pb.Message{Data: []byte{}}, &proto3pb.Message{Data: nil}, true},
 
 	{"extension vs. no extension", messageWithoutExtension, messageWithExtension1a, false},
 	{"extension vs. same extension", messageWithExtension1a, messageWithExtension1b, true},
@@ -138,6 +158,9 @@ var EqualTests = []struct {
 
 	{"int32 extension vs. itself", messageWithInt32Extension1, messageWithInt32Extension1, true},
 	{"int32 extension vs. a different int32", messageWithInt32Extension1, messageWithInt32Extension2, false},
+
+	{"unregistered extension same", messageWithExtension3a, messageWithExtension3b, true},
+	{"unregistered extension different", messageWithExtension3a, messageWithExtension3c, false},
 
 	{
 		"message with group",
@@ -178,6 +201,36 @@ var EqualTests = []struct {
 		"map different value only",
 		&pb.MessageWithMap{NameMapping: map[int32]string{1: "Ken"}},
 		&pb.MessageWithMap{NameMapping: map[int32]string{1: "Rob"}},
+		false,
+	},
+	{
+		"zero-length maps same",
+		&pb.MessageWithMap{NameMapping: map[int32]string{}},
+		&pb.MessageWithMap{NameMapping: nil},
+		true,
+	},
+	{
+		"orders in map don't matter",
+		&pb.MessageWithMap{NameMapping: map[int32]string{1: "Ken", 2: "Rob"}},
+		&pb.MessageWithMap{NameMapping: map[int32]string{2: "Rob", 1: "Ken"}},
+		true,
+	},
+	{
+		"oneof same",
+		&pb.Communique{Union: &pb.Communique_Number{41}},
+		&pb.Communique{Union: &pb.Communique_Number{41}},
+		true,
+	},
+	{
+		"oneof one nil",
+		&pb.Communique{Union: &pb.Communique_Number{41}},
+		&pb.Communique{},
+		false,
+	},
+	{
+		"oneof different",
+		&pb.Communique{Union: &pb.Communique_Number{41}},
+		&pb.Communique{Union: &pb.Communique_Name{"Bobby Tables"}},
 		false,
 	},
 }
