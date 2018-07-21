@@ -580,7 +580,6 @@
 		},
 		{
 			"checksumSHA1": "ip36g6+W2yTwy+nvIBhevHvO++c=",
-			"origin": "github.com/appbaseio/abc/vendor/golang.org/x/net/http2",
 			"path": "golang.org/x/net/http2",
 			"revision": "a680a1efc54dd51c040b3b5ce4939ea3cf2ea0d1",
 			"revisionTime": "2018-07-19T17:54:20Z"
@@ -614,6 +613,13 @@
 			"path": "golang.org/x/oauth2/jwt",
 			"revision": "ef147856a6ddbb60760db74283d2424e98c87bff",
 			"revisionTime": "2018-06-20T17:47:24Z"
+		},
+		{
+			"checksumSHA1": "Ha7qxFxfv10pjqyLJ4koDk3sM7A=",
+			"origin": "github.com/appbaseio/abc/vendor/golang.org/x/sys/unix",
+			"path": "golang.org/x/sys/unix",
+			"revision": "ac767d655b305d4e9612f5f6e33120b9176c4ad4",
+			"revisionTime": "2018-07-08T03:57:06Z"
 		},
 		{
 			"checksumSHA1": "QIi09tZjosMoWNkH71TRIiAdPBA=",
@@ -850,7 +856,7 @@
 			"revisionTime": "2018-07-18T23:41:21Z"
 		},
 		{
-			"checksumSHA1": "55ESok/FrANVuObE67hPlIn57V8=",
+			"checksumSHA1": "q+KaJeV14AxyoA8+u/hxev4OD4c=",
 			"path": "google.golang.org/grpc",
 			"revision": "445634bdcc9393d2681e504aafd3efc9b28c4bf2",
 			"revisionTime": "2018-07-20T00:33:42Z"
