@@ -9,7 +9,7 @@
 
 # ABC
 
-ABC is a command-line too to interact with appbase.io.
+ABC is a command-line tool to interact with appbase.io.
 It can also serve as a swiss army knife to import data from any popular data source (Postgres, SQL, Mongo) to ElasticSearch.
 This feature works with minimum configuration and is totally automatic.
 In certain sources like Postgres and Mongo, you can even keep the database and ElasticSearch cluster in sync such that any change from source gets added in destination as well.
