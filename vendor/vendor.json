@@ -237,6 +237,13 @@
 			"revisionTime": "2017-09-26T11:14:11Z"
 		},
 		{
+			"checksumSHA1": "WLzklYULkdX0rWc6g9rDdoON0Ys=",
+			"path": "github.com/go-redis/redis",
+			"revision": "ab1a52f0c9e9ebd920caba4492af5af4242705e0",
+			"revisionTime": "2018-07-12T12:57:03Z",
+			"tree": true
+		},
+		{
 			"checksumSHA1": "lrMJVb7MNqPHrt+YVw+HTFfFpy8=",
 			"path": "github.com/go-sql-driver/mysql",
 			"revision": "404c02a8a39c65a587e5ceedbd6e29c2ca185aca",
@@ -616,7 +623,6 @@
 		},
 		{
 			"checksumSHA1": "Ha7qxFxfv10pjqyLJ4koDk3sM7A=",
-			"origin": "github.com/appbaseio/abc/vendor/golang.org/x/sys/unix",
 			"path": "golang.org/x/sys/unix",
 			"revision": "ac767d655b305d4e9612f5f6e33120b9176c4ad4",
 			"revisionTime": "2018-07-08T03:57:06Z"
