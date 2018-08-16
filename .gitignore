@@ -3,6 +3,7 @@
 /transform*js
 .vscode
 *.rdb
+.idea
 
 # private
 /adaptorx
