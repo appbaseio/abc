@@ -8,8 +8,8 @@
 #
 
 # Pull the base image
-FROM alpine:3.6
-MAINTAINER Avi Aryan <avi.aryan123@gmail.com>
+FROM alpine:3.8
+MAINTAINER Siddharth Kothari <siddharth@appbase.io>
 
 # Set GOPATH
 ENV GOPATH /go
