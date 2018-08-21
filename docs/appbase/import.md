@@ -64,7 +64,7 @@ abc import --src_type=elasticsearch --src_uri=APPNAME2 APPNAME
 
 ### Cloud Firestore
 ```sh
-`abc import --src_type=firestore --sac_path="/home/johnappleseed/ServiceAccountKey.json" --src_filter="users" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+abc import --src_type=firestore --sac_path="/home/johnappleseed/ServiceAccountKey.json" --src_filter="users" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
 ### Kafka
