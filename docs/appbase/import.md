@@ -22,6 +22,7 @@ At the time of writing, the list of parameters supported looks like -
 --src_filter=.*                              Namespace filter for source
 --src_type=postgres                          type of source database
 --src_uri=http://user:pass@host:port/db      url of source database
+--sac_path=./ServiceAccountCredentials.json  Path to the service account credentials file obtained after creating a firebase app.
 --tail=false                                 allow tail feature
 --test=false                                 if set to true, only pipeline is created and sync is not started. Useful for checking your configuration
 --transform_file=                             URI of transform file to use
@@ -59,6 +60,11 @@ We can even use the app's name as URI once we are logged in.
 
 ```sh
 abc import --src_type=elasticsearch --src_uri=APPNAME2 APPNAME
+```
+
+### Cloud Firestore
+```sh
+`abc import --src_type=firestore --sac_path="/home/johnappleseed/ServiceAccountKey.json" --src_filter="users" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
 ### Kafka
