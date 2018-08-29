@@ -5,16 +5,17 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/appbaseio/abc/appbase/app"
-	"github.com/appbaseio/abc/appbase/common"
-	"github.com/appbaseio/abc/imports/adaptor"
-	"github.com/appbaseio/abc/log"
-	"github.com/joho/godotenv"
 	"io/ioutil"
 	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/appbaseio/abc/appbase/app"
+	"github.com/appbaseio/abc/appbase/common"
+	"github.com/appbaseio/abc/imports/adaptor"
+	"github.com/appbaseio/abc/log"
+	"github.com/joho/godotenv"
 )
 
 // GLOBALS
@@ -100,10 +101,11 @@ func runImport(args []string) error {
 	}
 
 	var destConfig = map[string]interface{}{
-		"uri":    destURL,
-		"_name_": "elasticsearch",
-		"request_size": *requestSize,
+		"uri":           destURL,
+		"_name_":        "elasticsearch",
+		"request_size":  *requestSize,
 		"bulk_requests": *bulkRequests,
+		"tail":          *tail,
 	}
 
 	// write config file
