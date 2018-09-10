@@ -54,6 +54,7 @@ func runImport(args []string) error {
 	test := flagset.Bool("test", false, `if set to true, only pipeline is created and sync is not started. 
 		Useful for checking your configuration`)
 	sacPath := flagset.String("sac_path", "./ServiceAccountKey.json", "Path to firebase service account credentials file")
+	ssl := flagset.Bool("ssl", false, "Enable SSL connection to the source.")
 	requestSize := flagset.Int64("request_size", 2<<19, "Http request size in bytes, specifically for bulk requests to ES.")
 	bulkRequests := flagset.Int("bulk_requests", 1000, "Number of bulk requests to send during a network request to ES.")
 
@@ -93,16 +94,16 @@ func runImport(args []string) error {
 		"tail":             *tail,
 		"typeName":         *typeName,
 		"replication_slot": *replicationSlot,
-		// "timeout":          *timeout,
-		"srcRegex":    *srcRegex,
-		"sacPath":     *sacPath,
-		"_transform_": *transformFile,
+		"srcRegex":         *srcRegex,
+		"sacPath":          *sacPath,
+		"ssl":              *ssl,
+		"_transform_":      *transformFile,
 	}
 
 	var destConfig = map[string]interface{}{
-		"uri":    destURL,
-		"_name_": "elasticsearch",
-		"request_size": *requestSize,
+		"uri":           destURL,
+		"_name_":        "elasticsearch",
+		"request_size":  *requestSize,
 		"bulk_requests": *bulkRequests,
 	}
 
