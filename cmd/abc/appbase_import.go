@@ -24,6 +24,7 @@ var srcParamMap = map[string]string{
 	"src_uri":          "uri",
 	"src_type":         "_name_",
 	"tail":             "tail",
+	"ssl":              "ssl",
 	"replication_slot": "replication_slot",
 	"typename":         "typeName",
 	"src_filter":       "srcRegex",
@@ -245,6 +246,14 @@ func genPipelineFromEnv(filename string) (string, error) {
 			src[v] = val
 			// tail should be boolean
 			if k == "tail" {
+				if val == "true" {
+					src[v] = true
+				} else {
+					src[v] = false
+				}
+			}
+			// ssl should be boolean
+			if k == "ssl" {
 				if val == "true" {
 					src[v] = true
 				} else {
