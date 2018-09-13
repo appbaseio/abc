@@ -28,13 +28,17 @@ var srcParamMap = map[string]string{
 	"replication_slot": "replication_slot",
 	"typename":         "typeName",
 	"src_filter":       "srcRegex",
+	"sac_path":         "sacPath",
 	// "timeout":          "timeout",
 	"transform_file": "_transform_",
 }
 
 var destParamMap = map[string]string{
-	"dest_uri":  "uri",
-	"dest_type": "_name_",
+	"dest_uri":      "uri",
+	"dest_type":     "_name_",
+	"tail":          "tail",
+	"request_size":  "request_size",
+	"bulk_requests": "bulk_requests",
 }
 
 const basicUsage string = `abc import --src.type {DBType} --src.uri {URI} [-t|--tail] [Uri|Appname]`
@@ -267,6 +271,13 @@ func genPipelineFromEnv(filename string) (string, error) {
 	for k, v := range destParamMap {
 		if val, ok := config[k]; ok {
 			dest[v] = val
+			if k == "tail" {
+				if val == "true" {
+					dest[v] = true
+				} else {
+					dest[v] = false
+				}
+			}
 		}
 	}
 	// generate file
