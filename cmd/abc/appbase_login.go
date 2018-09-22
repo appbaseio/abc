@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/login"
 	"github.com/appbaseio/abc/appbase/user"
@@ -10,7 +11,7 @@ import (
 // runLogin runs the login command
 func runLogin(args []string) error {
 	flagset := baseFlagSet("login")
-	basicUsage := "abc login [google|github]"
+	basicUsage := "abc login [google|github|gitlab]"
 	flagset.Usage = usageFor(flagset, basicUsage)
 	if err := flagset.Parse(args); err != nil {
 		return err
@@ -23,7 +24,7 @@ func runLogin(args []string) error {
 			return user.ShowUserEmail()
 		}
 	case 1:
-		if common.StringInSlice(args[0], []string{"google", "github"}) {
+		if common.StringInSlice(args[0], []string{"google", "github", "gitlab"}) {
 			fmt.Println("Logging in..")
 			return login.StartUserLogin(args[0])
 		}
