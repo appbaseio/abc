@@ -104,6 +104,13 @@ For more source URL patterns, see [go-sql-driver/mysql](https://github.com/go-sq
 abc import --src_type=postgres -t --replication_slot="standby_replication_slot" --src_uri="postgresql://USER:PASS@HOST:PORT/DBNAME" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
+
+### Redis
+
+```sh
+abc import --src_type=redis --src_uri="redis://USER:PASS@HOST:PORT/DBNUMBER" "https://USER:PASS@scalr.api.appbase.io/APPNAME"
+```
+
 ### Using a config file
 
 ```sh
