@@ -3,14 +3,15 @@ package app
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/appbaseio/abc/appbase/common"
-	"github.com/appbaseio/abc/appbase/session"
-	"github.com/appbaseio/abc/appbase/spinner"
-	"github.com/olekukonko/tablewriter"
 	"net/http"
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/appbaseio/abc/appbase/common"
+	"github.com/appbaseio/abc/appbase/session"
+	"github.com/appbaseio/abc/appbase/spinner"
+	"github.com/olekukonko/tablewriter"
 )
 
 // Permission represents an app permission object
@@ -92,6 +93,42 @@ func ShowAppMetrics(app string) error {
 	})
 	table.SetAlignment(tablewriter.ALIGN_CENTER)
 	table.Render()
+	return nil
+}
+
+// ShowAppAnalytics fetches analytics for an app
+func ShowAppAnalytics(app string, endpoint string) error {
+	spinner.StartText("Fetching app analytics")
+	defer spinner.Stop()
+	// show analytics
+	fmt.Println()
+	req, err := http.NewRequest("GET", common.AccAPIURL+"/analytics/"+app+"/"+endpoint, nil)
+	if err != nil {
+		return err
+	}
+	resp, err := session.SendRequest(req)
+	if err != nil {
+		return err
+	}
+	spinner.Stop()
+
+	switch endpoint {
+	case "latency":
+		ShowLatency(resp.Body)
+	case "geoip":
+		ShowGeoIP(resp.Body)
+	case "overview":
+		ShowOverview(resp.Body)
+	case "popularresults":
+		ShowPopularResults(resp.Body)
+	case "popularsearches":
+		ShowPopularSearches(resp.Body)
+	case "popularfilters":
+		ShowPopularFilters(resp.Body)
+	case "noresultsearches":
+		ShowNoResultSearches(resp.Body)
+	}
+
 	return nil
 }
 
