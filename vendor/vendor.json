@@ -201,7 +201,7 @@
 			"revisionTime": "2017-10-02T20:02:53Z"
 		},
 		{
-			"checksumSHA1": "8jpS123oh7X8khCYQ75XzcO8YlY=",
+			"checksumSHA1": "a2yC46a1qsJomgY6rb+FkTFiqmE=",
 			"path": "github.com/davecgh/go-spew/spew/testdata",
 			"revision": "ecdeabc65495df2dec95d7c4a4c3e021903035e5",
 			"revisionTime": "2017-10-02T20:02:53Z"
@@ -1064,6 +1064,12 @@
 			"path": "google.golang.org/grpc/testdata",
 			"revision": "445634bdcc9393d2681e504aafd3efc9b28c4bf2",
 			"revisionTime": "2018-07-20T00:33:42Z"
+		},
+		{
+			"checksumSHA1": "sISoioAbkoScV9ggjFM3fitfiiI=",
+			"path": "gopkg.in/olivere/elastic.v6",
+			"revision": "425e5369a8f054f4f447f7c8ee1bf605f48425ab",
+			"revisionTime": "2018-10-11T18:14:04Z"
 		}
 	],
 	"rootPath": "github.com/appbaseio/abc"
