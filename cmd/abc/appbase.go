@@ -16,8 +16,9 @@ func usageAppbase() {
 	fmt.Fprintf(os.Stderr, "  user      get user details\n")
 	fmt.Fprintf(os.Stderr, "  apps      display user apps\n")
 	fmt.Fprintf(os.Stderr, "  app       display app details\n")
-	fmt.Fprintf(os.Stderr, "  create    create app\n")
-	fmt.Fprintf(os.Stderr, "  delete    delete app\n")
+	fmt.Fprintf(os.Stderr, "  cluster   display cluster details\n")
+	fmt.Fprintf(os.Stderr, "  create    create app/cluster\n")
+	fmt.Fprintf(os.Stderr, "  delete    delete app/cluster\n")
 	fmt.Fprintf(os.Stderr, "  logout    logout session\n")
 	if imports.IsPrivate {
 		fmt.Fprintf(os.Stderr, "  import    import data to appbase app\n")
@@ -39,6 +40,8 @@ func provisionAppbaseCLI(command string) func([]string) error {
 		run = runApps
 	case "app":
 		run = runApp
+	case "cluster":
+		run = runCluster
 	case "create":
 		run = runCreate
 	case "delete":
