@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/appbaseio/abc/appbase/app"
+	"github.com/appbaseio/abc/appbase/cluster"
 	"github.com/appbaseio/abc/appbase/common"
 )
 
@@ -63,12 +64,14 @@ func runApp(args []string) error {
 // runCreate runs `create` command
 func runCreate(args []string) error {
 	flagset := baseFlagSet("create")
-	basicUsage := "abc create [--es2|--es6] [--category=category] AppName"
+	basicUsage := "abc create [--es2|--es6] [--category=category] [--cluster|c] [--interactive|-i] AppName|ClusterName"
 	flagset.Usage = usageFor(flagset, basicUsage)
 	// https://gobyexample.com/command-line-flags
 	isEs6 := flagset.Bool("es6", false, "is app es6")
 	isEs2 := flagset.Bool("es2", true, "is app es2")
 	category := flagset.String("category", "generic", "category for app")
+	clusterName := flagset.BoolP("cluster", "c", false, "cluster mode")
+	interactiveMode := flagset.BoolP("interactive", "i", true, "interactive mode for cluster creation")
 
 	if err := flagset.Parse(args); err != nil {
 		return err
@@ -76,7 +79,13 @@ func runCreate(args []string) error {
 	args = flagset.Args()
 
 	if len(args) == 1 {
-		if *isEs6 {
+		if *clusterName {
+			if *interactiveMode {
+				cluster.RunClusterCreateInteractive()
+			} else {
+				cluster.RunClusterCreate(args[0])
+			}
+		} else if *isEs6 {
 			return app.RunAppCreate(args[0], "6", *category)
 		} else if *isEs2 {
 			return app.RunAppCreate(args[0], "2", *category)
@@ -92,13 +101,17 @@ func runCreate(args []string) error {
 // runDelete runs `delete` command
 func runDelete(args []string) error {
 	flagset := baseFlagSet("delete")
-	basicUsage := "abc delete [AppID|AppName]"
+	basicUsage := "abc delete [AppID|AppName|ClusterID] [--cluster=ClusterName]"
 	flagset.Usage = usageFor(flagset, basicUsage)
+	getCluster := flagset.Bool("cluster", false, "for deleting clusters instead of apps")
 	if err := flagset.Parse(args); err != nil {
 		return err
 	}
 	args = flagset.Args()
 	if len(args) == 1 {
+		if *getCluster == true {
+			return cluster.RunClusterDelete(args[0])
+		}
 		return app.RunAppDelete(args[0])
 	}
 	showShortHelp(basicUsage)
