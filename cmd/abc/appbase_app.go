@@ -64,13 +64,14 @@ func runApp(args []string) error {
 // runCreate runs `create` command
 func runCreate(args []string) error {
 	flagset := baseFlagSet("create")
-	basicUsage := "abc create [--es2|--es6] [--category=category] [--cluster|c] [--interactive|-i] AppName|ClusterName"
+	basicUsage := "abc create [--es2|--es6] [--category=category] [--cluster|-c] [--interactive|-i] AppName|ClusterName"
 	flagset.Usage = usageFor(flagset, basicUsage)
 	// https://gobyexample.com/command-line-flags
 	isEs6 := flagset.Bool("es6", false, "is app es6")
 	isEs2 := flagset.Bool("es2", true, "is app es2")
 	category := flagset.String("category", "generic", "category for app")
-	clusterName := flagset.BoolP("cluster", "c", false, "cluster mode")
+
+	isCluster := flagset.BoolP("cluster", "c", false, "cluster mode")
 	interactiveMode := flagset.BoolP("interactive", "i", true, "interactive mode for cluster creation")
 
 	if err := flagset.Parse(args); err != nil {
@@ -79,7 +80,7 @@ func runCreate(args []string) error {
 	args = flagset.Args()
 
 	if len(args) == 1 {
-		if *clusterName {
+		if *isCluster {
 			if *interactiveMode {
 				cluster.RunClusterCreateInteractive()
 			} else {
