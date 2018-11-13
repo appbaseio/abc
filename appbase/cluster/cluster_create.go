@@ -34,9 +34,11 @@ type createClusterRespBody struct {
 	Cluster cluster `json:"cluster"`
 }
 
-// RunClusterCreate creates a cluster in non-interactive mode using flags
-func RunClusterCreate(name string) {
-
+// BuildRequestBody creates a request body to for cluster deployment based on input from flags
+func BuildRequestBody(name string, location string, vmSize string, plan string, ssh string, provider string, nodes int, esVersion string, volumeSize int) string {
+	esBody := "\"elasticsearch\": {\n    \"nodes\": " + strconv.Itoa(nodes) + ",\n    \"version\": \"" + esVersion + "\",\n    \"volume_size\": " + strconv.Itoa(volumeSize) + "\n  }"
+	clusterBody := "\"cluster\": {\n    \"name\": \"" + name + "\",\n    \"location\": \"" + location + "\",\n    \"vm_size\": \"" + vmSize + "\",\n    \"ssh_public_key\": \"" + ssh + "\",\n    \"pricing_plan\": \"" + plan + "\",\n    \"provider\": \"" + provider + "\"\n  }"
+	return "{\n  " + esBody + ",\n  " + clusterBody + "\n}"
 }
 
 var additionalChoices = []*survey.Question{
@@ -61,7 +63,9 @@ var additionalChoices = []*survey.Question{
 	},
 }
 
-func buildRequestBody() string {
+// BuildRequestBodyInteractive asks the user questions based on which it constructs the
+// request body string to deploy the cluster.
+func BuildRequestBodyInteractive() string {
 	answers := make(map[string]interface{})
 
 	err := survey.Ask(additionalChoices, &answers)
@@ -86,12 +90,10 @@ func buildRequestBody() string {
 	return respBodyString[:idx] + respBodyString[idx+1:] + "}"
 }
 
-// RunClusterCreateInteractive creates a cluster in interactive mode by asking the user
+// DeployCluster creates a cluster in interactive mode by asking the user
 // for the deployment details.
-func RunClusterCreateInteractive() error {
-	str := buildRequestBody()
-	payload := strings.NewReader(str)
-	fmt.Println(str)
+func DeployCluster(body string) error {
+	payload := strings.NewReader(body)
 	spinner.Start()
 	defer spinner.Stop()
 

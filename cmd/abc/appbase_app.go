@@ -72,7 +72,15 @@ func runCreate(args []string) error {
 	category := flagset.String("category", "generic", "category for app")
 
 	isCluster := flagset.BoolP("cluster", "c", false, "cluster mode")
-	interactiveMode := flagset.BoolP("interactive", "i", true, "interactive mode for cluster creation")
+	interactiveMode := flagset.BoolP("interactive", "i", false, "interactive mode for cluster creation")
+	location := flagset.String("loc", "", "location of the cluster")
+	vmSize := flagset.String("vmsize", "", "size of the VMs")
+	pricingPlan := flagset.String("plan", "", "pricing plan")
+	sshPublicKey := flagset.String("ssh", "", "SSH public key")
+	provider := flagset.String("provider", "", "Accepted values are azure or gke")
+	nodes := flagset.Int("nodes", 1, "number of ES nodes")
+	esVersion := flagset.String("version", "", "A valid ES version")
+	volumeSize := flagset.Int("volume", 1, "volume size. Valid values are from 1-500")
 
 	if err := flagset.Parse(args); err != nil {
 		return err
@@ -82,9 +90,11 @@ func runCreate(args []string) error {
 	if len(args) == 1 {
 		if *isCluster {
 			if *interactiveMode {
-				cluster.RunClusterCreateInteractive()
+				requestBody := cluster.BuildRequestBodyInteractive()
+				cluster.DeployCluster(requestBody)
 			} else {
-				cluster.RunClusterCreate(args[0])
+				requestBody := cluster.BuildRequestBody(args[0], *location, *vmSize, *pricingPlan, *sshPublicKey, *provider, *nodes, *esVersion, *volumeSize)
+				cluster.DeployCluster(requestBody)
 			}
 		} else if *isEs6 {
 			return app.RunAppCreate(args[0], "6", *category)
