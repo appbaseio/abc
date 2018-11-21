@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/appbaseio/abc/appbase/app"
 	"github.com/appbaseio/abc/appbase/common"
 )
@@ -32,8 +33,10 @@ func runApps(args []string) error {
 // runApp runs `app` command
 func runApp(args []string) error {
 	flagset := baseFlagSet("app")
-	basicUsage := "abc app [-c|--creds] [-m|--metrics] [--data-view] [ID|Appname]"
+	basicUsage := "abc app [-c|--creds] [-m|--metrics] [--data-view] [-a| --analytics] [ID|Appname]"
 	flagset.Usage = usageFor(flagset, basicUsage)
+	analytics := flagset.BoolP("analytics", "a", false, "show app analytics")
+	analyticsEndpoint := flagset.String("endpoint", "overview", "the analytics endpoint to be queried")
 	creds := flagset.BoolP("creds", "c", false, "show app credentials")
 	metrics := flagset.BoolP("metrics", "m", false, "show app metrics")
 	dataView := flagset.Bool("data-view", false, "open app data view using Dejavu")
@@ -48,6 +51,8 @@ func runApp(args []string) error {
 			return app.OpenAppDataView(args[0])
 		} else if *queryView {
 			return app.OpenAppQueryView(args[0])
+		} else if *analytics {
+			return app.ShowAppAnalytics(args[0], *analyticsEndpoint)
 		}
 		return app.ShowAppDetails(args[0], *creds, *metrics)
 	}
