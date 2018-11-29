@@ -113,7 +113,7 @@ func runCreate(args []string) error {
 // runDelete runs `delete` command
 func runDelete(args []string) error {
 	flagset := baseFlagSet("delete")
-	basicUsage := "abc delete [AppID|AppName|ClusterID] [--cluster=ClusterName]"
+	basicUsage := "abc delete [--cluster] [AppID|AppName|ClusterID]"
 	flagset.Usage = usageFor(flagset, basicUsage)
 	getCluster := flagset.Bool("cluster", false, "for deleting clusters instead of apps")
 	if err := flagset.Parse(args); err != nil {
