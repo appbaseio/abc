@@ -17,6 +17,8 @@
 /test*.csv
 /test*.env
 /test*.json
+*.json
+*.csv 
 
 # es log
 /elastic.log
