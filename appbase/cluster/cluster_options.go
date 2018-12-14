@@ -57,6 +57,7 @@ var clusterOptions = []*survey.Question{
 				"Standard_B2s",
 				"Standard_B2ms",
 				"Standard_B4ms",
+				"custom-2-4096",
 				"g1-small",
 				"n1-standard-1",
 				"n1-standard-2",
@@ -75,7 +76,7 @@ var clusterOptions = []*survey.Question{
 		Name: "pricing_plan",
 		Prompt: &survey.Select{
 			Message: "Enter the pricing plan",
-			Options: []string{"Growth", "Sandbox", "Hobby", "Production1", "Production2", "Production3"},
+			Options: []string{"Sandbox", "Hobby", "Production-I", "Production-II", "Production-III"},
 		},
 		Validate: survey.Required,
 	},
@@ -114,9 +115,9 @@ func buildClusterObjectString() string {
 var esOptions = []*survey.Question{
 	{
 		Name: "nodes",
-		Prompt: &survey.Input{
-			Message: "Enter the number of ES nodes",
-			Help:    "Must be an odd number. 1 <= nodes <= 9",
+		Prompt: &survey.Select{
+			Message: "Enter the number of nodes",
+			Options: []string{"1", "2", "3"},
 		},
 		Validate: survey.Required,
 	},
@@ -129,8 +130,11 @@ var esOptions = []*survey.Question{
 		Validate: survey.Required,
 	},
 	{
-		Name:     "volume_size",
-		Prompt:   &survey.Input{Message: "Enter the volume size"},
+		Name: "volume_size",
+		Prompt: &survey.Select{
+			Message: "Enter the volume size",
+			Options: []string{"30", "40", "80", "160"},
+		},
 		Validate: survey.Required,
 	},
 	{
@@ -291,7 +295,7 @@ var addonsOptions = []*survey.Question{
 		Prompt: &survey.Select{
 			Message: "Choose an addon from the following list:",
 			Help:    "In case of multiple addons be sure not to select the same addon more than once to prevent redundancy in the JSON object.",
-			Options: []string{"dejavu", "elasticsearch-hq", "mirage"},
+			Options: []string{"dejavu", "elasticsearch-hq", "mirage", "arc"},
 		},
 		Validate: survey.Required,
 	},

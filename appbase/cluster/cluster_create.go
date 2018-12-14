@@ -109,7 +109,6 @@ func DeployCluster(body string) error {
 	}
 	spinner.Stop()
 
-	// status code not 200
 	if resp.StatusCode != 202 {
 		defer resp.Body.Close()
 		bodyBytes, _ := ioutil.ReadAll(resp.Body)
