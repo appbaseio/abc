@@ -8,6 +8,21 @@ import (
 	"gopkg.in/AlecAivazis/survey.v1"
 )
 
+func checkError(err error) {
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+}
+
+func stringBuilder(str string, answers map[string]interface{}) string {
+	for key, value := range answers {
+		if value != "" {
+			str = str + "\"" + key + "\": " + "\"" + value.(string) + "\"," + "\n    "
+		}
+	}
+	return str
+}
+
 var clusterOptions = []*survey.Question{
 	{
 		Name:     "name",
@@ -15,10 +30,34 @@ var clusterOptions = []*survey.Question{
 		Validate: survey.Required,
 	},
 	{
+		Name: "provider",
+		Prompt: &survey.Select{
+			Message: "Choose the provider:",
+			Options: []string{"azure", "gke"},
+		},
+		Validate: survey.Required,
+	},
+	{
+		Name:     "ssh_public_key",
+		Prompt:   &survey.Input{Message: "Enter the ssh public key of the cluster"},
+		Validate: survey.Required,
+	},
+	{
+		Name: "pricing_plan",
+		Prompt: &survey.Select{
+			Message: "Enter the pricing plan",
+			Options: []string{"sandbox", "hobby", "production-1", "production-2", "production-3"},
+		},
+		Validate: survey.Required,
+	},
+}
+
+var azureOptions = []*survey.Question{
+	{
 		Name: "location",
 		Prompt: &survey.Select{
-			Message: "Enter the location of the cluster",
-			Help:    "The first 13 options are for azure clusters and the rest for gke",
+			Message: "Enter cluster location (provider: azure)",
+			Help:    "Omit if the provider is not",
 			Options: []string{
 				"eastus",
 				"westeurope",
@@ -33,6 +72,30 @@ var clusterOptions = []*survey.Question{
 				"uksouth",
 				"westus2",
 				"westus",
+			},
+		},
+	},
+	{
+		Name: "vm_size",
+		Prompt: &survey.Select{
+			Message: "Enter the VM size of the cluster",
+			Options: []string{
+				"Standard_B2s",
+				"Standard_B2ms",
+				"Standard_B4ms",
+			},
+		},
+		Validate: survey.Required,
+	},
+}
+
+var gkeOptions = []*survey.Question{
+	{
+		Name: "location",
+		Prompt: &survey.Select{
+			Message: "Enter cluster location (provider: gke)",
+			Help:    "Omit if the provider is not gke",
+			Options: []string{
 				"us-east1-b",
 				"europe-west1-b",
 				"us-central1-b",
@@ -52,11 +115,7 @@ var clusterOptions = []*survey.Question{
 		Name: "vm_size",
 		Prompt: &survey.Select{
 			Message: "Enter the VM size of the cluster",
-			Help:    "The first three options are for azure clusters and the rest for gke",
 			Options: []string{
-				"Standard_B2s",
-				"Standard_B2ms",
-				"Standard_B4ms",
 				"custom-2-4096",
 				"g1-small",
 				"n1-standard-1",
@@ -67,73 +126,43 @@ var clusterOptions = []*survey.Question{
 		},
 		Validate: survey.Required,
 	},
-	{
-		Name:     "ssh_public_key",
-		Prompt:   &survey.Input{Message: "Enter the ssh public key of the cluster"},
-		Validate: survey.Required,
-	},
-	{
-		Name: "pricing_plan",
-		Prompt: &survey.Select{
-			Message: "Enter the pricing plan",
-			Options: []string{"Sandbox", "Hobby", "Production-I", "Production-II", "Production-III"},
-		},
-		Validate: survey.Required,
-	},
-	{
-		Name: "provider",
-		Prompt: &survey.Select{
-			Message: "Choose the provider:",
-			Options: []string{"azure", "gke"},
-		},
-		Validate: survey.Required,
-	},
 }
 
-func buildClusterObjectString() string {
+func buildClusterObjectString() (string, string) {
 	fmt.Println("Enter the cluster details")
 
 	answers := make(map[string]interface{})
 
 	err := survey.Ask(clusterOptions, &answers)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
+	checkError(err)
 
 	clusterObject := "\"cluster\": {\n    "
-	for key, value := range answers {
-		if value != "" {
-			clusterObject = clusterObject + "\"" + key + "\": " + "\"" + value.(string) + "\"," + "\n    "
-		}
+	clusterObject = stringBuilder(clusterObject, answers)
+
+	providerSpecificAnswers := make(map[string]interface{})
+
+	if answers["provider"] == "gke" {
+		err := survey.Ask(gkeOptions, &providerSpecificAnswers)
+		checkError(err)
+	} else {
+		err := survey.Ask(azureOptions, &providerSpecificAnswers)
+		checkError(err)
 	}
+
+	clusterObject = stringBuilder(clusterObject, providerSpecificAnswers)
+
 	idx := strings.LastIndex(clusterObject, ",")
 	clusterObject = clusterObject[:idx] + clusterObject[idx+1:] + "},\n"
-	return clusterObject
+	return clusterObject, answers["pricing_plan"].(string)
 
 }
 
 var esOptions = []*survey.Question{
 	{
-		Name: "nodes",
-		Prompt: &survey.Select{
-			Message: "Enter the number of nodes",
-			Options: []string{"1", "2", "3"},
-		},
-		Validate: survey.Required,
-	},
-	{
 		Name: "version",
 		Prompt: &survey.Input{
 			Message: "Enter ES version",
 			Help:    "Must be a valid Elasticsearch version in the format x.y.z",
-		},
-		Validate: survey.Required,
-	},
-	{
-		Name: "volume_size",
-		Prompt: &survey.Select{
-			Message: "Enter the volume size",
-			Options: []string{"30", "40", "80", "160"},
 		},
 		Validate: survey.Required,
 	},
@@ -178,7 +207,7 @@ var esOptions = []*survey.Question{
 }
 
 // GetESDetails ....
-func buildESObjectString() string {
+func buildESObjectString(plan string) string {
 	fmt.Println("Enter the ES details")
 	answers := make(map[string]interface{})
 
@@ -193,9 +222,7 @@ func buildESObjectString() string {
 Next:
 	for key, value := range answers {
 		if value != "" {
-			if key == "nodes" || key == "volume_size" {
-				// Skipping integers from adding escaped quotes
-			} else if key == "backup" {
+			if key == "backup" {
 				value = strconv.FormatBool(value.(bool))
 			} else if key == "plugins" {
 				tempStr := ""
@@ -207,9 +234,21 @@ Next:
 				esObject = esObject + "\"" + key + "\": " + "\"" + value.(string) + "\"," + "\n    "
 				continue Next
 			}
-			esObject = esObject + "\"" + key + "\": " + value.(string) + ",\n    "
 		}
 	}
+
+	planMap := map[string][]string{
+		"sandbox":      []string{"1", "30"},
+		"hobby":        []string{"2", "30"},
+		"production-1": []string{"3", "40"},
+		"production-2": []string{"3", "80"},
+		"production-3": []string{"3", "160"},
+	}
+
+	// TODO: find a better way for this and replace the hardcoded strings
+	nodeAndSize := planMap[plan]
+	esObject = esObject + "\"" + "nodes" + "\": " + nodeAndSize[0] + ",\n    "
+	esObject = esObject + "\"" + "volume_size" + "\": " + nodeAndSize[1] + ",\n    "
 
 	idx := strings.LastIndex(esObject, ",")
 	esObject = esObject[:idx] + esObject[idx+1:] + "},\n"

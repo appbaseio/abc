@@ -3,7 +3,6 @@ package cluster
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
@@ -32,6 +31,15 @@ type cluster struct {
 type createClusterRespBody struct {
 	Status  status  `json:"status"`
 	Cluster cluster `json:"cluster"`
+}
+
+func decodeResp(resp *http.Response, res *createClusterRespBody) error {
+	dec := json.NewDecoder(resp.Body)
+	err := dec.Decode(&res)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // BuildRequestBody creates a request body to for cluster deployment based on input from flags
@@ -73,7 +81,8 @@ func BuildRequestBodyInteractive() string {
 		fmt.Println(err.Error())
 	}
 
-	respBodyString := "{\n  " + buildESObjectString() + "  " + buildClusterObjectString()
+	clustersString, plan := buildClusterObjectString()
+	respBodyString := "{\n  " + buildESObjectString(plan) + "  " + clustersString
 
 	if answers["logstash"] == true {
 		respBodyString = respBodyString + buildLogstashObjectString()
@@ -111,13 +120,13 @@ func DeployCluster(body string) error {
 
 	if resp.StatusCode != 202 {
 		defer resp.Body.Close()
-		bodyBytes, _ := ioutil.ReadAll(resp.Body)
-		return fmt.Errorf("There was an error %s", string(bodyBytes))
+		var res createClusterRespBody
+		_ = decodeResp(resp, &res)
+		return fmt.Errorf("There was an error %s", res.Status.Message)
 	}
 
 	var res createClusterRespBody
-	dec := json.NewDecoder(resp.Body)
-	err = dec.Decode(&res)
+	err = decodeResp(resp, &res)
 	if err != nil {
 		return err
 	}

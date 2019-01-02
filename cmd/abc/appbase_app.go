@@ -92,10 +92,16 @@ func runCreate(args []string) error {
 		if *isCluster {
 			if *interactiveMode {
 				requestBody := cluster.BuildRequestBodyInteractive()
-				cluster.DeployCluster(requestBody)
+				err := cluster.DeployCluster(requestBody)
+				if err != nil {
+					return err
+				}
 			} else {
 				requestBody := cluster.BuildRequestBody(args[0], *location, *vmSize, *pricingPlan, *sshPublicKey, *provider, *nodes, *esVersion, *volumeSize)
-				cluster.DeployCluster(requestBody)
+				err := cluster.DeployCluster(requestBody)
+				if err != nil {
+					return err
+				}
 			}
 		} else if *isEs6 {
 			return app.RunAppCreate(args[0], "6", *category)
