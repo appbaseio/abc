@@ -117,8 +117,6 @@ var gkeOptions = []*survey.Question{
 			Message: "Enter the VM size of the cluster",
 			Options: []string{
 				"custom-2-4096",
-				"g1-small",
-				"n1-standard-1",
 				"n1-standard-2",
 				"n1-standard-4",
 				"n1-standard-8",
