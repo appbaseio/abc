@@ -75,18 +75,14 @@ var azureOptions = []*survey.Question{
 			},
 		},
 	},
-	{
-		Name: "vm_size",
-		Prompt: &survey.Select{
-			Message: "Enter the VM size of the cluster",
-			Options: []string{
-				"Standard_B2s",
-				"Standard_B2ms",
-				"Standard_B4ms",
-			},
-		},
-		Validate: survey.Required,
-	},
+}
+
+var AWSBinding = map[string]interface{}{
+	"sandbox":      "Standard_B2s",
+	"hobby":        "Standard_B2s",
+	"production-1": "Standard_B2s",
+	"production-2": "Standard_B2ms",
+	"production-3": "Standard_B4ms",
 }
 
 var gkeOptions = []*survey.Question{
@@ -111,19 +107,14 @@ var gkeOptions = []*survey.Question{
 		},
 		Validate: survey.Required,
 	},
-	{
-		Name: "vm_size",
-		Prompt: &survey.Select{
-			Message: "Enter the VM size of the cluster",
-			Options: []string{
-				"custom-2-4096",
-				"n1-standard-2",
-				"n1-standard-4",
-				"n1-standard-8",
-			},
-		},
-		Validate: survey.Required,
-	},
+}
+
+var GKEBinding = map[string]interface{}{
+	"sandbox":      "custom-2-4096",
+	"hobby":        "custom-2-4096",
+	"production-1": "custom-2-4096",
+	"production-2": "n1-standard-2",
+	"production-3": "n1-standard-4",
 }
 
 func buildClusterObjectString() (string, string) {
@@ -134,6 +125,8 @@ func buildClusterObjectString() (string, string) {
 	err := survey.Ask(clusterOptions, &answers)
 	checkError(err)
 
+	plan := answers["pricing_plan"].(string)
+
 	clusterObject := "\"cluster\": {\n    "
 	clusterObject = stringBuilder(clusterObject, answers)
 
@@ -142,16 +135,18 @@ func buildClusterObjectString() (string, string) {
 	if answers["provider"] == "gke" {
 		err := survey.Ask(gkeOptions, &providerSpecificAnswers)
 		checkError(err)
+		providerSpecificAnswers["vm_size"] = GKEBinding[plan]
 	} else {
 		err := survey.Ask(azureOptions, &providerSpecificAnswers)
 		checkError(err)
+		providerSpecificAnswers["vm_size"] = AWSBinding[plan]
 	}
 
 	clusterObject = stringBuilder(clusterObject, providerSpecificAnswers)
 
 	idx := strings.LastIndex(clusterObject, ",")
 	clusterObject = clusterObject[:idx] + clusterObject[idx+1:] + "},\n"
-	return clusterObject, answers["pricing_plan"].(string)
+	return clusterObject, plan
 
 }
 
