@@ -43,4 +43,4 @@ This will fire up the interactive mode in which the user will have to answer que
 
 In this case all the options that are mandatory for the cluster to be deployed are to be provided through command line flags
 
-`abc create --cluster --loc"east-us-1" --vm-size="n1-standard-1" --plan="Growth" --ssh=<your-ssh-key> --provider="gke" --nodes=3 --volume=15 --version="5.6.9" ClusterName`
+`abc create --cluster --loc="east-us-1" --vm-size="n1-standard-1" --plan="production-1" --ssh=<your-ssh-key> --provider="gke" --nodes=3 --volume=15 --version="5.6.9" ClusterName`
