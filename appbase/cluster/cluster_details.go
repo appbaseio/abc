@@ -84,8 +84,8 @@ func ShowClusterDetails(cluster string) error {
 	}
 
 	if res.Status.Code != 200 {
-		fmt.Println(res.Status.Code)
-		return errors.New("Could not fetch cluster details")
+		errMessage := fmt.Sprintf("Could not fetch cluster details: [error: %s %d]", res.Status.Message, res.Status.Code)
+		return errors.New(errMessage)
 	}
 
 	fmt.Println("Cluster Details")
