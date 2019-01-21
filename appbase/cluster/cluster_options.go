@@ -345,10 +345,6 @@ var addonsOptions = []*survey.Question{
 		Name:   "env",
 		Prompt: &survey.Input{Message: "Enter env"},
 	},
-	{
-		Name:   "path",
-		Prompt: &survey.Input{Message: "Enter path"},
-	},
 }
 
 func buildAddonsObjectString(number int) string {
