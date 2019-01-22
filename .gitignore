@@ -3,6 +3,7 @@
 /transform*js
 .vscode
 *.rdb
+*.db
 .idea
 
 # private
