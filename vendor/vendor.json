@@ -177,6 +177,13 @@
 			"revisionTime": "2018-07-17T20:18:09Z"
 		},
 		{
+			"checksumSHA1": "QQWp3HhkCX0wNLVHo1r6pu1UbhA=",
+			"path": "github.com/AlecAivazis/survey",
+			"revision": "0be4439d90f533f1ea2e0adddd5b1a405e6f5559",
+			"revisionTime": "2018-10-25T01:51:22Z",
+			"tree": true
+		},
+		{
 			"checksumSHA1": "yx1uy2qmhz2ZmoUKn5BUa9rL0JI=",
 			"path": "github.com/Shopify/sarama",
 			"revision": "0f4f8caef994ca7e4f9072c1858b7c6761ed498f",
@@ -1064,6 +1071,13 @@
 			"path": "google.golang.org/grpc/testdata",
 			"revision": "445634bdcc9393d2681e504aafd3efc9b28c4bf2",
 			"revisionTime": "2018-07-20T00:33:42Z"
+		},
+		{
+			"checksumSHA1": "pE6rZEQrvd9u62BGjSI4N2UqNUk=",
+			"path": "gopkg.in/AlecAivazis/survey.v1",
+			"revision": "0be4439d90f533f1ea2e0adddd5b1a405e6f5559",
+			"revisionTime": "2018-10-25T01:51:22Z",
+			"tree": true
 		},
 		{
 			"checksumSHA1": "sISoioAbkoScV9ggjFM3fitfiiI=",
