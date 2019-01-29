@@ -461,6 +461,13 @@
 			"revisionTime": "2017-11-10T01:03:15Z"
 		},
 		{
+			"checksumSHA1": "oQTgbR0vU6WPfFvoleO07tSIlyo=",
+			"path": "github.com/mailru/easyjson",
+			"revision": "8b799c424f57fa123fc63a99d6383bc6e4c02578",
+			"revisionTime": "2018-03-23T15:44:45Z",
+			"tree": true
+		},
+		{
 			"checksumSHA1": "89I9MhxW2SaTiVDFGOyTbok5p+g=",
 			"path": "github.com/mattn/go-colorable",
 			"revision": "6fcc0c1fd9b620311d821b106a400b35dc95c497",
@@ -477,6 +484,13 @@
 			"path": "github.com/ogier/pflag",
 			"revision": "45c278ab3607870051a2ea9040bb85fcb8557481",
 			"revisionTime": "2016-01-29T22:01:14Z"
+		},
+		{
+			"checksumSHA1": "bIhEFLSLVY+sm+45vSSB2k/4WC0=",
+			"path": "github.com/olivere/elastic",
+			"revision": "6aa9e8e8e7ac38cd04d07d2f5024cb11d540aa02",
+			"revisionTime": "2018-03-30T12:21:22Z",
+			"tree": true
 		},
 		{
 			"checksumSHA1": "bnWJ5VK7fHAcqpLqY09k0nX8QNs=",
@@ -1080,10 +1094,11 @@
 			"tree": true
 		},
 		{
-			"checksumSHA1": "sISoioAbkoScV9ggjFM3fitfiiI=",
+			"checksumSHA1": "cHGjkaNDM8sfQxOGJ/zcYFa65Ew=",
 			"path": "gopkg.in/olivere/elastic.v6",
-			"revision": "425e5369a8f054f4f447f7c8ee1bf605f48425ab",
-			"revisionTime": "2018-10-11T18:14:04Z"
+			"revision": "d6362604399c7af560b54f048b4fcfbdd6eff293",
+			"revisionTime": "2018-03-30T11:55:32Z",
+			"tree": true
 		}
 	],
 	"rootPath": "github.com/appbaseio/abc"
