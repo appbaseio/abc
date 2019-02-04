@@ -177,13 +177,6 @@
 			"revisionTime": "2018-07-17T20:18:09Z"
 		},
 		{
-			"checksumSHA1": "QQWp3HhkCX0wNLVHo1r6pu1UbhA=",
-			"path": "github.com/AlecAivazis/survey",
-			"revision": "0be4439d90f533f1ea2e0adddd5b1a405e6f5559",
-			"revisionTime": "2018-10-25T01:51:22Z",
-			"tree": true
-		},
-		{
 			"checksumSHA1": "yx1uy2qmhz2ZmoUKn5BUa9rL0JI=",
 			"path": "github.com/Shopify/sarama",
 			"revision": "0f4f8caef994ca7e4f9072c1858b7c6761ed498f",
@@ -461,13 +454,6 @@
 			"revisionTime": "2017-11-10T01:03:15Z"
 		},
 		{
-			"checksumSHA1": "oQTgbR0vU6WPfFvoleO07tSIlyo=",
-			"path": "github.com/mailru/easyjson",
-			"revision": "8b799c424f57fa123fc63a99d6383bc6e4c02578",
-			"revisionTime": "2018-03-23T15:44:45Z",
-			"tree": true
-		},
-		{
 			"checksumSHA1": "89I9MhxW2SaTiVDFGOyTbok5p+g=",
 			"path": "github.com/mattn/go-colorable",
 			"revision": "6fcc0c1fd9b620311d821b106a400b35dc95c497",
@@ -480,17 +466,16 @@
 			"revisionTime": "2017-11-07T05:05:31Z"
 		},
 		{
+			"checksumSHA1": "RYKZaEgXj3NedzLmd96Hd+xQRdg=",
+			"path": "github.com/mattn/go-sqlite3",
+			"revision": "3fa1c550ffa69b74dc4bfd5109b4e218f32c87cf",
+			"revisionTime": "2019-01-04T16:17:12Z"
+		},
+		{
 			"checksumSHA1": "srxWPDlzsC2TlKJnQsCMSGx/RYg=",
 			"path": "github.com/ogier/pflag",
 			"revision": "45c278ab3607870051a2ea9040bb85fcb8557481",
 			"revisionTime": "2016-01-29T22:01:14Z"
-		},
-		{
-			"checksumSHA1": "bIhEFLSLVY+sm+45vSSB2k/4WC0=",
-			"path": "github.com/olivere/elastic",
-			"revision": "6aa9e8e8e7ac38cd04d07d2f5024cb11d540aa02",
-			"revisionTime": "2018-03-30T12:21:22Z",
-			"tree": true
 		},
 		{
 			"checksumSHA1": "bnWJ5VK7fHAcqpLqY09k0nX8QNs=",
@@ -1087,18 +1072,10 @@
 			"revisionTime": "2018-07-20T00:33:42Z"
 		},
 		{
-			"checksumSHA1": "pE6rZEQrvd9u62BGjSI4N2UqNUk=",
-			"path": "gopkg.in/AlecAivazis/survey.v1",
-			"revision": "0be4439d90f533f1ea2e0adddd5b1a405e6f5559",
-			"revisionTime": "2018-10-25T01:51:22Z",
-			"tree": true
-		},
-		{
-			"checksumSHA1": "cHGjkaNDM8sfQxOGJ/zcYFa65Ew=",
+			"checksumSHA1": "sISoioAbkoScV9ggjFM3fitfiiI=",
 			"path": "gopkg.in/olivere/elastic.v6",
-			"revision": "d6362604399c7af560b54f048b4fcfbdd6eff293",
-			"revisionTime": "2018-03-30T11:55:32Z",
-			"tree": true
+			"revision": "425e5369a8f054f4f447f7c8ee1bf605f48425ab",
+			"revisionTime": "2018-10-11T18:14:04Z"
 		}
 	],
 	"rootPath": "github.com/appbaseio/abc"
