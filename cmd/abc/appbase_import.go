@@ -149,7 +149,7 @@ func execBuilder(file string, isTest bool) error {
 
 // writeConfigFile writes config information in a pipeline file
 func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]interface{}) (string, error) {
-	fname := "pipeline_" + strconv.FormatInt(time.Now().Unix(), 10) + ".js"
+	fname := "pipeline_" + strconv.FormatInt(time.Now().UnixNano(), 10) + ".js"
 
 	if _, err := os.Stat(fname); err == nil {
 		log.Errorf("File %s exists, will be overwritten", fname)
