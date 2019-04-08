@@ -2,12 +2,15 @@ package login
 
 import (
 	"fmt"
+	"net/http"
+	"os"
+	"strings"
+
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
 	"github.com/appbaseio/abc/appbase/spinner"
 	"github.com/appbaseio/abc/appbase/user"
 	"github.com/appbaseio/abc/log"
-	"os"
 )
 
 // IsUserAuthenticated checks if user is logged in or not
@@ -55,6 +58,37 @@ func StartUserLogin(host string) error {
 		log.Errorln(err)
 		fmt.Println("\nFailed to get user info. Please try again.")
 	}
+	spinner.Stop()
+	return err
+}
+
+// StartUserLoginBasicAuth starts user login process
+func StartUserLoginBasicAuth(creds string) error {
+	req, err := http.NewRequest("GET", common.AccAPIURL, nil)
+	if err != nil {
+		fmt.Println("Failed to initialize request")
+	}
+
+	credSlice := strings.Split(creds, ":")
+	req.SetBasicAuth(credSlice[0], credSlice[1])
+
+	spinner.Start()
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		fmt.Println("Failed to perform request")
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		return fmt.Errorf("Bad request returned %d, wasn't able to login user", resp.StatusCode)
+	}
+
+	err = user.ShowUserEmail()
+	if err != nil {
+		log.Errorln(err)
+		fmt.Println("\nFailed to get user info. Please try again.")
+	}
+
 	spinner.Stop()
 	return err
 }
