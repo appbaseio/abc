@@ -42,7 +42,7 @@ In the examples below, the destination URI has been provided as:
 "https://USER:PASS@scalr.api.appbase.io/APPNAME"
 ```
 
-Instead of that, you could also use your admin API key.
+Instead of using your user-name and password, you could also use your admin API key.
 
 ```
 "https://admin-API-key@scalr.api.appbase.io/APPNAME"
