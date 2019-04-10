@@ -9,4 +9,12 @@
 
 
 ## Example
-`abc import --src_type=redis --src_uri="redis://localhost:6379/0" appbase-redis-demo`
+`abc import --src_type=redis --src_uri="redis://localhost:6379/0" https://USERID:PASS@scalr.api.appbase.io/APPNAME`
+
+For the destination URI, instead of using your user-id and password, you could also use your admin API key.
+
+```
+https://admin-API-key@scalr.api.appbase.io/APPNAME
+```
+
+You can find your admin API key inside your app page at appbase.io under Security -> API Credentials.
