@@ -39,13 +39,13 @@ Note that you only need to set the parameters that are required for the source d
 In the examples below, the destination URI has been provided as:
 
 ```
-"https://USER:PASS@scalr.api.appbase.io/APPNAME"
+https://USERID:PASS@scalr.api.appbase.io/APPNAME
 ```
 
-Instead of using your user-name and password, you could also use your admin API key.
+Instead of using your user-id and password, you could also use your admin API key.
 
 ```
-"https://admin-API-key@scalr.api.appbase.io/APPNAME"
+https://admin-API-key@scalr.api.appbase.io/APPNAME
 ```
 
 You can find your admin API key inside your app page at appbase.io under Security -> API Credentials.
