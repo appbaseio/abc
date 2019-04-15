@@ -66,6 +66,8 @@ func runImport(args []string) error {
 
 	transformFile := flagset.String("transform_file", "", "transform file to use")
 
+	verify := flagset.Bool("verify", false, "verify the source and destination connections")
+
 	// use external config
 	config := flagset.String("config", "", "Path to external config file, if specified, only that is used")
 
@@ -73,6 +75,10 @@ func runImport(args []string) error {
 	// parse args
 	if err := flagset.Parse(args); err != nil {
 		return err
+	}
+
+	if *verify {
+		return verifyConnections(*srcType, *srcURL, *ssl)
 	}
 
 	// use the config file
