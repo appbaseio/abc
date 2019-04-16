@@ -81,13 +81,14 @@ func runImport(args []string) error {
 	if *config != "" {
 		file, configuredAdaptors, err := genPipelineFromEnv(*config)
 
+		if err != nil {
+			return err
+		}
+
 		if *verify {
 			return verifyConnections(configuredAdaptors)
 		}
 
-		if err != nil {
-			return err
-		}
 		return execBuilder(file, *test)
 	}
 
