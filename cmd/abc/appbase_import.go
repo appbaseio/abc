@@ -31,7 +31,7 @@ var srcParamMap = map[string]string{
 	"sac_path":         "sacPath",
 	// "timeout":          "timeout",
 	"transform_file": "_transform_",
-	"log_dir":        "xlog_dir",
+	"log_dir":        "log_dir",
 }
 
 var destParamMap = map[string]string{
@@ -107,7 +107,7 @@ func runImport(args []string) error {
 		"sacPath":          *sacPath,
 		"ssl":              *ssl,
 		"_transform_":      *transformFile,
-		"xlog_dir":         *logDir,
+		"log_dir":          *logDir,
 	}
 
 	var destConfig = map[string]interface{}{
@@ -224,9 +224,9 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 	} else {
 		// no transform file
 
-		// set Config({xlog_dir})
-		if srcConfig["xlog_dir"] != "" {
-			confStr := fmt.Sprintf(`t.Config({"xlog_dir":"%s"}).Source("source", source, "/%s/").Save("sink", sink, "/.*/")`, srcConfig["xlog_dir"], srcConfig["srcRegex"])
+		// set Config({log_dir})
+		if srcConfig["log_dir"] != "" {
+			confStr := fmt.Sprintf(`t.Config({"log_dir":"%s"}).Source("source", source, "/%s/").Save("sink", sink, "/.*/")`, srcConfig["log_dir"], srcConfig["srcRegex"])
 
 			fmt.Println(confStr)
 
