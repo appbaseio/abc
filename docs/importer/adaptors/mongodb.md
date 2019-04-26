@@ -31,3 +31,5 @@ Also, you can see the provider docs for how to get `oplog` access.
 
 Read this excellent [blog post](http://www.sohamkamani.com/blog/2016/06/30/docker-mongo-replica-set/) for how to setup oplog access on your own cluster.
 In case you are using mlab which is a very popular mongo provider, see the [oplog doc for mlab](http://docs.mlab.com/oplog/).
+
+To enable resume tailing, use the `--log_dir` argument with `abc import`. Give it a path to store logs, which would help resume tailing.
