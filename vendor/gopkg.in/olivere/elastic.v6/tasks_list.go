@@ -7,6 +7,7 @@ package elastic
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"net/url"
 	"strings"
 
@@ -24,11 +25,12 @@ type TasksListService struct {
 	taskId            []string
 	actions           []string
 	detailed          *bool
+	human             *bool
 	nodeId            []string
-	parentNode        string
-	parentTaskId      *string
+	parentTaskId      string
 	waitForCompletion *bool
 	groupBy           string
+	headers           http.Header
 }
 
 // NewTasksListService creates a new TasksListService.
@@ -39,6 +41,8 @@ func NewTasksListService(client *Client) *TasksListService {
 }
 
 // TaskId indicates to returns the task(s) with specified id(s).
+// Notice that the caller is responsible for using the correct format,
+// i.e. node_id:task_number, as specified in the REST API.
 func (s *TasksListService) TaskId(taskId ...string) *TasksListService {
 	s.taskId = append(s.taskId, taskId...)
 	return s
@@ -56,6 +60,12 @@ func (s *TasksListService) Detailed(detailed bool) *TasksListService {
 	return s
 }
 
+// Human indicates whether to return time and byte values in human-readable format.
+func (s *TasksListService) Human(human bool) *TasksListService {
+	s.human = &human
+	return s
+}
+
 // NodeId is a list of node IDs or names to limit the returned information;
 // use `_local` to return information from the node you're connecting to,
 // leave empty to get information from all nodes.
@@ -64,15 +74,11 @@ func (s *TasksListService) NodeId(nodeId ...string) *TasksListService {
 	return s
 }
 
-// ParentNode returns tasks with specified parent node.
-func (s *TasksListService) ParentNode(parentNode string) *TasksListService {
-	s.parentNode = parentNode
-	return s
-}
-
-// ParentTaskId returns tasks with specified parent task id (node_id:task_number). Set to -1 to return all.
+// ParentTaskId returns tasks with specified parent task id.
+// Notice that the caller is responsible for using the correct format,
+// i.e. node_id:task_number, as specified in the REST API.
 func (s *TasksListService) ParentTaskId(parentTaskId string) *TasksListService {
-	s.parentTaskId = &parentTaskId
+	s.parentTaskId = parentTaskId
 	return s
 }
 
@@ -84,9 +90,18 @@ func (s *TasksListService) WaitForCompletion(waitForCompletion bool) *TasksListS
 }
 
 // GroupBy groups tasks by nodes or parent/child relationships.
-// As of now, it can either be "nodes" (default) or "parents".
+// As of now, it can either be "nodes" (default) or "parents" or "none".
 func (s *TasksListService) GroupBy(groupBy string) *TasksListService {
 	s.groupBy = groupBy
+	return s
+}
+
+// Header sets headers on the request
+func (s *TasksListService) Header(name string, value string) *TasksListService {
+	if s.headers == nil {
+		s.headers = http.Header{}
+	}
+	s.headers.Add(name, value)
 	return s
 }
 
@@ -123,14 +138,14 @@ func (s *TasksListService) buildURL() (string, url.Values, error) {
 	if s.detailed != nil {
 		params.Set("detailed", fmt.Sprintf("%v", *s.detailed))
 	}
+	if s.human != nil {
+		params.Set("human", fmt.Sprintf("%v", *s.human))
+	}
 	if len(s.nodeId) > 0 {
 		params.Set("node_id", strings.Join(s.nodeId, ","))
 	}
-	if s.parentNode != "" {
-		params.Set("parent_node", s.parentNode)
-	}
-	if s.parentTaskId != nil {
-		params.Set("parent_task_id", *s.parentTaskId)
+	if s.parentTaskId != "" {
+		params.Set("parent_task_id", s.parentTaskId)
 	}
 	if s.waitForCompletion != nil {
 		params.Set("wait_for_completion", fmt.Sprintf("%v", *s.waitForCompletion))
@@ -161,9 +176,10 @@ func (s *TasksListService) Do(ctx context.Context) (*TasksListResponse, error) {
 
 	// Get HTTP response
 	res, err := s.client.PerformRequest(ctx, PerformRequestOptions{
-		Method: "GET",
-		Path:   path,
-		Params: params,
+		Method:  "GET",
+		Path:    path,
+		Params:  params,
+		Headers: s.headers,
 	})
 	if err != nil {
 		return nil, err
@@ -174,11 +190,13 @@ func (s *TasksListService) Do(ctx context.Context) (*TasksListResponse, error) {
 	if err := s.client.decoder.Decode(res.Body, ret); err != nil {
 		return nil, err
 	}
+	ret.Header = res.Header
 	return ret, nil
 }
 
 // TasksListResponse is the response of TasksListService.Do.
 type TasksListResponse struct {
+	Header       http.Header             `json:"-"`
 	TaskFailures []*TaskOperationFailure `json:"task_failures"`
 	NodeFailures []*FailedNodeException  `json:"node_failures"`
 	// Nodes returns the tasks per node. The key is the node id.
@@ -210,18 +228,19 @@ type DiscoveryNode struct {
 
 // TaskInfo represents information about a currently running task.
 type TaskInfo struct {
-	Node               string      `json:"node"`
-	Id                 int64       `json:"id"` // the task id (yes, this is a long in the Java source)
-	Type               string      `json:"type"`
-	Action             string      `json:"action"`
-	Status             interface{} `json:"status"`      // has separate implementations of Task.Status in Java for reindexing, replication, and "RawTaskStatus"
-	Description        interface{} `json:"description"` // same as Status
-	StartTime          string      `json:"start_time"`
-	StartTimeInMillis  int64       `json:"start_time_in_millis"`
-	RunningTime        string      `json:"running_time"`
-	RunningTimeInNanos int64       `json:"running_time_in_nanos"`
-	Cancellable        bool        `json:"cancellable"`
-	ParentTaskId       string      `json:"parent_task_id"` // like "YxJnVYjwSBm_AUbzddTajQ:12356"
+	Node               string            `json:"node"`
+	Id                 int64             `json:"id"` // the task id (yes, this is a long in the Java source)
+	Type               string            `json:"type"`
+	Action             string            `json:"action"`
+	Status             interface{}       `json:"status"`      // has separate implementations of Task.Status in Java for reindexing, replication, and "RawTaskStatus"
+	Description        interface{}       `json:"description"` // same as Status
+	StartTime          string            `json:"start_time"`
+	StartTimeInMillis  int64             `json:"start_time_in_millis"`
+	RunningTime        string            `json:"running_time"`
+	RunningTimeInNanos int64             `json:"running_time_in_nanos"`
+	Cancellable        bool              `json:"cancellable"`
+	ParentTaskId       string            `json:"parent_task_id"` // like "YxJnVYjwSBm_AUbzddTajQ:12356"
+	Headers            map[string]string `json:"headers"`
 }
 
 // StartTaskResult is used in cases where a task gets started asynchronously and

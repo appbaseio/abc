@@ -592,6 +592,24 @@
 			"revisionTime": "2018-07-20T19:22:23Z"
 		},
 		{
+			"checksumSHA1": "7Ow6yUNulE8gvuAdJwzW4VIukXM=",
+			"path": "golang.org/x/crypto/acme",
+			"revision": "a29dc8fdc73485234dbef99ebedb95d2eced08de",
+			"revisionTime": "2019-04-26T14:07:02Z"
+		},
+		{
+			"checksumSHA1": "3Kg/2KXyFdx0oYHBcQJZBjg9HKw=",
+			"path": "golang.org/x/crypto/acme/autocert",
+			"revision": "a29dc8fdc73485234dbef99ebedb95d2eced08de",
+			"revisionTime": "2019-04-26T14:07:02Z"
+		},
+		{
+			"checksumSHA1": "h5++tJbH/hHoYbr6bzf6Ey8BAq4=",
+			"path": "golang.org/x/crypto/acme/autocert/internal/acmetest",
+			"revision": "a29dc8fdc73485234dbef99ebedb95d2eced08de",
+			"revisionTime": "2019-04-26T14:07:02Z"
+		},
+		{
 			"checksumSHA1": "ip36g6+W2yTwy+nvIBhevHvO++c=",
 			"path": "golang.org/x/net/http2",
 			"revision": "a680a1efc54dd51c040b3b5ce4939ea3cf2ea0d1",
@@ -632,6 +650,90 @@
 			"path": "golang.org/x/sys/unix",
 			"revision": "ac767d655b305d4e9612f5f6e33120b9176c4ad4",
 			"revisionTime": "2018-07-08T03:57:06Z"
+		},
+		{
+			"checksumSHA1": "K8G7V+afY+MXi8RmHD9fs/1L7zE=",
+			"path": "golang.org/x/tools/go/ast/astutil",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "4KKvUojOOHNtciXug7ZFhiQ2+Cs=",
+			"path": "golang.org/x/tools/go/buildutil",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "KRJX8oSPYp+vtjF6BpFvKkcMmVc=",
+			"path": "golang.org/x/tools/go/expect",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "ZM7tqKDi5EOuZYNVmzx+hV43OJA=",
+			"path": "golang.org/x/tools/go/gcexportdata",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "VQ0sTJYKkzzAvWA6zvaKD5lar0o=",
+			"path": "golang.org/x/tools/go/internal/cgo",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "tmIUD0ixT1bX3VW+6jgLkR4xHlY=",
+			"path": "golang.org/x/tools/go/internal/gcimporter",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "0eGV7/fQ1iQbU5tB7MewaXJdEjA=",
+			"path": "golang.org/x/tools/go/internal/packagesdriver",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "xRvMRXFPGL6yMeDN7wvhiR365S8=",
+			"path": "golang.org/x/tools/go/loader",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "Usts/2UcgTFU/xiNZJJjMPqDCmc=",
+			"path": "golang.org/x/tools/go/packages",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "3XZZEqBlxCFU/Wl7RzhCGElvU90=",
+			"path": "golang.org/x/tools/go/packages/packagestest",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "6AXbwdwjBzC+yFJjfgibhm5wND4=",
+			"path": "golang.org/x/tools/internal/fastwalk",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "03OsvOogL0V7N6eNk8hCjJbj4sc=",
+			"path": "golang.org/x/tools/internal/gopathwalk",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "KiWbFG5mbWhMjQLVvbRcQm5rqxk=",
+			"path": "golang.org/x/tools/internal/semver",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
+		},
+		{
+			"checksumSHA1": "Co0z0nw7t+A7Mfj6+3Uz6+x6dh0=",
+			"path": "golang.org/x/tools/internal/span",
+			"revision": "fe54fb35175bb1c0c175e2335e23d7fa90ca987a",
+			"revisionTime": "2019-04-18T13:46:22Z"
 		},
 		{
 			"checksumSHA1": "0CUC0lU/wGzT4ZCWbbfyWNzMBcY=",
@@ -1076,6 +1178,12 @@
 			"path": "gopkg.in/olivere/elastic.v6",
 			"revision": "425e5369a8f054f4f447f7c8ee1bf605f48425ab",
 			"revisionTime": "2018-10-11T18:14:04Z"
+		},
+		{
+			"checksumSHA1": "wUikThjObilsRTcp57pylKGZizE=",
+			"path": "gopkg.in/olivere/elastic.v7",
+			"revision": "60d62e5b2d1c728d7cbbeb7ed9a284303ea4acd4",
+			"revisionTime": "2019-04-10T20:10:18Z"
 		}
 	],
 	"rootPath": "github.com/appbaseio/abc"

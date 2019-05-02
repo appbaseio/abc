@@ -48,6 +48,7 @@ type DeleteByQueryService struct {
 	searchTimeout          string
 	searchType             string
 	size                   *int
+	slices                 interface{}
 	sort                   []string
 	stats                  []string
 	storedFields           []string
@@ -301,6 +302,16 @@ func (s *DeleteByQueryService) Size(size int) *DeleteByQueryService {
 	return s
 }
 
+// Slices represents the number of slices (default: 1).
+// It used to  be a number, but can be set to "auto" as of 6.3.
+//
+// See https://www.elastic.co/guide/en/elasticsearch/reference/6.3/docs-delete-by-query.html#docs-delete-by-query-automatic-slice
+// for details.
+func (s *DeleteByQueryService) Slices(slices interface{}) *DeleteByQueryService {
+	s.slices = slices
+	return s
+}
+
 // Sort is a list of <field>:<direction> pairs.
 func (s *DeleteByQueryService) Sort(sort ...string) *DeleteByQueryService {
 	s.sort = append(s.sort, sort...)
@@ -507,6 +518,9 @@ func (s *DeleteByQueryService) buildURL() (string, url.Values, error) {
 	if s.size != nil {
 		params.Set("size", fmt.Sprintf("%d", *s.size))
 	}
+	if s.slices != nil {
+		params.Set("slices", fmt.Sprintf("%v", s.slices))
+	}
 	if len(s.sort) > 0 {
 		params.Set("sort", strings.Join(s.sort, ","))
 	}
@@ -613,6 +627,61 @@ func (s *DeleteByQueryService) Do(ctx context.Context) (*BulkIndexByScrollRespon
 
 	// Return result
 	ret := new(BulkIndexByScrollResponse)
+	if err := s.client.decoder.Decode(res.Body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+// DoAsync executes the delete-by-query operation asynchronously by starting a new task.
+// Callers need to use the Task Management API to watch the outcome of the reindexing
+// operation.
+func (s *DeleteByQueryService) DoAsync(ctx context.Context) (*StartTaskResult, error) {
+	// Check pre-conditions
+	if err := s.Validate(); err != nil {
+		return nil, err
+	}
+
+	// DoAsync only makes sense with WaitForCompletion set to true
+	if s.waitForCompletion != nil && *s.waitForCompletion {
+		return nil, fmt.Errorf("cannot start a task with WaitForCompletion set to true")
+	}
+	f := false
+	s.waitForCompletion = &f
+
+	// Get URL for request
+	path, params, err := s.buildURL()
+	if err != nil {
+		return nil, err
+	}
+
+	// Set body if there is a query set
+	var body interface{}
+	if s.body != nil {
+		body = s.body
+	} else if s.query != nil {
+		src, err := s.query.Source()
+		if err != nil {
+			return nil, err
+		}
+		body = map[string]interface{}{
+			"query": src,
+		}
+	}
+
+	// Get HTTP response
+	res, err := s.client.PerformRequest(ctx, PerformRequestOptions{
+		Method: "POST",
+		Path:   path,
+		Params: params,
+		Body:   body,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	// Return operation response
+	ret := new(StartTaskResult)
 	if err := s.client.decoder.Decode(res.Body, ret); err != nil {
 		return nil, err
 	}
