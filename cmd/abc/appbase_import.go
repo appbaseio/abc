@@ -69,6 +69,8 @@ func runImport(args []string) error {
 
 	transformFile := flagset.String("transform_file", "", "transform file to use")
 
+	verify := flagset.Bool("verify", false, "verify the source and destination connections")
+
 	// use external config
 	config := flagset.String("config", "", "Path to external config file, if specified, only that is used")
 
@@ -80,10 +82,16 @@ func runImport(args []string) error {
 
 	// use the config file
 	if *config != "" {
-		file, err := genPipelineFromEnv(*config)
+		file, configuredAdaptors, err := genPipelineFromEnv(*config)
+
 		if err != nil {
 			return err
 		}
+
+		if *verify {
+			return verifyConnections(configuredAdaptors)
+		}
+
 		return execBuilder(file, *test)
 	}
 
@@ -119,9 +127,13 @@ func runImport(args []string) error {
 	}
 
 	// write config file
-	file, err := writeConfigFile(srcConfig, destConfig)
+	file, configuredAdaptors, err := writeConfigFile(srcConfig, destConfig)
 	if err != nil {
 		return err
+	}
+
+	if *verify {
+		return verifyConnections(configuredAdaptors)
 	}
 
 	log.Infof("Created temp file %s", file)
@@ -152,7 +164,7 @@ func execBuilder(file string, isTest bool) error {
 }
 
 // writeConfigFile writes config information in a pipeline file
-func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]interface{}) (string, error) {
+func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]interface{}) (string, map[string]adaptor.Adaptor, error) {
 	fname := "pipeline_" + strconv.FormatInt(time.Now().UnixNano(), 10) + ".js"
 
 	if _, err := os.Stat(fname); err == nil {
@@ -160,7 +172,7 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 	}
 	appFileHandle, err := os.Create(fname)
 	if err != nil {
-		return "", err
+		return "", nil, err
 	}
 	defer appFileHandle.Close()
 
@@ -171,23 +183,25 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 	if !strings.Contains(destConfig["uri"].(string), "/") {
 		destConfig["uri"], err = app.GetAppURL(destConfig["uri"].(string))
 		if err != nil {
-			return "", err
+			return "", nil, err
 		}
 	}
 	// check appname as source uri
 	if (!strings.Contains(srcConfig["uri"].(string), "/")) && srcConfig["_name_"].(string) == "elasticsearch" {
 		srcConfig["uri"], err = app.GetAppURL(srcConfig["uri"].(string))
 		if err != nil {
-			return "", err
+			return "", nil, err
 		}
 	}
 	// check file path as source [json, csv]
 	if common.StringInSlice(srcConfig["_name_"].(string), []string{"json", "csv"}) {
 		err = common.IsFileValid(srcConfig["uri"].(string))
 		if err != nil {
-			return "", err
+			return "", nil, err
 		}
 	}
+
+	configuredAdaptors := make(map[string]adaptor.Adaptor)
 
 	nodeName := "source"
 	for _, name := range args {
@@ -204,10 +218,11 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 		}
 		// get adaptor
 		a, _ := adaptor.GetAdaptor(name, config)
+		configuredAdaptors[nodeName] = a
 		// get config json
 		b, err := json.Marshal(a)
 		if err != nil {
-			return "", err
+			return "", nil, err
 		}
 		confJSON := string(b)
 		// save to file
@@ -218,7 +233,7 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 	if srcConfig["_transform_"] != "" {
 		dat, err := ioutil.ReadFile(srcConfig["_transform_"].(string))
 		if err != nil {
-			return "", err
+			return "", nil, err
 		}
 		appFileHandle.WriteString(string(dat))
 	} else {
@@ -240,15 +255,15 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 	}
 	appFileHandle.WriteString("\n")
 
-	return fname, nil
+	return fname, configuredAdaptors, nil
 }
 
 // genPipelineFromEnv generates a pipeline file from config file
-func genPipelineFromEnv(filename string) (string, error) {
+func genPipelineFromEnv(filename string) (string, map[string]adaptor.Adaptor, error) {
 	var config map[string]string
 	config, err := godotenv.Read(filename)
 	if err != nil {
-		return "", err
+		return "", nil, err
 	}
 	// save keys as small
 	for k := range config {
@@ -295,10 +310,20 @@ func genPipelineFromEnv(filename string) (string, error) {
 		}
 	}
 	// generate file
-	file, err := writeConfigFile(src, dest)
+	file, configuredAdaptors, err := writeConfigFile(src, dest)
 	if err != nil {
-		return "", err
+		return "", nil, err
 	}
 	fmt.Printf("Writing %s...\n", file)
-	return file, nil
+	return file, configuredAdaptors, nil
+}
+
+func verifyConnections(adaptors map[string]adaptor.Adaptor) error {
+	for _, ad := range adaptors {
+		err := ad.Verify()
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
