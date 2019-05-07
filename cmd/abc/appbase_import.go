@@ -31,6 +31,7 @@ var srcParamMap = map[string]string{
 	"sac_path":         "sacPath",
 	// "timeout":          "timeout",
 	"transform_file": "_transform_",
+	"log_dir":        "log_dir",
 }
 
 var destParamMap = map[string]string{
@@ -63,6 +64,8 @@ func runImport(args []string) error {
 	ssl := flagset.Bool("ssl", false, "Enable SSL connection to the source.")
 	requestSize := flagset.Int64("request_size", 2<<19, "Http request size in bytes, specifically for bulk requests to ES.")
 	bulkRequests := flagset.Int("bulk_requests", 1000, "Number of bulk requests to send during a network request to ES.")
+
+	logDir := flagset.String("log_dir", "", "used for storing commit logs")
 
 	transformFile := flagset.String("transform_file", "", "transform file to use")
 
@@ -104,6 +107,7 @@ func runImport(args []string) error {
 		"sacPath":          *sacPath,
 		"ssl":              *ssl,
 		"_transform_":      *transformFile,
+		"log_dir":          *logDir,
 	}
 
 	var destConfig = map[string]interface{}{
@@ -219,10 +223,20 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 		appFileHandle.WriteString(string(dat))
 	} else {
 		// no transform file
-		appFileHandle.WriteString(
-			fmt.Sprintf(`t.Source("source", source, "/%s/").Save("sink", sink, "/.*/")`,
-				srcConfig["srcRegex"]),
-		)
+
+		// set Config({log_dir})
+		if srcConfig["log_dir"] != "" {
+			confStr := fmt.Sprintf(`t.Config({"log_dir":"%s"}).Source("source", source, "/%s/").Save("sink", sink, "/.*/")`, srcConfig["log_dir"], srcConfig["srcRegex"])
+
+			fmt.Println(confStr)
+
+			appFileHandle.WriteString(confStr)
+		} else {
+			appFileHandle.WriteString(
+				fmt.Sprintf(`t.Source("source", source, "/%s/").Save("sink", sink, "/.*/")`,
+					srcConfig["srcRegex"]),
+			)
+		}
 	}
 	appFileHandle.WriteString("\n")
 
