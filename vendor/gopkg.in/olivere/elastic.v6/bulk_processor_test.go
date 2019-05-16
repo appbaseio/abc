@@ -8,6 +8,7 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
+	"reflect"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -36,6 +37,9 @@ func TestBulkProcessorDefaults(t *testing.T) {
 		t.Errorf("expected %v; got: %v", want, got)
 	}
 	if got, want := p.wantStats, false; got != want {
+		t.Errorf("expected %v; got: %v", want, got)
+	}
+	if got, want := p.retryItemStatusCodes, defaultRetryItemStatusCodes; !reflect.DeepEqual(got, want) {
 		t.Errorf("expected %v; got: %v", want, got)
 	}
 	if p.backoff == nil {

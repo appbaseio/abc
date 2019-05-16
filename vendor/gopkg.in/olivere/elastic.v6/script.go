@@ -18,7 +18,8 @@ type Script struct {
 	params map[string]interface{}
 }
 
-// NewScript creates and initializes a new Script.
+// NewScript creates and initializes a new Script. By default, it is of
+// type "inline". Use NewScriptStored for a stored script (where type is "id").
 func NewScript(script string) *Script {
 	return &Script{
 		script: script,

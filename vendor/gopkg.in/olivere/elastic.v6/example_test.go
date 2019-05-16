@@ -13,7 +13,7 @@ import (
 	"reflect"
 	"time"
 
-	elastic "github.com/olivere/elastic"
+	"github.com/olivere/elastic"
 )
 
 type Tweet struct {
@@ -143,12 +143,19 @@ func Example() {
 		Id("1").
 		Do(context.Background())
 	if err != nil {
-		// Handle error
-		panic(err)
+		switch {
+		case elastic.IsNotFound(err):
+			panic(fmt.Sprintf("Document not found: %v", err))
+		case elastic.IsTimeout(err):
+			panic(fmt.Sprintf("Timeout retrieving document: %v", err))
+		case elastic.IsConnErr(err):
+			panic(fmt.Sprintf("Connection problem: %v", err))
+		default:
+			// Some other kind of error
+			panic(err)
+		}
 	}
-	if get1.Found {
-		fmt.Printf("Got document %s in version %d from index %s, type %s\n", get1.Id, get1.Version, get1.Index, get1.Type)
-	}
+	fmt.Printf("Got document %s in version %d from index %s, type %s\n", get1.Id, get1.Version, get1.Index, get1.Type)
 
 	// Flush to make sure the documents got written.
 	_, err = client.Flush().Index("twitter").Do(context.Background())
@@ -423,7 +430,11 @@ func ExampleAggregations() {
 		histogram, found := userBucket.DateHistogram("history")
 		if found {
 			for _, year := range histogram.Buckets {
-				fmt.Printf("user %q has %d tweets in %q\n", user, year.DocCount, year.KeyAsString)
+				var key string
+				if s := year.KeyAsString; s != nil {
+					key = *s
+				}
+				fmt.Printf("user %q has %d tweets in %q\n", user, year.DocCount, key)
 			}
 		}
 	}

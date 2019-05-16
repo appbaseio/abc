@@ -440,7 +440,7 @@ func TestSearchSpecificFields(t *testing.T) {
 			t.Errorf("expected SearchResult.Hits.Hit.Index = %q; got %q", testIndexName, hit.Index)
 		}
 		if hit.Source != nil {
-			t.Fatalf("expected SearchResult.Hits.Hit.Source to be nil; got: %q", hit.Source)
+			t.Fatalf("expected SearchResult.Hits.Hit.Source to be nil; got: %v", hit.Source)
 		}
 		if hit.Fields == nil {
 			t.Fatal("expected SearchResult.Hits.Hit.Fields to be != nil")
@@ -1316,5 +1316,38 @@ func TestSearchResultWithFieldCollapsingAndInnerHits(t *testing.T) {
 		if lastTweets == nil {
 			t.Fatal("expected inner_hits in SearchResult")
 		}
+	}
+}
+
+func TestSearchScriptQuery(t *testing.T) {
+	client := setupTestClientAndCreateIndexAndAddDocs(t) //, SetTraceLog(log.New(os.Stdout, "", 0)))
+
+	// ES uses Painless as default scripting engine in 6.x
+	// Another example of using painless would be:
+	//
+	//	script := NewScript(`
+	//	String username = doc['user'].value;
+	//	return username == 'olivere'
+	//`)
+	// See https://www.elastic.co/guide/en/elasticsearch/painless/6.3/painless-examples.html
+	script := NewScript("doc['user'].value == 'olivere'")
+	query := NewScriptQuery(script)
+
+	searchResult, err := client.Search().
+		Index(testIndexName).
+		Query(query).
+		Pretty(true).
+		Do(context.TODO())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if searchResult.Hits == nil {
+		t.Errorf("expected SearchResult.Hits != nil; got nil")
+	}
+	if want, have := int64(2), searchResult.Hits.TotalHits; want != have {
+		t.Errorf("expected SearchResult.Hits.TotalHits = %d; got %d", want, have)
+	}
+	if want, have := 2, len(searchResult.Hits.Hits); want != have {
+		t.Errorf("expected len(SearchResult.Hits.Hits) = %d; got %d", want, have)
 	}
 }

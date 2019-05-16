@@ -51,6 +51,7 @@ type UpdateByQueryService struct {
 	searchTimeout          string
 	searchType             string
 	size                   *int
+	slices                 interface{}
 	sort                   []string
 	stats                  []string
 	storedFields           []string
@@ -320,6 +321,16 @@ func (s *UpdateByQueryService) Size(size int) *UpdateByQueryService {
 	return s
 }
 
+// Slices represents the number of slices (default: 1).
+// It used to  be a number, but can be set to "auto" as of 6.3.
+//
+// See https://www.elastic.co/guide/en/elasticsearch/reference/6.3/docs-update-by-query.html#docs-update-by-query-slice
+// for details.
+func (s *UpdateByQueryService) Slices(slices interface{}) *UpdateByQueryService {
+	s.slices = slices
+	return s
+}
+
 // Sort is a list of <field>:<direction> pairs.
 func (s *UpdateByQueryService) Sort(sort ...string) *UpdateByQueryService {
 	s.sort = append(s.sort, sort...)
@@ -539,6 +550,9 @@ func (s *UpdateByQueryService) buildURL() (string, url.Values, error) {
 	if s.size != nil {
 		params.Set("size", fmt.Sprintf("%d", *s.size))
 	}
+	if s.slices != nil {
+		params.Set("slices", fmt.Sprintf("%v", s.slices))
+	}
 	if len(s.sort) > 0 {
 		params.Set("sort", strings.Join(s.sort, ","))
 	}
@@ -651,6 +665,53 @@ func (s *UpdateByQueryService) Do(ctx context.Context) (*BulkIndexByScrollRespon
 
 	// Return operation response (BulkIndexByScrollResponse is defined in DeleteByQuery)
 	ret := new(BulkIndexByScrollResponse)
+	if err := s.client.decoder.Decode(res.Body, ret); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+// DoAsync executes the update-by-query operation asynchronously by starting a new task.
+// Callers need to use the Task Management API to watch the outcome of the reindexing
+// operation.
+func (s *UpdateByQueryService) DoAsync(ctx context.Context) (*StartTaskResult, error) {
+	// Check pre-conditions
+	if err := s.Validate(); err != nil {
+		return nil, err
+	}
+
+	// DoAsync only makes sense with WaitForCompletion set to true
+	if s.waitForCompletion != nil && *s.waitForCompletion {
+		return nil, fmt.Errorf("cannot start a task with WaitForCompletion set to true")
+	}
+	f := false
+	s.waitForCompletion = &f
+
+	// Get URL for request
+	path, params, err := s.buildURL()
+	if err != nil {
+		return nil, err
+	}
+
+	// Setup HTTP request body
+	body, err := s.getBody()
+	if err != nil {
+		return nil, err
+	}
+
+	// Get HTTP response
+	res, err := s.client.PerformRequest(ctx, PerformRequestOptions{
+		Method: "POST",
+		Path:   path,
+		Params: params,
+		Body:   body,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	// Return operation response
+	ret := new(StartTaskResult)
 	if err := s.client.decoder.Decode(res.Body, ret); err != nil {
 		return nil, err
 	}
