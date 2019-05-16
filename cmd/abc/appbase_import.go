@@ -71,6 +71,10 @@ func runImport(args []string) error {
 
 	verify := flagset.Bool("verify", false, "verify the source and destination connections")
 
+	srcUsername := flagset.String("src_username", "", "source username")
+	srcPassword := flagset.String("src_password", "", "source password")
+	srcRealm := flagset.String("src_realm", "", "source realm")
+
 	// use external config
 	config := flagset.String("config", "", "Path to external config file, if specified, only that is used")
 
@@ -116,6 +120,9 @@ func runImport(args []string) error {
 		"ssl":              *ssl,
 		"_transform_":      *transformFile,
 		"log_dir":          *logDir,
+		"username":         *srcUsername,
+		"password":         *srcPassword,
+		"realm":            *srcRealm,
 	}
 
 	var destConfig = map[string]interface{}{
