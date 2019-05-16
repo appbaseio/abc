@@ -22,6 +22,9 @@ At the time of writing, the list of parameters supported looks like -
 --src_filter=.*                              Namespace filter for source
 --src_type=postgres                          type of source database
 --src_uri=http://user:pass@host:port/db      url of source database
+--src_username="username"                    username for source connection
+--src_password="password"                    password for source connection
+--src_realm="realm"                          realm for source connection
 --sac_path=./ServiceAccountCredentials.json  Path to the service account credentials file obtained after creating a firebase app.
 --tail=false                                 allow tail feature
 --test=false                                 if set to true, only pipeline is created and sync is not started. Useful for checking your configuration
