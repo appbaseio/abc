@@ -1,0 +1,2 @@
+job1:
+  script: "pwd;ls -al;"
