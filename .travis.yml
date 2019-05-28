@@ -1,15 +1,58 @@
-sudo: required
-dist: trusty
 language: go
-go:
-- 1.8.x
-env:
-  global:
-  - ABC_BUILD=oss
-script:
-- go build -tags 'oss' ./cmd/abc/...
-install: true
+
 branches:
   only:
   - master
   - dev
+
+install: true
+
+jobs:
+  include:
+    - name: linux
+      os: linux
+      dist: xenial
+      sudo: required
+
+      before_install:
+      - wget https://github.com/neo4j-drivers/seabolt/releases/download/v1.7.4/seabolt-1.7.4-Linux-ubuntu-16.04.deb
+      - sudo dpkg -i seabolt-1.7.4-Linux-ubuntu-16.04.deb
+      - sudo apt-get install -y libssl-dev build-essential
+      - go get github.com/neo4j/neo4j-go-driver/neo4j
+      - go get github.com/appbaseio/abc || true
+      - mkdir private
+      - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
+
+      script:
+      - go build -tags "seabolt_static oss" -o "abc-linux" ./cmd/abc/...
+
+      deploy:
+        provider: releases
+        api_key: $PAT
+        skip_cleanup: true
+        file: abc-linux
+        draft: true
+
+    - name: macos
+      os: osx
+      osx_image: xcode10.2
+
+      before_install:
+      - curl -LO https://github.com/neo4j-drivers/seabolt/releases/download/v1.7.4/seabolt-1.7.4-Darwin.tar.gz
+      - tar -zxf seabolt-1.7.4-Darwin.tar.gz
+      - export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:`pwd`/seabolt-1.7.4-Darwin/usr/local/share/pkgconfig
+      - export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:`pwd`/seabolt-1.7.4-Darwin/usr/local/lib
+      - go get github.com/neo4j/neo4j-go-driver/neo4j
+      - go get github.com/appbaseio/abc || true
+      - mkdir private
+      - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
+
+      script:
+      - go build -tags "seabolt_static oss" -o "abc-macos" ./cmd/abc/...
+
+      deploy:
+        provider: releases
+        api_key: $PAT
+        skip_cleanup: true
+        file: abc-macos
+        draft: true
