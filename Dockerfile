@@ -8,38 +8,35 @@
 #
 
 # Pull the base image
-FROM alpine:3.8
+FROM golang:1.12.5 AS builder
 MAINTAINER Siddharth Kothari <siddharth@appbase.io>
-
-# Set GOPATH
-ENV GOPATH /go
-
-# certs
-RUN apk --update add --no-cache ca-certificates
-RUN update-ca-certificates
 
 # Get build variant
 ARG ABC_BUILD=oss
 ENV ABC_BUILD ${ABC_BUILD}
 
-# Make directories for the code
-RUN mkdir -p /go/src/github.com/appbaseio/abc
-RUN mkdir -p /abc
+RUN mkdir -p $GOPATH/github.com/src/appbaseio/abc && \
+	mkdir -p /abc && \
+	curl -LO https://github.com/neo4j-drivers/seabolt/releases/download/v1.7.4/seabolt-1.7.4-Linux-ubuntu-18.04.deb && \
+	dpkg -i seabolt-1.7.4-Linux-ubuntu-18.04.deb && \
+	go get github.com/neo4j/neo4j-go-driver/neo4j
 
-# Add abc files
-ADD . /go/src/github.com/appbaseio/abc
+WORKDIR $GOPATH/src/github.com/appbaseio/abc
 
-# install
-RUN apk add --no-cache --virtual build-dependencies go libc-dev && \
-	cd /go/src/github.com/appbaseio/abc && \
-	go build -tags $ABC_BUILD ./cmd/abc/... && \
-	mv ./abc /abc/ && \
-	apk del build-dependencies && \
-	rm -rf /go && \
-	rm -rf /usr/local/go
+COPY . .
 
-WORKDIR /abc
+RUN go build -tags "seabolt_static $ABC_BUILD" -o /abc/abc ./cmd/abc/...
+
+FROM ubuntu:bionic
+MAINTAINER Siddharth Kothari <siddharth@appbase.io>
+
+# certs
+RUN apt-get update && \
+	apt-get install -y ca-certificates && \
+	update-ca-certificates
+
+COPY --from=builder /abc/abc /abc/abc
 
 # Define default entrypoint
 # Entrypoint gets extra parameters from docker run
-ENTRYPOINT ["./abc"]
+ENTRYPOINT ["/abc/abc"]
