@@ -5,6 +5,8 @@ branches:
   - master
   - dev
 
+install: true
+
 jobs:
   include:
     - name: linux
