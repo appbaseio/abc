@@ -24,7 +24,7 @@ jobs:
       - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
       script:
-      - go build -tags "seabolt_static oss" -o "abc-linux"
+      - go build -tags "seabolt_static oss" -o "abc-linux" ./cmd/abc/...
 
       deploy:
         provider: releases
@@ -48,7 +48,7 @@ jobs:
       - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
       script:
-      - go build -tags "seabolt_static oss" -o "abc-macos"
+      - go build -tags "seabolt_static oss" -o "abc-macos" ./cmd/abc/...
 
       deploy:
         provider: releases
