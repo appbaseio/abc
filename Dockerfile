@@ -25,7 +25,7 @@ WORKDIR $GOPATH/src/github.com/appbaseio/abc
 
 COPY . .
 
-RUN go build -tags $ABC_BUILD -o /abc/abc ./cmd/abc/...
+RUN go build -tags "seabolt_static $ABC_BUILD" -o /abc/abc ./cmd/abc/...
 
 FROM ubuntu:bionic
 MAINTAINER Siddharth Kothari <siddharth@appbase.io>
