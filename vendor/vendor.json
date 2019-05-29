@@ -256,6 +256,18 @@
 			"revisionTime": "2016-01-25T20:49:56Z"
 		},
 		{
+			"checksumSHA1": "1irnmGLdt0YZ5OuVSzgnUZ/EfhM=",
+			"path": "github.com/golang/mock/gomock",
+			"revision": "140ae90f29eaaadc229f8d4b78f074b7f0611c1e",
+			"revisionTime": "2019-05-17T14:58:38Z"
+		},
+		{
+			"checksumSHA1": "HuzaMCq8i3gBr/kURLQCcfX6J3I=",
+			"path": "github.com/golang/mock/gomock/internal/mock_gomock",
+			"revision": "140ae90f29eaaadc229f8d4b78f074b7f0611c1e",
+			"revisionTime": "2019-05-17T14:58:38Z"
+		},
+		{
 			"checksumSHA1": "5++9mP/Ec3/LuBX8yf0AvveNUlg=",
 			"path": "github.com/golang/protobuf/proto",
 			"revision": "427e165155e0a4ff5993a36657c1f733f5b0f782",
@@ -472,10 +484,48 @@
 			"revisionTime": "2019-01-04T16:17:12Z"
 		},
 		{
+			"checksumSHA1": "2PbGxlLhhF4E+0Z1Gy3ryqHiFIE=",
+			"path": "github.com/neo4j-drivers/gobolt",
+			"revision": "0b8728e471cbd11fe5ffa3ae65a467886018012e",
+			"revisionTime": "2019-03-06T10:24:30Z",
+			"version": "1.7",
+			"versionExact": "1.7"
+		},
+		{
+			"checksumSHA1": "jWfYJmAi6KYm02tSfPiWiHggY4M=",
+			"path": "github.com/neo4j/neo4j-go-driver/neo4j",
+			"revision": "934739616886b903306e1df80aa58047407a1971",
+			"revisionTime": "2019-05-08T17:51:40Z",
+			"version": "1.7",
+			"versionExact": "1.7"
+		},
+		{
+			"checksumSHA1": "IFa+ZOnK7JCFfQOqk7EyiaHB8Ww=",
+			"path": "github.com/neo4j/neo4j-go-driver/neo4j/utils/test",
+			"revision": "934739616886b903306e1df80aa58047407a1971",
+			"revisionTime": "2019-05-08T17:51:40Z",
+			"version": "1.7",
+			"versionExact": "1.7"
+		},
+		{
 			"checksumSHA1": "srxWPDlzsC2TlKJnQsCMSGx/RYg=",
 			"path": "github.com/ogier/pflag",
 			"revision": "45c278ab3607870051a2ea9040bb85fcb8557481",
 			"revisionTime": "2016-01-29T22:01:14Z"
+		},
+		{
+			"path": "github.com/olivere/elastic/v7/config",
+			"revision": ""
+		},
+		{
+			"path": "github.com/olivere/elastic/v7/uritemplates",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "OyeP0Sp/PT/Nc5wpA7OlbNJ2XPQ=",
+			"path": "github.com/onsi/ginkgo/extensions/table",
+			"revision": "4cb744166b80afeec15fd0b4446c640a7688cd51",
+			"revisionTime": "2019-05-20T14:44:22Z"
 		},
 		{
 			"checksumSHA1": "bnWJ5VK7fHAcqpLqY09k0nX8QNs=",
@@ -494,6 +544,18 @@
 			"path": "github.com/rcrowley/go-metrics",
 			"revision": "8732c616f52954686704c8645fe1a9d59e9df7c1",
 			"revisionTime": "2018-01-25T23:19:41Z"
+		},
+		{
+			"checksumSHA1": "NnsJ7+vqFtYb2DgoI+IXWOshjbU=",
+			"path": "github.com/stretchr/objx",
+			"revision": "35313a95ee26395aa17d366c71a2ccf788fa69b6",
+			"revisionTime": "2019-04-15T11:18:23Z"
+		},
+		{
+			"checksumSHA1": "zHb8n4J+fZbwB6SBI6NqFL/7l+o=",
+			"path": "github.com/stretchr/testify/mock",
+			"revision": "34c6fa2dc70986bccbbffcc6130f6920a924b075",
+			"revisionTime": "2019-03-04T09:57:49Z"
 		},
 		{
 			"checksumSHA1": "Q2NFGh5HlKwYmTu+jjpEd6b18JY=",
