@@ -19,6 +19,7 @@ jobs:
       - sudo dpkg -i seabolt-1.7.4-Linux-ubuntu-16.04.deb
       - sudo apt-get install -y libssl-dev build-essential
       - go get github.com/neo4j/neo4j-go-driver/neo4j
+      - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
       - mkdir private
       - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
@@ -32,6 +33,8 @@ jobs:
         skip_cleanup: true
         file: abc-linux
         draft: true
+        on:
+          all_branches: true
 
     - name: macos
       os: osx
@@ -43,6 +46,7 @@ jobs:
       - export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:`pwd`/seabolt-1.7.4-Darwin/usr/local/share/pkgconfig
       - export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:`pwd`/seabolt-1.7.4-Darwin/usr/local/lib
       - go get github.com/neo4j/neo4j-go-driver/neo4j
+      - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
       - mkdir private
       - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
@@ -56,3 +60,5 @@ jobs:
         skip_cleanup: true
         file: abc-macos
         draft: true
+        on:
+          all_branches: true
