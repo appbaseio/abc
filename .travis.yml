@@ -52,13 +52,13 @@ jobs:
       - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
       script:
-      - go build -tags 'seabolt_static !oss' -o "abc-macos" ./cmd/abc/...
+      - go build -tags 'seabolt_static !oss' -o "abc-darwin" ./cmd/abc/...
 
       deploy:
         provider: releases
         api_key: $PAT
         skip_cleanup: true
-        file: abc-macos
+        file: abc-darwin
         draft: true
         on:
           all_branches: true
