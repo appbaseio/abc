@@ -1,6 +1,5 @@
 .DS_Store
 *.[568ao]
-*.pb.go
 *.ao
 *.so
 *.pyc
