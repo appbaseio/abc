@@ -1,7 +1,7 @@
 
 [![latest version](https://img.shields.io/badge/version-0.10.1-yellow.svg)](https://github.com/appbaseio/abc/releases/latest)
 [![Go Report Card](https://goreportcard.com/badge/github.com/appbaseio/abc)](https://goreportcard.com/report/github.com/appbaseio/abc)
-[![Travis branch](https://img.shields.io/travis/appbaseio/abc/dev.svg)]()
+[![Travis branch](https://travis-ci.org/appbaseio/abc.svg?branch=dev)]()
 [![license](https://img.shields.io/github/license/appbaseio/abc.svg)]()
 
 
