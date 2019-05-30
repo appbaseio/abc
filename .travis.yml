@@ -1,3 +1,5 @@
+if: tag IS blank
+
 language: go
 
 branches:
@@ -27,11 +29,15 @@ jobs:
       script:
       - go build -tags 'seabolt_static !oss' -o "abc-linux" ./cmd/abc/...
 
+      before_deploy:
+      - zip -r abc-linux.zip abc-linux
+      - export TRAVIS_TAG="preview"
+
       deploy:
         provider: releases
         api_key: $PAT
         skip_cleanup: true
-        file: abc-linux
+        file: abc-linux.zip
         draft: true
         on:
           all_branches: true
@@ -54,11 +60,15 @@ jobs:
       script:
       - go build -tags 'seabolt_static !oss' -o "abc-darwin" ./cmd/abc/...
 
+      before_deploy:
+      - zip -r abc-darwin.zip abc-darwin
+      - export TRAVIS_TAG="preview"
+
       deploy:
         provider: releases
         api_key: $PAT
         skip_cleanup: true
-        file: abc-darwin
+        file: abc-darwin.zip
         draft: true
         on:
           all_branches: true
