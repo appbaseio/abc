@@ -87,6 +87,7 @@ jobs:
       - 7z x -oglib glib_2.28.8-1_win32.zip
       - 7z x -ogettext gettext-runtime_0.18.1.1-2_win32.zip
       - 7z x -oseabolt seabolt-1.7.4-win64-mingw.zip
+      - which gcc
       - cp pkg-config/bin/pkg-config.exe c:/MinGW/bin/pkg-config.exe
       - cp gettext/bin/intl.dll c:/MinGW/bin/intl.dll
       - cp glib/bin/libglib-2.0-0.dll c:/MinGW/bin/libglib-2.0-0.dll
