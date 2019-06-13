@@ -89,6 +89,7 @@ jobs:
       - 7z x -oseabolt seabolt-1.7.4-win64-mingw.zip
       - choco install pkgconfiglite -y
       - pkg-config -h
+      - pkg-config --variable pc_path pkg-config
       # - which gcc
       # - cp pkg-config/bin/pkg-config.exe c:/MinGW/bin/pkg-config.exe
       # - cp gettext/bin/intl.dll c:/MinGW/bin/intl.dll
