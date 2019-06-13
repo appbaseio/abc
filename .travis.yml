@@ -85,7 +85,9 @@ jobs:
       - 7z x -oglib glib_2.28.8-1_win32.zip
       - 7z x -ogettext gettext-runtime_0.18.1.1-2_win32.zip
       - 7z x -oseabolt seabolt-1.7.4-win64-mingw.zip
-      - mv pkg-config/bin/pkg-config.exe pkg-config/bin/pkg-config
+      - pkg-config/bin/pkg-config.exe -h
+      # - pkg-config/bin/pkg-config -h
+      - ln -s pkg-config/bin/pkg-config.exe pkg-config/bin/pkg-config
       - export PATH=$PATH:`pwd`/glib/bin:`pwd`/gettext/bin:`pwd`/pkg-config/bin:`pwd`/seabolt/bin
       - export PKG_CONFIG_PATH=`pwd`/seabolt
       - echo $PATH
