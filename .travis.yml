@@ -97,6 +97,7 @@ jobs:
       - echo $PATH
       - echo $PKG_CONFIG_PATH
       - pkg-config --variable pc_path pkg-config
+      - echo
       - go get github.com/neo4j/neo4j-go-driver/neo4j
       - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
