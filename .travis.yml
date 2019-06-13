@@ -88,8 +88,6 @@ jobs:
       - 7z x -ogettext gettext-runtime_0.18.1.1-2_win32.zip
       - 7z x -oseabolt seabolt-1.7.4-win64-mingw.zip
       - choco install pkgconfiglite -y
-      - pkg-config -h
-      - pkg-config --variable pc_path pkg-config
       # - which gcc
       # - cp pkg-config/bin/pkg-config.exe c:/MinGW/bin/pkg-config.exe
       # - cp gettext/bin/intl.dll c:/MinGW/bin/intl.dll
@@ -98,6 +96,7 @@ jobs:
       - export PKG_CONFIG_PATH=`pwd`/seabolt
       - echo $PATH
       - echo $PKG_CONFIG_PATH
+      - pkg-config --variable pc_path pkg-config
       - go get github.com/neo4j/neo4j-go-driver/neo4j
       - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
