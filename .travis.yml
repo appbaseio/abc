@@ -89,7 +89,6 @@ jobs:
       - export PKG_CONFIG_PATH=`pwd`/seabolt
       - echo $PATH
       - echo $PKG_CONFIG_PATH
-      - pkg-config -h
       - go get github.com/neo4j/neo4j-go-driver/neo4j
       - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
@@ -97,4 +96,4 @@ jobs:
       script:
       - echo $PATH
       - echo $PKG_CONFIG_PATH
-      - pkg-config -h
+      - pkg-config.exe -h
