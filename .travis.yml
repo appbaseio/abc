@@ -86,18 +86,18 @@ jobs:
       - 7z x -opkg-config pkg-config_0.26-1_win32.zip
       - 7z x -oglib glib_2.28.8-1_win32.zip
       - 7z x -ogettext gettext-runtime_0.18.1.1-2_win32.zip
-      - 7z x -oseabolt seabolt-1.7.4-win64-mingw.zip
       - choco install pkgconfiglite -y
+      - pkg-config --variable pc_path pkg-config
+      - 7z x -oC:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig seabolt-1.7.4-win64-mingw.zip
       # - which gcc
       # - cp pkg-config/bin/pkg-config.exe c:/MinGW/bin/pkg-config.exe
       # - cp gettext/bin/intl.dll c:/MinGW/bin/intl.dll
       # - cp glib/bin/libglib-2.0-0.dll c:/MinGW/bin/libglib-2.0-0.dll
-      - export PATH=$PATH:`pwd`/glib/bin:`pwd`/gettext/bin:`pwd`/pkg-config/bin:`pwd`/seabolt/bin
-      - export PKG_CONFIG_PATH=`pwd`/seabolt
+      - export PATH=$PATH:`pwd`/glib/bin:`pwd`/gettext/bin:`pwd`/pkg-config/bin:C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
+      # - export PKG_CONFIG_PATH=`pwd`/seabolt
       - echo $PATH
       - echo $PKG_CONFIG_PATH
-      - pkg-config --variable pc_path pkg-config
-      - echo
+      - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig
       - go get github.com/neo4j/neo4j-go-driver/neo4j
       - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
