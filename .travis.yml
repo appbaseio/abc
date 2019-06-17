@@ -88,20 +88,16 @@ jobs:
       - 7z x -ogettext gettext-runtime_0.18.1.1-2_win32.zip
       - choco install pkgconfiglite -y
       - pkg-config --variable pc_path pkg-config
-      - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig
-      - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
-      - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/lib
-      - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include
+      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig
+      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
+      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/lib
+      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include
       - 7z e -oC:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig seabolt-1.7.4-win64-mingw.zip
       # - which gcc
-      # - cp pkg-config/bin/pkg-config.exe c:/MinGW/bin/pkg-config.exe
-      # - cp gettext/bin/intl.dll c:/MinGW/bin/intl.dll
-      # - cp glib/bin/libglib-2.0-0.dll c:/MinGW/bin/libglib-2.0-0.dll
       - export PATH=$PATH:`pwd`/glib/bin:`pwd`/gettext/bin:`pwd`/pkg-config/bin:C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
       - echo $PATH
       - export CPATH=C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include/seabolt17/bolt
       - pkg-config --cflags  -- seabolt17
-      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig
       - go get github.com/neo4j/neo4j-go-driver/neo4j
       - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
