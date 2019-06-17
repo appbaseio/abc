@@ -88,7 +88,7 @@ jobs:
       - 7z x -ogettext gettext-runtime_0.18.1.1-2_win32.zip
       - choco install pkgconfiglite -y
       - pkg-config --variable pc_path pkg-config
-      - 7z x -oC:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig seabolt-1.7.4-win64-mingw.zip
+      - 7z e -oC:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig seabolt-1.7.4-win64-mingw.zip
       # - which gcc
       # - cp pkg-config/bin/pkg-config.exe c:/MinGW/bin/pkg-config.exe
       # - cp gettext/bin/intl.dll c:/MinGW/bin/intl.dll
