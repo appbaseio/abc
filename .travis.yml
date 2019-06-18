@@ -97,7 +97,7 @@ jobs:
       - export PATH=$PATH:`pwd`/glib/bin:`pwd`/gettext/bin:`pwd`/pkg-config/bin:C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
       - echo $PATH
       - export CPATH=C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include/seabolt17
-      - pkg-config --cflags  -- seabolt17
+      - export C_INCLUDE_PATH=C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include/seabolt17
       - go get github.com/neo4j/neo4j-go-driver/neo4j
       - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
