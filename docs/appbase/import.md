@@ -19,7 +19,7 @@ At the time of writing, the list of parameters supported looks like -
 --config=                                    Path to external config file, if specified, only that is used
 --log.level="info"                           Only log messages with the given severity or above. Valid levels: [debug, info, error]
 --replication_slot=standby_replication_slot  [postgres] replication slot to use
---src_filter=.*                              Namespace filter for source
+--src_filter=.*                              Namespace filter for source, accepts a regex
 --src_type=postgres                          type of source database
 --src_uri=http://user:pass@host:port/db      url of source database
 --src_username="username"                    username for source connection
@@ -33,6 +33,8 @@ At the time of writing, the list of parameters supported looks like -
 ```
 
 Note that you only need to set the parameters that are required for the source database type. For example, you don't set `replication_slot` when taking CSV as the source.
+
+**Note** - `--src_filter` switch can be used as a namespace filter for source and accepts a regex. For e.g., if you want to filter one or more tables from a collection, you can specify them as `--src_filter="table1|table2|table3"`
 
 **Note** - Help for [transform_file](../importer/transform_file.md) is available here.
 
