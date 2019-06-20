@@ -92,7 +92,8 @@ jobs:
       # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
       # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/lib
       # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include
-      - 7z e -oC:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig seabolt-1.7.4-win64-mingw.zip
+      - 7z x -oC:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig seabolt-1.7.4-win64-mingw.zip
+      - mv C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/seabolt-1.7.4-win64-mingw/* C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/
       # - which gcc
       - export PATH=$PATH:`pwd`/glib/bin:`pwd`/gettext/bin:`pwd`/pkg-config/bin:C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
       - echo $PATH
