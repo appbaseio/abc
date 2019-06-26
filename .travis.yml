@@ -98,7 +98,8 @@ jobs:
       - go get github.com/neo4j/neo4j-go-driver/neo4j
       - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
+      - mkdir private
+      - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
       script:
-      - pwd
-      - ls
+      - go build -tags 'seabolt_static !oss' -o "abc-darwin" ./cmd/abc/...
