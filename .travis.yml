@@ -101,7 +101,7 @@ jobs:
       - go build -tags 'seabolt_static !oss' -o "abc-windows" ./cmd/abc/...
 
       before_deploy:
-      - zip -r abc-windows.zip abc-windows
+      - 7z a abc-windows.zip abc-windows
       - export TRAVIS_TAG="preview"
 
       deploy:
