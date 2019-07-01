@@ -85,13 +85,8 @@ jobs:
       - 7z x -oglib glib_2.28.8-1_win32.zip
       - 7z x -ogettext gettext-runtime_0.18.1.1-2_win32.zip
       - choco install pkgconfiglite -y
-      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig
-      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
-      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/lib
-      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include
       - 7z x -oC:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig seabolt-1.7.4-win64-mingw.zip
       - mv C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/seabolt-1.7.4-win64-mingw/* C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/
-      # - which gcc
       - export PATH=$PATH:`pwd`/glib/bin:`pwd`/gettext/bin:`pwd`/pkg-config/bin:C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
       - export CPATH=C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include/seabolt17
       - export C_INCLUDE_PATH=C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include/seabolt17
@@ -103,3 +98,16 @@ jobs:
 
       script:
       - go build -tags 'seabolt_static !oss' -o "abc-windows" ./cmd/abc/...
+
+      before_deploy:
+      - zip -r abc-windows.zip abc-windows
+      - export TRAVIS_TAG="preview"
+
+      deploy:
+        provider: releases
+        api_key: $PAT
+        skip_cleanup: true
+        file: abc-windows.zip
+        draft: true
+        on:
+          all_branches: true
