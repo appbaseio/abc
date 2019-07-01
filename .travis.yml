@@ -6,6 +6,7 @@ branches:
   only:
   - master
   - dev
+  - ci-cd-windows-origin
 
 install: true
 
