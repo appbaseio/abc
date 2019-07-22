@@ -46,6 +46,22 @@ Also the type name used is for the sink, so the type name should be consistent w
 all the [transforms](transforms/) i.e. if you have a transform that 
 changes namespace in any way, the type names used in mapping should take care of that.
 
+`Note:` Starting ElasticSearch v7, document types have been removed. The Mapping method should only contain data starting with the `properties` key. The same example with v7 would look as below:
+
+```js
+t.Source("source", source, "/.*/")
+	.Mapping({
+		"properties": {
+			"name": { "type": "string" },
+			"age": { "type": "integer" },
+			// more properties
+		}
+	})
+	.Transform(pretty({"spaces":0}))
+	// transforms
+	.Save("sink", sink, "/.*/")
+```
+
 
 #### src_filter and transform file
 
