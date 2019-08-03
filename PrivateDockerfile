@@ -12,7 +12,7 @@ MAINTAINER Siddharth Kothari <siddharth@appbase.io>
 
 # Get build variant
 ARG ABC_BUILD=noss
-ENV ABC_BUILD ${ABC_BUILD}
+ENV ABC_BUILD=${ABC_BUILD}
 
 RUN apt-get update && \
 	apt-get install -y libssl-dev && \
