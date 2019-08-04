@@ -72,3 +72,34 @@ jobs:
         draft: true
         on:
           all_branches: true
+
+    - name: windows
+      os: windows
+
+      before_install:
+      - curl -LO http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/pkg-config_0.26-1_win32.zip
+      - curl -LO http://ftp.gnome.org/pub/gnome/binaries/win32/glib/2.28/glib_2.28.8-1_win32.zip
+      - curl -LO http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/gettext-runtime_0.18.1.1-2_win32.zip
+      - curl -LO https://github.com/neo4j-drivers/seabolt/releases/download/v1.7.4/seabolt-1.7.4-win64-mingw.zip
+      - 7z x -opkg-config pkg-config_0.26-1_win32.zip
+      - 7z x -oglib glib_2.28.8-1_win32.zip
+      - 7z x -ogettext gettext-runtime_0.18.1.1-2_win32.zip
+      - choco install pkgconfiglite -y
+      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig
+      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
+      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/lib
+      # - ls C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include
+      - 7z x -oC:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig seabolt-1.7.4-win64-mingw.zip
+      - mv C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/seabolt-1.7.4-win64-mingw/* C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/
+      # - which gcc
+      - export PATH=$PATH:`pwd`/glib/bin:`pwd`/gettext/bin:`pwd`/pkg-config/bin:C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
+      - export CPATH=C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include/seabolt17
+      - export C_INCLUDE_PATH=C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include/seabolt17
+      - go get github.com/neo4j/neo4j-go-driver/neo4j
+      - go get gopkg.in/olivere/elastic.v7
+      - go get github.com/appbaseio/abc || true
+      - mkdir private
+      - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
+
+      script:
+      - go build -tags 'seabolt_static !oss' -o "abc-windows" ./cmd/abc/...
