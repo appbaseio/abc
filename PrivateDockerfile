@@ -14,6 +14,9 @@ MAINTAINER Siddharth Kothari <siddharth@appbase.io>
 ARG ABC_BUILD=noss
 ENV ABC_BUILD=${ABC_BUILD}
 
+# Use Private token for the codebase
+ARG PAT
+
 RUN apt-get update && \
 	apt-get install -y libssl-dev && \
 	mkdir -p $GOPATH/github.com/src/appbaseio/abc && \
@@ -24,6 +27,7 @@ RUN apt-get update && \
 	go get gopkg.in/olivere/elastic.v7
 
 WORKDIR $GOPATH/src/github.com/appbaseio/abc
+RUN git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
 COPY . .
 
