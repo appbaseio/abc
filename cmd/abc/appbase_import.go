@@ -42,7 +42,7 @@ var destParamMap = map[string]string{
 	"bulk_requests": "bulk_requests",
 }
 
-const basicUsage string = `abc import --src.type {DBType} --src.uri {URI} [-t|--tail] [Uri|Appname]`
+const basicUsage string = `abc import --src_type={SourceDatabase} --src_uri={SourceURI} [-t|--tail] [Cluster URL|App Name]`
 
 // runImport runs the import command
 func runImport(args []string) error {
