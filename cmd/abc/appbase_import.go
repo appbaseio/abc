@@ -341,6 +341,24 @@ func verifyConnections(adaptors map[string]adaptor.Adaptor) error {
 }
 
 func verifyConnectionsWithoutDestination(srcConfig map[string]interface{}) error {
+
+	// check appname as source uri
+	if (!strings.Contains(srcConfig["uri"].(string), "/")) && srcConfig["_name_"].(string) == "elasticsearch" {
+		var sourceErr error
+		srcConfig["uri"], sourceErr = app.GetAppURL(srcConfig["uri"].(string))
+		if sourceErr != nil {
+			return sourceErr
+		}
+	}
+	// check file path as source [json, csv]
+	if common.StringInSlice(srcConfig["_name_"].(string), []string{"json", "csv"}) {
+		var filePathErr error
+		filePathErr = common.IsFileValid(srcConfig["uri"].(string))
+		if filePathErr != nil {
+			return filePathErr
+		}
+	}
+
 	var config = make(map[string]interface{})
 	for k, v := range srcConfig {
 		config[k] = v
