@@ -363,7 +363,10 @@ func verifyConnectionsWithoutDestination(srcConfig map[string]interface{}) error
 	for k, v := range srcConfig {
 		config[k] = v
 	}
-	ad, _ := adaptor.GetAdaptor(srcConfig["_name_"].(string), config)
+	ad, adaptorErr := adaptor.GetAdaptor(srcConfig["_name_"].(string), config)
+	if adaptorErr != nil {
+		return adaptorErr
+	}
 	err := ad.Verify()
 	if err != nil {
 		return err
