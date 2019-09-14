@@ -99,15 +99,6 @@ func runImport(args []string) error {
 		return execBuilder(file, *test)
 	}
 
-	// use command line params
-	args = flagset.Args()
-	if len(args) == 1 {
-		destURL = args[0]
-	} else {
-		showShortHelp(basicUsage)
-		return nil
-	}
-
 	// create source config
 	var srcConfig = map[string]interface{}{
 		"_name_":           *srcType,
@@ -125,6 +116,20 @@ func runImport(args []string) error {
 		"realm":            *srcRealm,
 	}
 
+	// use command line params
+	args = flagset.Args()
+	if len(args) == 1 {
+		destURL = args[0]
+	} else {
+		if *verify {
+			return verifyConnectionsWithoutDestination(srcConfig)
+		} else {
+			showShortHelp(basicUsage)
+			return nil
+		}
+	}
+
+	// create destination config
 	var destConfig = map[string]interface{}{
 		"uri":           destURL,
 		"_name_":        "elasticsearch",
@@ -334,3 +339,20 @@ func verifyConnections(adaptors map[string]adaptor.Adaptor) error {
 	}
 	return nil
 }
+
+func verifyConnectionsWithoutDestination(srcConfig map[string]interface{}) error {
+	var config = make(map[string]interface{})
+	for k, v := range srcConfig {
+		config[k] = v
+	}
+	ad, adaptorErr := adaptor.GetAdaptor(srcConfig["_name_"].(string), config)
+	if adaptorErr != nil {
+		return adaptorErr
+	}
+	err := ad.Verify()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
