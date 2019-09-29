@@ -52,7 +52,7 @@ ABC comes with a lots of benefits over any other traditional solution to the sam
 - Whether your data resides in Postgres or a JSON file or MongoDB or in all three places, abc can index the data into Elasticsearch. Besides these, it also supports CSV, MySQL, SQLServer, Kafka and Elasticsearch itself to an Elasticsearch index.
 - It can keep the Elasticsearch index synced in realtime with the data source. (Note: Currently only supported for MongoDB and Postgres)
 - `abc import` is a single line CLI command that allows doing all of the above. It doesn’t require any external dependencies, takes zero lines of code configuration, and runs as an isolated process with a minimal resource footprint.
-- abc also supports configureable user defined transformations for advanced uses to map data types, columns or transform the data itself before it gets indexed into Elasticsearch.
+- abc also supports configurable user defined transformations for advanced uses to map data types, columns or transform the data itself before it gets indexed into Elasticsearch.
 
 
 
