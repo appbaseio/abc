@@ -64,11 +64,12 @@ func runApp(args []string) error {
 // runCreate runs `create` command
 func runCreate(args []string) error {
 	flagset := baseFlagSet("create")
-	basicUsage := "abc create [--es2|--es6] [--category=category] [--cluster|-c] [--interactive|-i] [--loc] [--vmsize] [--plan] [--ssh] [--provider] [--nodes] [--version] [--volume] AppName|ClusterName"
+	basicUsage := "abc create [--es7|--es6|--es5] [--category=category] [--cluster|-c] [--interactive|-i] [--loc] [--vmsize] [--plan] [--ssh] [--provider] [--nodes] [--version] [--volume] AppName|ClusterName"
 	flagset.Usage = usageFor(flagset, basicUsage)
 	// https://gobyexample.com/command-line-flags
+	isEs7 := flagset.Bool("es7", true, "is app es7")
 	isEs6 := flagset.Bool("es6", false, "is app es6")
-	isEs2 := flagset.Bool("es2", true, "is app es2")
+	isEs5 := flagset.Bool("es5", false, "is app es5")
 	category := flagset.String("category", "generic", "category for app")
 
 	// Cluster specific flags
@@ -105,11 +106,13 @@ func runCreate(args []string) error {
 			}
 		} else if *isEs6 {
 			return app.RunAppCreate(args[0], "6", *category)
-		} else if *isEs2 {
-			return app.RunAppCreate(args[0], "2", *category)
+		} else if *isEs5 {
+			return app.RunAppCreate(args[0], "5", *category)
+		} else if *isEs7 {
+			return app.RunAppCreate(args[0], "7", *category)
 		} else {
-			fmt.Println("App needs to be ES2 or ES6")
-			return nil
+			fmt.Println("Creating an ElasticSearch v7 app")
+			return app.RunAppCreate(args[0], "7", *category)
 		}
 	}
 	showShortHelp(basicUsage)
