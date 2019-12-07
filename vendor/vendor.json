@@ -339,6 +339,36 @@
 			"revisionTime": "2017-09-26T11:14:11Z"
 		},
 		{
+			"checksumSHA1": "umKQ1O+Lr2ZcBI192xH8FILVGJc=",
+			"path": "github.com/globalsign/mgo",
+			"revision": "eeefdecb41b842af6dc652aaea4026e8403e62df",
+			"revisionTime": "2018-10-15T13:59:52Z"
+		},
+		{
+			"checksumSHA1": "eyGqv5tDAutaH0wGYLti1G5gg4E=",
+			"path": "github.com/globalsign/mgo/bson",
+			"revision": "eeefdecb41b842af6dc652aaea4026e8403e62df",
+			"revisionTime": "2018-10-15T13:59:52Z"
+		},
+		{
+			"checksumSHA1": "v+vkHey6KrivVjjvBSG3FTK98hk=",
+			"path": "github.com/globalsign/mgo/internal/json",
+			"revision": "eeefdecb41b842af6dc652aaea4026e8403e62df",
+			"revisionTime": "2018-10-15T13:59:52Z"
+		},
+		{
+			"checksumSHA1": "loubUcDO2QAStKIlVd7DqSeoEaw=",
+			"path": "github.com/globalsign/mgo/internal/sasl",
+			"revision": "eeefdecb41b842af6dc652aaea4026e8403e62df",
+			"revisionTime": "2018-10-15T13:59:52Z"
+		},
+		{
+			"checksumSHA1": "0sp392bVkHVh1xaSLCpFmjCJKgs=",
+			"path": "github.com/globalsign/mgo/internal/scram",
+			"revision": "eeefdecb41b842af6dc652aaea4026e8403e62df",
+			"revisionTime": "2018-10-15T13:59:52Z"
+		},
+		{
 			"checksumSHA1": "/dD5cv7GCma//1VMO1j6xP16BI8=",
 			"path": "github.com/go-kit/kit/log",
 			"revision": "07d89a2775297bf4d8e79873a10fa0f43d300a07",
