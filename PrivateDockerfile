@@ -12,11 +12,11 @@ MAINTAINER Siddharth Kothari <siddharth@appbase.io>
 
 # Get build variant
 ARG ABC_BUILD=noss
-ENV ABC_BUILD=${ABC_BUILD}
+ENV ABC_BUILD=$ABC_BUILD
 
 # Use Private token for the codebase
 ARG PAT
-ENV PAT=${PAT}
+ENV PAT=$PAT
 
 RUN apt-get update && \
 	apt-get install -y libssl-dev && \
