@@ -3,7 +3,7 @@ package mejson
 import (
 	"encoding/base64"
 	"fmt"
-	"gopkg.in/mgo.v2/bson"
+	"github.com/globalsign/mgo/bson"
 	"os"
 	"reflect"
 	"time"
