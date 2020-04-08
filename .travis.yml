@@ -18,17 +18,13 @@ jobs:
       sudo: required
 
       before_install:
-      - wget https://github.com/neo4j-drivers/seabolt/releases/download/v1.7.4/seabolt-1.7.4-Linux-ubuntu-16.04.deb
-      - sudo dpkg -i seabolt-1.7.4-Linux-ubuntu-16.04.deb
-      - sudo apt-get install -y libssl-dev build-essential
-      - go get github.com/neo4j/neo4j-go-driver/neo4j
       - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
       - mkdir private
       - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
       script:
-      - go build -tags 'seabolt_static !oss' -o "abc-linux" ./cmd/abc/...
+      - go build -tags '!oss' -o "abc-linux" ./cmd/abc/...
 
       before_deploy:
       - zip -r abc-linux.zip abc-linux
@@ -48,18 +44,13 @@ jobs:
       osx_image: xcode9.4
 
       before_install:
-      - curl -LO https://github.com/neo4j-drivers/seabolt/releases/download/v1.7.4/seabolt-1.7.4-Darwin.tar.gz
-      - tar -zxf seabolt-1.7.4-Darwin.tar.gz
-      - export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:`pwd`/seabolt-1.7.4-Darwin/usr/local/share/pkgconfig
-      - export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:`pwd`/seabolt-1.7.4-Darwin/usr/local/lib
-      - go get github.com/neo4j/neo4j-go-driver/neo4j
       - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
       - mkdir private
       - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
       script:
-      - go build -tags 'seabolt_static !oss' -o "abc-darwin" ./cmd/abc/...
+      - go build -tags '!oss' -o "abc-darwin" ./cmd/abc/...
 
       before_deploy:
       - zip -r abc-darwin.zip abc-darwin
@@ -78,27 +69,13 @@ jobs:
       os: windows
 
       before_install:
-      - curl -LO http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/pkg-config_0.26-1_win32.zip
-      - curl -LO http://ftp.gnome.org/pub/gnome/binaries/win32/glib/2.28/glib_2.28.8-1_win32.zip
-      - curl -LO http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/gettext-runtime_0.18.1.1-2_win32.zip
-      - curl -LO https://github.com/neo4j-drivers/seabolt/releases/download/v1.7.4/seabolt-1.7.4-win64-mingw.zip
-      - 7z x -opkg-config pkg-config_0.26-1_win32.zip
-      - 7z x -oglib glib_2.28.8-1_win32.zip
-      - 7z x -ogettext gettext-runtime_0.18.1.1-2_win32.zip
-      - choco install pkgconfiglite -y
-      - 7z x -oC:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig seabolt-1.7.4-win64-mingw.zip
-      - mv C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/seabolt-1.7.4-win64-mingw/* C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/
-      - export PATH=$PATH:`pwd`/glib/bin:`pwd`/gettext/bin:`pwd`/pkg-config/bin:C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/bin
-      - export CPATH=C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include/seabolt17
-      - export C_INCLUDE_PATH=C:/ProgramData/chocolatey/lib/pkgconfiglite/tools/pkg-config-lite-0.28-1/share/pkgconfig/include/seabolt17
-      - go get github.com/neo4j/neo4j-go-driver/neo4j
       - go get gopkg.in/olivere/elastic.v7
       - go get github.com/appbaseio/abc || true
       - mkdir private
       - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
       script:
-      - go build -tags 'seabolt_static !oss' -o "abc-windows" ./cmd/abc/...
+      - go build -tags '!oss' -o "abc-windows" ./cmd/abc/...
 
       before_deploy:
       - 7z a abc-windows.zip abc-windows

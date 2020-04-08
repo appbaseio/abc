@@ -17,18 +17,13 @@ ENV ABC_BUILD=${ABC_BUILD}
 
 RUN apt-get update && \
 	apt-get install -y libssl-dev && \
-	mkdir -p $GOPATH/github.com/src/appbaseio/abc && \
-	mkdir -p /abc && \
-	curl -LO https://github.com/neo4j-drivers/seabolt/releases/download/v1.7.4/seabolt-1.7.4-Linux-ubuntu-18.04.deb && \
-	dpkg -i seabolt-1.7.4-Linux-ubuntu-18.04.deb && \
-	go get github.com/neo4j/neo4j-go-driver/neo4j && \
 	go get gopkg.in/olivere/elastic.v7
 
 WORKDIR $GOPATH/src/github.com/appbaseio/abc
 
 COPY . .
 
-RUN go build -tags "seabolt_static $ABC_BUILD" -o /abc/abc ./cmd/abc/...
+RUN go build -tags "$ABC_BUILD" -o /abc/abc ./cmd/abc/...
 
 FROM ubuntu:bionic
 MAINTAINER Siddharth Kothari <siddharth@appbase.io>
