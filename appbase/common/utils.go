@@ -3,6 +3,7 @@ package common
 import (
 	"encoding/json"
 	"github.com/appbaseio/abc/log"
+	"net/url"
 	"os"
 	"os/exec"
 	"runtime"
@@ -91,6 +92,12 @@ func SizeInKB(size int) int {
 
 // IsFileValid check if the file is valid
 func IsFileValid(file string) error {
+
+	if _, err := url.ParseRequestURI(file); err == nil { //do not check remote file validity here
+		log.Infoln("Importing data from remote file", file)
+		return nil
+	}
+
 	if _, err := os.Stat(file); os.IsNotExist(err) {
 		return err
 	}
