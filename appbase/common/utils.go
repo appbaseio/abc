@@ -136,7 +136,6 @@ var DefaultDownloadDirectory = "./temp"
 
 //DownloadFile create a local copy of the remote json file
 func DownloadFile(filepath string, url string) error {
-
 	log.Infoln("Downloading the file from remote URL:", url)
 	_, err := os.Stat(DefaultDownloadDirectory) //check if  directory exist
 	if os.IsNotExist(err) {
