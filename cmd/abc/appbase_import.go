@@ -206,7 +206,7 @@ func writeConfigFile(srcConfig map[string]interface{}, destConfig map[string]int
 		}
 	}
 	// check file path as source [json, csv]
-	if common.StringInSlice(srcConfig["_name_"].(string), []string{"json", "csv"}) {
+	if common.StringInSlice(srcConfig["_name_"].(string), []string{"json", "csv", "jsonl"}) {
 		err = common.IsFileValid(srcConfig["uri"].(string))
 		if err != nil {
 			return "", nil, err
@@ -355,4 +355,3 @@ func verifyConnectionsWithoutDestination(srcConfig map[string]interface{}) error
 	}
 	return nil
 }
-
