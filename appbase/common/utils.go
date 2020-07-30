@@ -2,12 +2,16 @@ package common
 
 import (
 	"encoding/json"
-	"github.com/appbaseio/abc/log"
+	"fmt"
+	"io"
+	"net/http"
 	"net/url"
 	"os"
 	"os/exec"
 	"runtime"
 	"strings"
+
+	"github.com/appbaseio/abc/log"
 )
 
 // GetKeyForValue returns key for the given value
@@ -125,4 +129,51 @@ func Max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// DefaultDownloadDirectory to download remote files
+var DefaultDownloadDirectory = "./temp"
+
+//DownloadFile create a local copy of the remote json file
+func DownloadFile(filepath string, url string) error {
+
+	log.Infoln("Downloading the file from remote URL:", url)
+	_, err := os.Stat(DefaultDownloadDirectory) //check if  directory exist
+	if os.IsNotExist(err) {
+
+		err = os.Mkdir(DefaultDownloadDirectory, 0755) //if not create, directory
+		if err != nil {
+			return err
+		}
+	}
+	if err != nil {
+		return err
+	}
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+
+	defer resp.Body.Close()
+	out, err := os.Create(filepath)
+	if err != nil {
+		return err
+	}
+
+	defer out.Close()
+
+	_, err = io.Copy(out, resp.Body)
+	return err
+}
+
+// RemoveFile delete remote file
+func RemoveFile(fileName string) error {
+	log.Infoln("Deleting the temporary file:", fileName)
+	if err := os.Remove(fileName); err != nil {
+		log.Debugf(fmt.Sprintf("Unable to delete temporary file: %s", fileName), err)
+		return err
+	}
+	log.Infoln("file successfully deleted at path:", fileName)
+	return nil
 }
