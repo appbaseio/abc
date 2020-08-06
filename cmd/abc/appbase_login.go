@@ -11,7 +11,7 @@ import (
 // runLogin runs the login command
 func runLogin(args []string) error {
 	flagset := baseFlagSet("login")
-	basicUsage := "abc login [google|github|gitlab]"
+	basicUsage := "abc login [google|github|gitlab|api] [-c|--credentials] {username:password}"
 	flagset.Usage = usageFor(flagset, basicUsage)
 	if err := flagset.Parse(args); err != nil {
 		return err
@@ -27,6 +27,12 @@ func runLogin(args []string) error {
 		if common.StringInSlice(args[0], []string{"google", "github", "gitlab"}) {
 			fmt.Println("Logging in..")
 			return login.StartUserLogin(args[0])
+		}
+		showShortHelp(basicUsage)
+	case 2:
+		if args[0] == "api" {
+			fmt.Println("Logging in..")
+			return login.StartUserLoginBasicAuth(args[1])
 		}
 		showShortHelp(basicUsage)
 	default:
