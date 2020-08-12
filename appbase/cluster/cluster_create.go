@@ -51,11 +51,6 @@ func BuildRequestBody(name string, location string, vmSize string, plan string, 
 
 var additionalChoices = []*survey.Question{
 	{
-		Name:     "logstash",
-		Prompt:   &survey.Confirm{Message: "Would you like to provide Logstash options to your cluster deployment?"},
-		Validate: survey.Required,
-	},
-	{
 		Name:     "kibana",
 		Prompt:   &survey.Confirm{Message: "Would you like to provide Kibana options to your cluster deployment?"},
 		Validate: survey.Required,
@@ -84,9 +79,6 @@ func BuildRequestBodyInteractive() string {
 	clustersString, plan := buildClusterObjectString()
 	respBodyString := "{\n  " + buildESObjectString(plan) + "  " + clustersString
 
-	if answers["logstash"] == true {
-		respBodyString = respBodyString + buildLogstashObjectString()
-	}
 	if answers["kibana"] == true {
 		respBodyString = respBodyString + buildKibanaObjectString()
 	}

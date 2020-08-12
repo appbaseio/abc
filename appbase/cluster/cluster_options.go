@@ -248,7 +248,7 @@ Next:
 	return esObject
 }
 
-var logstashKibanaOptions = []*survey.Question{
+var kibanaOptions = []*survey.Question{
 	{
 		Name:   "create_node",
 		Prompt: &survey.Confirm{Message: "Do you want to create node?"},
@@ -271,35 +271,11 @@ var logstashKibanaOptions = []*survey.Question{
 	},
 }
 
-func buildLogstashObjectString() string {
-	fmt.Println("Enter the logstash details")
-	answers := make(map[string]interface{})
-	err := survey.Ask(logstashKibanaOptions, &answers)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-
-	logstashObject := "\"logstash\": {\n    "
-	for key, value := range answers {
-		if value != "" {
-			if key == "create_node" {
-				value = strconv.FormatBool(value.(bool))
-				logstashObject = logstashObject + "\"" + key + "\": " + value.(string) + ",\n    "
-			} else {
-				logstashObject = logstashObject + "\"" + key + "\": " + "\"" + value.(string) + "\"" + ",\n    "
-			}
-		}
-	}
-	idx := strings.LastIndex(logstashObject, ",")
-	logstashObject = logstashObject[:idx] + logstashObject[idx+1:] + "},\n"
-	return logstashObject
-}
-
 func buildKibanaObjectString() string {
 	fmt.Println("Enter the kibana details")
 	answers := make(map[string]interface{})
 
-	err := survey.Ask(logstashKibanaOptions, &answers)
+	err := survey.Ask(kibanaOptions, &answers)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
