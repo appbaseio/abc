@@ -28,109 +28,109 @@
 		},
 		{
 			"checksumSHA1": "Ghcg+iXwd1tjkY5SvcCaojy8SpQ=",
-			"path": "cloud.google.com/go/compute/metadata",
+			"path": "pkg.go.dev/cloud.google.com/go/compute/metadata",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "fpAAWpRCnVH6vrlnC7EqFbmJ1iQ=",
-			"path": "cloud.google.com/go/firestore",
+			"path": "pkg.go.dev/cloud.google.com/go/firestore",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "G5zdiONDcW7T5WcF4yM+b5HpbQw=",
-			"path": "cloud.google.com/go/firestore/apiv1beta1",
+			"path": "pkg.go.dev/cloud.google.com/go/firestore/apiv1beta1",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "Ttp3HKUNigy2ukQufJVWUUo5/9A=",
-			"path": "cloud.google.com/go/firestore/genproto",
+			"path": "pkg.go.dev/cloud.google.com/go/firestore/genproto",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "fkZ3wY+M3cKAXs15Q6soYO5GYWA=",
-			"path": "cloud.google.com/go/httpreplay",
+			"path": "pkg.go.dev/cloud.google.com/go/httpreplay",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "5O+4wd3cLpUcpXyyYgYDZp5sEks=",
-			"path": "cloud.google.com/go/httpreplay/internal/proxy",
+			"path": "pkg.go.dev/cloud.google.com/go/httpreplay/internal/proxy",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "p7J+xmpu7o2dsef37VvBGhMNeIc=",
-			"path": "cloud.google.com/go/iam",
+			"path": "pkg.go.dev/cloud.google.com/go/iam",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "OleM9EMaWVLzgcFjr14Cr8pn098=",
-			"path": "cloud.google.com/go/internal",
+			"path": "pkg.go.dev/cloud.google.com/go/internal",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "fxSNi/d/HtNjpih4UVYad0yDWB4=",
-			"path": "cloud.google.com/go/internal/atomiccache",
+			"path": "pkg.go.dev/cloud.google.com/go/internal/atomiccache",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "XDz8EFXeRILxThKb6k6SGxvZaIk=",
-			"path": "cloud.google.com/go/internal/btree",
+			"path": "pkg.go.dev/cloud.google.com/go/internal/btree",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "X4rgMDAU1uydTdadlBQA+yCti+c=",
-			"path": "cloud.google.com/go/internal/fields",
+			"path": "pkg.go.dev/cloud.google.com/go/internal/fields",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "kJch5CIewEvRGH6skLk43YtrQCI=",
-			"path": "cloud.google.com/go/internal/optional",
+			"path": "pkg.go.dev/cloud.google.com/go/internal/optional",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "zDnQQEoN9Kr8Qec9sPywEFM0a8M=",
-			"path": "cloud.google.com/go/internal/pretty",
+			"path": "pkg.go.dev/cloud.google.com/go/internal/pretty",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "aBwVZtDpNRUa7acy6mCRO+aHN4A=",
-			"path": "cloud.google.com/go/internal/testutil",
+			"path": "pkg.go.dev/cloud.google.com/go/internal/testutil",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "MU/w6AMLidVs5wiDoQW+SZy5VOc=",
-			"path": "cloud.google.com/go/internal/trace",
+			"path": "pkg.go.dev/cloud.google.com/go/internal/trace",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "mjyfaVMfmFNxzbQLBCbORrRCm/c=",
-			"path": "cloud.google.com/go/internal/uid",
+			"path": "pkg.go.dev/cloud.google.com/go/internal/uid",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "NTFJ8KnxU72Ux5EdYWKCoFizoVY=",
-			"path": "cloud.google.com/go/internal/version",
+			"path": "pkg.go.dev/cloud.google.com/go/internal/version",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
 		{
 			"checksumSHA1": "WlAJ81zi2LAEtXr4IoDmr875MW8=",
-			"path": "cloud.google.com/go/storage",
+			"path": "pkg.go.dev/cloud.google.com/go/storage",
 			"revision": "1bad0581757551231811dfc864d6d5760deabe48",
 			"revisionTime": "2018-07-20T21:18:10Z"
 		},
