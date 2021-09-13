@@ -4,9 +4,9 @@ language: go
 
 branches:
   only:
-  - master
-  - dev
-  - ci-cd-windows-origin
+    - master
+    - dev
+    - ci-cd-windows-origin
 
 install: true
 
@@ -17,18 +17,18 @@ jobs:
       dist: xenial
       sudo: required
 
-      before_install:
-      - go get gopkg.in/olivere/elastic.v7
-      - go get github.com/appbaseio/abc || true
-      - mkdir private
-      - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
+      # before_install:
+      # - go get gopkg.in/olivere/elastic.v7
+      # - go get github.com/appbaseio/abc || true
+      # - mkdir private
+      # - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
       script:
-      - go build -tags '!oss' -o "abc-linux" ./cmd/abc/...
+        - go build -tags 'oss' -o "abc-linux" ./cmd/abc/...
 
       before_deploy:
-      - zip -r abc-linux.zip abc-linux
-      - export TRAVIS_TAG="preview"
+        - zip -r abc-linux.zip abc-linux
+        - export TRAVIS_TAG="preview"
 
       deploy:
         provider: releases
@@ -43,18 +43,18 @@ jobs:
       os: osx
       osx_image: xcode9.4
 
-      before_install:
-      - go get gopkg.in/olivere/elastic.v7
-      - go get github.com/appbaseio/abc || true
-      - mkdir private
-      - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
+      # before_install:
+      #   - go get gopkg.in/olivere/elastic.v7
+      #   - go get github.com/appbaseio/abc || true
+      #   - mkdir private
+      #   - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
       script:
-      - go build -tags '!oss' -o "abc-darwin" ./cmd/abc/...
+        - go build -tags 'oss' -o "abc-darwin" ./cmd/abc/...
 
       before_deploy:
-      - zip -r abc-darwin.zip abc-darwin
-      - export TRAVIS_TAG="preview"
+        - zip -r abc-darwin.zip abc-darwin
+        - export TRAVIS_TAG="preview"
 
       deploy:
         provider: releases
@@ -68,18 +68,18 @@ jobs:
     - name: windows
       os: windows
 
-      before_install:
-      - go get gopkg.in/olivere/elastic.v7
-      - go get github.com/appbaseio/abc || true
-      - mkdir private
-      - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
+      # before_install:
+      #   - go get gopkg.in/olivere/elastic.v7
+      #   - go get github.com/appbaseio/abc || true
+      #   - mkdir private
+      #   - git clone https://$PAT@github.com/appbaseio-confidential/abc-import private
 
       script:
-      - go build -tags '!oss' -o "abc-windows" ./cmd/abc/...
+        - go build -tags 'oss' -o "abc-windows" ./cmd/abc/...
 
       before_deploy:
-      - 7z a abc-windows.zip abc-windows
-      - export TRAVIS_TAG="preview"
+        - 7z a abc-windows.zip abc-windows
+        - export TRAVIS_TAG="preview"
 
       deploy:
         provider: releases

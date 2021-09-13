@@ -6,7 +6,7 @@ import (
 	"fmt"
 	flag "github.com/ogier/pflag"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 type levelFlag string
