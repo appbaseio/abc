@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/appbaseio/abc/private/offset"
-	"github.com/appbaseio/abc/private/pipeline"
+	"github.com/appbaseio/abc/importer/offset"
+	"github.com/appbaseio/abc/importer/pipeline"
 )
 
 func TestNewBuilder(t *testing.T) {

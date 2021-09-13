@@ -1,0 +1,11 @@
+/transporter
+.vagrant
+/pipeline.js
+/transformer.js
+.vscode
+*.rdb
+# macOS
+.DS_Store
+
+# es log
+/elastic.log
