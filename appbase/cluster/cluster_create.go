@@ -8,10 +8,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/AlecAivazis/survey.v1"
 	"github.com/appbaseio/abc/appbase/common"
 	"github.com/appbaseio/abc/appbase/session"
 	"github.com/appbaseio/abc/appbase/spinner"
+	"gopkg.in/AlecAivazis/survey.v1"
 )
 
 type status struct {
