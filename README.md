@@ -24,7 +24,6 @@ In certain sources like Postgres and Mongo, you can even keep the database and E
 5. [Development setup](#development)
 	1. [Local Setup](#local-setup)
 	2. [Docker Setup](#docker-setup)
-	3. [Build Variants](#build-variants)
 6. [ABC Resources](#abc-resources)
 	1. [Contributing to ABC](#contributing-to-abc)
 	2. [Licensing](#licensing)
@@ -179,16 +178,12 @@ ABC can be built locally via the traditional `go build` or by building a Docker 
 
 You can install ABC by building it locally and then moving the executable to anywhere you like.
 
-To build it, you will require **Go 1.8** or above installed on your system.
+To build it, you will require **Go 1.12** or above installed on your system.
 
 ```sh
-go get github.com/appbaseio/abc # alternatively, clone the repo in the `$GOPATH/src/github.com/appbaseio/abc` dir
-cd $GOPATH/src/github.com/appbaseio/abc
-go build -tags 'oss' ./cmd/abc/...
+go build ./cmd/abc/...
 ./abc --help  # voila, you just built abc from source!
 ```
-
-Note - You might be wondering what is the tag `oss` doing there. That's covered in the section [Build Variants](#build-variants).
 
 <a name="docker-setup"></a>
 ### 5.2 Docker Setup
@@ -196,7 +191,7 @@ Note - You might be wondering what is the tag `oss` doing there. That's covered 
 ```sh
 git clone https://github.com/appbaseio/abc
 cd abc
-docker build --build-arg ABC_BUILD=oss -t abc .
+docker build -t abc .
 docker volume create --name abc
 ```
 
@@ -221,27 +216,6 @@ abc apps
 ### 5.3 Build Variants
 
 The ABC project you see in this repository is not the complete project. Appbase.io works on a proprietary version of ABC using this project as the base.
-Hence we use the tag 'oss' to specify that this is an open source build.
-If you are curious, we use the tag '!oss' to make our private builds.
-
-
-#### How to know build variant from the executable?
-
-If you are not sure which build of `abc` you are using, you can run `abc version` and take note of the value under the VERSION header.
-
-For open source build, you will see
-
-```
-VERSION
-  ... (oss)
-```
-
-For the proprietary builds, you will see
-
-```
-VERSION
-  ... (!oss)
-```
 
 
 
@@ -260,4 +234,4 @@ Want to help out with ABC? Great! There are instructions to get you started [her
 
 ### 6.2 Licensing
 
-ABC's oss variant is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for full license text. ABC's !oss (read non-oss) variant which includes the `abc import` command and bundled in the binary is free to use while in beta.
+ABC is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for full license text.
