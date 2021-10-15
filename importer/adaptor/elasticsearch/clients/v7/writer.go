@@ -39,7 +39,7 @@ type Writer struct {
 }
 
 func init() {
-	constraint, _ := version.NewConstraint(">= 7.0")
+	constraint, _ := version.NewConstraint(">= 1.0")
 	clients.Add("v7", constraint, func(opts *clients.ClientOptions) (client.Writer, error) {
 		esOptions := []elastic.ClientOptionFunc{
 			elastic.SetURL(opts.URLs...),
@@ -106,19 +106,26 @@ func (w *Writer) Write(msg message.Msg) func(client.Session) (message.Msg, error
 
 		if msg.Data().AsMap() != nil && len(msg.Data().AsMap()) > 0 {
 			var id string
+			var index string
 			if _, ok := msg.Data()["_id"]; ok {
 				id = msg.ID()
 				msg.Data().Delete("_id")
 			}
 
+			// override the default import index if specified in the message data
+			if _, ok := msg.Data()["_index"]; ok {
+				index = msg.Data()["_index"].(string)
+				msg.Data().Delete("_index")
+			}
+
 			var br elastic.BulkableRequest
 			switch msg.OP() {
 			case ops.Delete:
-				br = elastic.NewBulkDeleteRequest().Type(indexType).Id(id)
+				br = elastic.NewBulkDeleteRequest().Type(indexType).Index(index).Id(id)
 			case ops.Insert:
-				br = elastic.NewBulkIndexRequest().Type(indexType).Id(id).Doc(msg.Data())
+				br = elastic.NewBulkIndexRequest().Type(indexType).Id(id).Index(index).Doc(msg.Data())
 			case ops.Update:
-				br = elastic.NewBulkUpdateRequest().Type(indexType).Id(id).Doc(msg.Data())
+				br = elastic.NewBulkUpdateRequest().Type(indexType).Id(id).Index(index).Doc(msg.Data())
 			}
 
 			// add a bulk request only if # of requests < --bulk_requests AND size of requests < --request_size switches
