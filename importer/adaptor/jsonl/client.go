@@ -95,13 +95,16 @@ func (c *Client) initFile() error {
 		return nil
 	}
 	name := strings.Replace(c.uri, "file://", "", 1)
-	if url, err := url.ParseRequestURI(c.uri); err == nil {
-		name = fmt.Sprintf("%s/%s.csv", common.DefaultDownloadDirectory, fmt.Sprintf("%d", time.Now().Unix()))
-		if err := common.DownloadFile(name, url.String()); err != nil {
-			return err
+	proto := strings.Split(c.uri, "//")
+	if strings.Contains(proto[0], `http`) {
+		if url, err := url.ParseRequestURI(c.uri); err == nil {
+			name = fmt.Sprintf("%s/%s.csv", common.DefaultDownloadDirectory, fmt.Sprintf("%d", time.Now().Unix()))
+			if err := common.DownloadFile(name, url.String()); err != nil {
+				return err
+			}
+			log.Infoln("Download complete for:", name)
+			c.deleteFileAfterUsage = true
 		}
-		log.Infoln("Download complete for:", name)
-		c.deleteFileAfterUsage = true
 	}
 
 	f, err := os.OpenFile(name, os.O_RDWR, 0666)
