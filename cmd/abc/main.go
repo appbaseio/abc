@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	flag "github.com/ogier/pflag"
 	"os"
 	"strings"
 	"text/tabwriter"
 
-	"github.com/appbaseio/abc/imports"
+	flag "github.com/ogier/pflag"
+
 	_ "github.com/appbaseio/abc/imports/all"
 	"github.com/appbaseio/abc/log"
 )
@@ -33,12 +33,7 @@ func main() {
 	var run func([]string) error
 	command := strings.ToLower(os.Args[1])
 	if command == "import" {
-		if imports.IsPrivate {
-			run = runImport
-		} else {
-			usage()
-			os.Exit(1)
-		}
+		run = runImport
 	} else {
 		run = provisionAppbaseCLI(command)
 	}

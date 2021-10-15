@@ -5,9 +5,8 @@ import (
 )
 
 func runLicense(args []string) error {
-	fmt.Println("\nThe abc project is copyright (c) 2017, Appbase, Inc.")
-	fmt.Println("\nThe open-source parts of abc are licensed under Apache 2.0 and the source code is available at https://github.com/appbaseio/abc.")
-	fmt.Print("\nThe `abc import` command is licensed for free use while in beta. It is derived from the https://github.com/compose/transporter project.\n\n")
+	fmt.Println("\nThe abc project is copyright (c) 2021, Appbase, Inc.")
+	fmt.Println("\nabc is entirely open-source and licensed under Apache 2.0 and the source code is available at https://github.com/appbaseio/abc.\n")
 	fmt.Println(`Copyright (c) 2014, Compose, Inc
 All rights reserved.
 
