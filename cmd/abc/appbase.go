@@ -18,7 +18,7 @@ func usageAppbase() {
 	fmt.Fprintf(os.Stderr, "  create    create app/cluster\n")
 	fmt.Fprintf(os.Stderr, "  delete    delete app/cluster\n")
 	fmt.Fprintf(os.Stderr, "  logout    logout session\n")
-	fmt.Fprintf(os.Stderr, "  import    import data to appbase app\n")
+	fmt.Fprintf(os.Stderr, "  import    import data to appbase.io cluster/app\n")
 	fmt.Fprintf(os.Stderr, "  version   show build details\n")
 	fmt.Fprintf(os.Stderr, "  license   show project license and credits\n")
 }
