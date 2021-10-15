@@ -3,7 +3,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/appbaseio/abc)](https://goreportcard.com/report/github.com/appbaseio/abc)
 [![Travis branch](https://travis-ci.org/appbaseio/abc.svg?branch=dev)]()
 [![license](https://img.shields.io/github/license/appbaseio/abc.svg)]()
-
+[![ABC Docker Publish](https://github.com/appbaseio/abc/actions/workflows/docker-publish.yaml/badge.svg)](https://github.com/appbaseio/abc/actions/workflows/docker-publish.yaml)
 
 ![abc banner image](https://user-images.githubusercontent.com/4047597/29240054-14e0e19a-7f7b-11e7-898b-ba6bad756b1d.png)
 

@@ -1,4 +1,4 @@
-name: ABC build
+name: ABC Docker Publish
 
 on:
   release:
