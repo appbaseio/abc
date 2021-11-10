@@ -27,7 +27,7 @@ jobs:
 
       # building go package based on os version - we use release tag for version
       - name: ABC Package for Linux and Darwin-amd64
-        if: ${{matrix.os != 'windows' && matrix.os != 'arm4'}} 
+        if: ${{matrix.os != 'windows' && matrix.os != 'arm64'}} 
         run: go build -o "abc-${{github.event.release.tag_name}}" -tags 'oss' ./cmd/abc/...
       
       - name: Package for Windows
