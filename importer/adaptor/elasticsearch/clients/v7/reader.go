@@ -26,7 +26,7 @@ type Reader struct {
 }
 
 func init() {
-	constraint, _ := version.NewConstraint(">= 7.0")
+	constraint, _ := version.NewConstraint(">= 1.0")
 	clients.AddReader("v7", constraint, func(opts *clients.ClientOptions) (client.Reader, error) {
 		esOptions := []elastic.ClientOptionFunc{
 			elastic.SetURL(opts.URLs...),
