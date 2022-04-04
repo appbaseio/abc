@@ -1,4 +1,4 @@
-package v7
+package v8
 
 import (
 	"context"
@@ -20,7 +20,7 @@ import (
 var (
 	_                client.Writer = &Writer{}
 	_                client.Closer = &Writer{}
-	isMappingApplied               = make(map[string]bool)
+	isMappingApplied               = false
 )
 
 // Writer implements client.Writer and client.Session for sending requests to an elasticsearch
@@ -39,8 +39,8 @@ type Writer struct {
 }
 
 func init() {
-	constraint, _ := version.NewConstraint(">= 1.0,<8.0")
-	clients.Add("v7", constraint, func(opts *clients.ClientOptions) (client.Writer, error) {
+	constraint, _ := version.NewConstraint(">=8.0")
+	clients.Add("v8", constraint, func(opts *clients.ClientOptions) (client.Writer, error) {
 		esOptions := []elastic.ClientOptionFunc{
 			elastic.SetURL(opts.URLs...),
 			elastic.SetSniff(false),
@@ -86,21 +86,13 @@ func (w *Writer) Write(msg message.Msg) func(client.Session) (message.Msg, error
 		w.Lock()
 		w.confirmChan = msg.Confirms()
 		w.Unlock()
-		indexType := "_doc"
 
 		// apply mapping
 		if mapping.IsMappingSet {
-			if _, ok := isMappingApplied[indexType]; !ok { // mapping for type not set
-				isMappingApplied[indexType] = true                     // mapping for type set
-				if _, ok := mapping.CurrentMapping["properties"]; ok { // mapping for type was specified by user
-
-					err := w.setMapping(w.esClient, indexType, mapping.CurrentMapping)
-					if err != nil {
-						return nil, err
-					}
-				} else {
-					log.Infof("Mapping for type %s was not set by the user", indexType)
-				}
+			isMappingApplied = true
+			err := w.setMapping(w.esClient, mapping.CurrentMapping)
+			if err != nil {
+				return nil, err
 			}
 		}
 
@@ -121,11 +113,11 @@ func (w *Writer) Write(msg message.Msg) func(client.Session) (message.Msg, error
 			var br elastic.BulkableRequest
 			switch msg.OP() {
 			case ops.Delete:
-				br = elastic.NewBulkDeleteRequest().Type(indexType).Index(index).Id(id)
+				br = elastic.NewBulkDeleteRequest().Index(index).Id(id)
 			case ops.Insert:
-				br = elastic.NewBulkIndexRequest().Type(indexType).Id(id).Index(index).Doc(msg.Data())
+				br = elastic.NewBulkIndexRequest().Id(id).Index(index).Doc(msg.Data())
 			case ops.Update:
-				br = elastic.NewBulkUpdateRequest().Type(indexType).Id(id).Index(index).Doc(msg.Data())
+				br = elastic.NewBulkUpdateRequest().Id(id).Index(index).Doc(msg.Data())
 			}
 
 			// add a bulk request only if # of requests < --bulk_requests AND size of requests < --request_size switches
@@ -196,7 +188,7 @@ func (w *Writer) Close() {
 }
 
 // setMapping sets the index mapping
-func (w *Writer) setMapping(esClient *elastic.Client, typ string, mapping map[string]interface{}) error {
+func (w *Writer) setMapping(esClient *elastic.Client, mapping map[string]interface{}) error {
 	log.Debugf("Going to apply mapping %s", mapping)
 	_, err := esClient.CreateIndex(w.index).BodyJson(map[string]interface{}{
 		"mappings": mapping,

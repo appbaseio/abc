@@ -2,7 +2,7 @@
 # https://golang.org/doc/install/source#environment
 mkdir -p build && cd build
 
-VERSION=1.0.0-beta.4
+VERSION=1.0.0
 
 export GOOS=darwin
 

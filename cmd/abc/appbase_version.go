@@ -7,7 +7,7 @@ import (
 	"github.com/appbaseio/abc/imports"
 )
 
-var version = "1.0.0-beta.4"
+var version = "1.0.0"
 var variant = imports.BuildName
 
 // runVersion runs the logout command
