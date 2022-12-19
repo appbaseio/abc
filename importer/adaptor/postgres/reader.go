@@ -119,16 +119,16 @@ func (r *Reader) iterateTable(db string, session *sql.DB, in <-chan string, done
 				`).Scan(&typeIdentyfier)
 				log.With("type", typeIdentyfier).Infoln("typeIdentyfier...")
 				if err != nil {
-        	log.With("db", db).With("table", c).Errorf("error getting typeIdentyfier %v", err)
-        }
+					log.With("db", db).With("table", c).Errorf("error getting typeIdentyfier %v", err)
+				}
 				columnsResult, err := session.Query(fmt.Sprintf(`
-            SELECT c.column_name, c.data_type, e.data_type AS element_type
-            FROM information_schema.columns c LEFT JOIN information_schema.element_types e
-                 ON ((c.table_catalog, c.table_schema, c.table_name, 'TABLE', c.dtd_identifier)
-                   = (e.object_catalog, e.object_schema, e.object_name, e.object_type, e."%v"))
-            WHERE c.table_schema = '%v' AND c.table_name = '%v'
-            ORDER BY c.ordinal_position;
-            `, typeIdentyfier, schemaTable[0], schemaTable[1]))
+				    SELECT c.column_name, c.data_type, e.data_type AS element_type
+				    FROM information_schema.columns c LEFT JOIN information_schema.element_types e
+					 ON ((c.table_catalog, c.table_schema, c.table_name, 'TABLE', c.dtd_identifier)
+					   = (e.object_catalog, e.object_schema, e.object_name, e.object_type, e."%v"))
+				    WHERE c.table_schema = '%v' AND c.table_name = '%v'
+				    ORDER BY c.ordinal_position;
+				    `, typeIdentyfier, schemaTable[0], schemaTable[1]))
 				if err != nil {
 					log.With("db", db).With("table", c).Errorf("error getting columns %v", err)
 					continue
