@@ -297,6 +297,7 @@ func determineVersion(uri *url.URL, host string, user *url.Userinfo) (string, er
 		Version struct {
 			Number string `json:"number"`
 		} `json:"version"`
+		Tagline string `json:"tagline"`
 	}
 	if resp.StatusCode != http.StatusOK {
 		return "", client.VersionError{URI: reqURL, V: "", Err: fmt.Sprintf("bad status code: %d", resp.StatusCode)}
@@ -307,5 +308,14 @@ func determineVersion(uri *url.URL, host string, user *url.Userinfo) (string, er
 	} else if r.Version.Number == "" {
 		return "", client.VersionError{URI: reqURL, V: "", Err: fmt.Sprintf("missing version: %s", body)}
 	}
+
+	// If the tagline contains `OpenSearch` in it, that means that this is
+	// an OpenSearch cluster so we should always treat it like ES 8.x . Thus we
+	// will return a different version that will make abc think this is an ES 8.x
+	// cluster instead.
+	if strings.Contains(strings.ToLower(r.Tagline), "opensearch") {
+		return "8.8.1", nil
+	}
+
 	return r.Version.Number, nil
 }
