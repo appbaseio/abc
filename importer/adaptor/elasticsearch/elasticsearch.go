@@ -314,7 +314,7 @@ func determineVersion(uri *url.URL, host string, user *url.Userinfo) (string, er
 	// will return a different version that will make abc think this is an ES 8.x
 	// cluster instead.
 	if strings.Contains(strings.ToLower(r.Tagline), "opensearch") {
-		return "8.8.1", nil
+		return "8.0.0", nil
 	}
 
 	return r.Version.Number, nil
