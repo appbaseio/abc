@@ -23,7 +23,6 @@ require (
 	github.com/hailocab/go-hostpool v0.0.0-20160125115350-e80d13ce29ed // indirect
 	github.com/hashicorp/go-version v1.3.0
 	github.com/joho/godotenv v1.2.1-0.20171110010315-6d367c18edf6
-	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/lib/pq v1.10.3
 	github.com/mattn/go-sqlite3 v1.10.1-0.20190104161712-3fa1c550ffa6
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
@@ -31,14 +30,13 @@ require (
 	github.com/oklog/oklog v0.3.2
 	github.com/oklog/run v1.1.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.5
-	github.com/olivere/elastic v6.2.37+incompatible // indirect
 	github.com/olivere/elastic/v7 v7.0.28
 	github.com/onsi/gomega v1.16.0 // indirect
 	github.com/pierrec/lz4 v1.0.2-0.20180113151703-ed8d4cc3b461 // indirect
 	github.com/pierrec/xxHash v0.0.0-20170714082455-a0006b13c722 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20180125231941-8732c616f529 // indirect
 	github.com/robertkrimen/otto v0.0.0-20210614181706-373ff5438452
-	github.com/sirupsen/logrus v1.4.3-0.20190518135202-2a22dbedbad1
+	github.com/sirupsen/logrus v1.8.3
 	github.com/smartystreets/go-aws-auth v0.0.0-20180515143844-0c1422d1fdb9
 	github.com/streadway/amqp v1.0.0
 	google.golang.org/api v0.56.0
@@ -46,9 +44,5 @@ require (
 	gopkg.in/fatih/pool.v2 v2.0.0 // indirect
 	gopkg.in/gorethink/gorethink.v3 v3.0.5
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
-	gopkg.in/olivere/elastic.v2 v2.0.61
-	gopkg.in/olivere/elastic.v3 v3.0.75
-	gopkg.in/olivere/elastic.v5 v5.0.86
-	gopkg.in/olivere/elastic.v6 v6.2.11
 	gopkg.in/sourcemap.v1 v1.0.5 // indirect
 )
